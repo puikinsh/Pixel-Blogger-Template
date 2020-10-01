@@ -1,6 +1,6 @@
 # Pixel Blogger Template
 
-This is a completely free, open source and customizable Blogger template for news and magazine style website in any niche. 
+This is a completely free, open source and customizable Blogger template (based on blogsport) for news and magazine style website in any niche. 
 This template is free for commercial and private use but comes with no support. Demo for Pixel template is available [here](https://pixel-template.blogspot.com) or by clicking of a larger demo button bellow. Whicehever you find first :)  
 
 # -> [[Demo](https://pixel-template.blogspot.com)] & [[Documentation](https://pixel-template.blogspot.com/p/documentation.html)]
