@@ -26,6 +26,8 @@ In summary, the Pixel template is a highly customizable and easy-to-use template
 ## Useful resources 
 
 * [Free Blogger Templates](https://colorlib.com/wp/free-blogger-templates/) - a list of free Blogger templates that have been by Colorlib and other template designers and developers. 
+
+Blogger is a very limited and outdated platform. Thefefore, here are the best alternatives that you can use to create a blog using tools that are modern, fast and uses drag & drop user interface for website building.
 * [Free Blog Themes](https://colorlib.com/wp/free-wordpress-blog-themes/) - A list of completely free WordPress blog themes. We have selected the best ones and we believe you will enjoy them as much as we. 
 * [Free WordPress Themes](https://colorlib.com/wp/free-wordpress-themes/) - A huge list of mobile friendly and responsive WordPress themes that are completely free. Most of them are made by Colorlib or our trusted partners such as CPO Themes, Macho Themes and more. 
 * [Blog Themes](https://colorlib.com/wp/best-personal-blog-wordpress-themes/) - Above we listed all the free examples but if you are looking for something trully beautiful and well designed you might want to check these premium examples. Most of them comes with page builder that will allow to take your website to the levels no free themes ever will. 
