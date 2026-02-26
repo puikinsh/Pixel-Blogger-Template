@@ -1,33 +1,155 @@
-# Pixel Blogger Template
+# Pixel — Free News & Magazine Blogger Template
 
-This is a completely free, open source and customizable Blogger template (based on blogsport) for news and magazine style website in any niche. 
-This template is free for commercial and private use but comes with no support. Demo for Pixel template is available [here](https://pixel-template.blogspot.com) or by clicking of a larger demo button bellow. Whichever you find first.
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3.8-7952B3?logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
+[![Swiper](https://img.shields.io/badge/Swiper-11-6332F6?logo=swiper&logoColor=white)](https://swiperjs.com/)
+[![Font Awesome](https://img.shields.io/badge/Font%20Awesome-7-528DD7?logo=fontawesome&logoColor=white)](https://fontawesome.com/)
 
-Pixel is a highly customizable Blogger template that is popular among bloggers due to its simplicity, ease of use, and clean design. The template is created by the designer Colorlib and is available for free download here on Github.
+Pixel is a free, open-source Blogger/Blogspot template designed for news, magazine, and content-rich websites. Built with Bootstrap 5.3.8, Swiper 11, and vanilla JavaScript — no jQuery required. Created and maintained by [Colorlib](https://colorlib.com).
 
-The Pixel template is well-suited for bloggers who want to showcase their content in a clean and professional manner. The template's minimalistic design and white background allow the content to take center stage, making it easy for readers to navigate and engage with the site.
+**[Live Demo](https://pixel-template.blogspot.com)** | **[Documentation](https://pixel-template.blogspot.com/p/documentation.html)** | **[Download](https://github.com/nicsuspended/Pixel-Blogger-Template/archive/refs/heads/master.zip)** | **[Changelog](CHANGELOG.md)**
 
-One of the best features of the Pixel template is its customizability. Bloggers can easily change the color scheme, font styles, and other design elements to match their branding and personal preferences. The template also includes several built-in features such as social media icons, drop-down menus, and responsive design, making it suitable for bloggers of all skill levels.
+![Pixel Blogger Template — free news and magazine Blogger theme by Colorlib](https://colorlib.com/wp/wp-content/uploads/sites/2/pixel-free-news-adsense-blogger-template.jpg)
 
-In addition to its user-friendly design, Pixel is also highly optimized for search engines. The template is built using the latest HTML and CSS coding techniques, ensuring that your blog loads quickly and is easily crawled by search engines like Google. This can help boost your blog's visibility in search engine results pages and attract more organic traffic to your site.
+## Features
 
-Despite being a free template, Pixel offers several features that are typically found only in premium templates. The template includes support for AdSense and other advertising networks, making it easy for bloggers to monetize their site. It also includes a related post widget, allowing readers to easily discover more content on your site and stay engaged.
+- **Responsive design** — 7 CSS breakpoints from 1200px down to 300px for perfect display on desktop, tablet, and mobile
+- **Bootstrap 5.3.8** — modern CSS framework with no jQuery dependency
+- **Swiper 11 featured slider** — touch-friendly carousel with hero + secondary post layout
+- **Font Awesome 7 icons** — 2,000+ scalable vector icons for social media, UI elements, and navigation
+- **AdSense-ready** — 3 built-in advertisement slots optimized for Google AdSense and other ad networks
+- **Mega menu navigation** — multi-level dropdown menus with support for mega menu columns
+- **Tabbed sidebar** — recent, popular, and random posts with tab switching
+- **SEO-optimized markup** — clean HTML structure, proper heading hierarchy, and meta tag support
+- **Fast page load** — non-blocking CSS loading with `loadCSS()`, CDN-hosted assets, and minimal dependencies
+- **Customizable colors** — Blogger variable system lets you change the main color scheme and background from the theme editor
+- **Social media integration** — 20+ social platform icons including X (Twitter), TikTok, Threads, Instagram, Facebook, YouTube, and more
+- **Related posts widget** — automatically displays related content to increase page views
+- **Custom search overlay** — full-width search with keyboard support
+- **Post author bio** — dedicated author section with social links and description
+- **Sticky sidebar** — sidebar content stays visible while scrolling for better ad viewability and navigation
+- **Mobile-friendly navigation** — responsive hamburger menu for small screens
+- **Comment system** — Blogger's built-in threaded comments with styled layout
+- **Pagination** — numbered page navigation with previous/next buttons
+- **CSS Grid featured section** — modern grid layout for the featured posts area
+- **Zero jQuery** — 100% vanilla JavaScript for fast, lightweight performance
 
-In summary, the Pixel template is a highly customizable and easy-to-use template that is perfect for bloggers who want to create a professional-looking website. With its clean design, built-in features, and optimized code, Pixel is a top choice for bloggers looking to enhance their online presence.
+## Quick Start
 
-# -> [[Demo](https://pixel-template.blogspot.com)] & [[Documentation](https://pixel-template.blogspot.com/p/documentation.html)]
+1. **Download** — [Download the ZIP](https://github.com/nicuspended/Pixel-Blogger-Template/archive/refs/heads/master.zip) or clone this repository
+2. **Open Blogger** — Go to [blogger.com](https://www.blogger.com) and sign in
+3. **Navigate to Theme** — Click **Theme** in the left sidebar, then **Customize** > **Edit HTML**
+4. **Paste the template** — Select all existing code, delete it, and paste the contents of `Pixel-Blogger-Template.xml`
+5. **Save** — Click the save icon and preview your site
 
+### Import Demo Content (Optional)
 
-![Pixel template preview](https://colorlib.com/wp/wp-content/uploads/sites/2/pixel-free-news-adsense-blogger-template.jpg)
+To see the template with sample posts and pages:
 
+1. Go to **Settings** > **Manage blog** > **Import content**
+2. Upload `Pixel Demo Content.xml`
+3. Your blog will be populated with sample news articles and pages
 
+## Customization
 
+### Theme Colors
 
-## Useful resources 
+Open the Blogger theme editor (**Theme** > **Customize**) to change:
 
-* [Free Blogger Templates](https://colorlib.com/wp/free-blogger-templates/) - a list of free Blogger templates that have been by Colorlib and other template designers and developers. 
+| Variable | Default | Description |
+| -------- | ------- | ----------- |
+| `maincolor` | `#2942ee` | Primary accent color used for links, buttons, hover states, and highlights |
+| `lightcolor` | `#f7f7f7` | Background color for blockquotes, pagination, and secondary elements |
+| `body.background` | `#f0f0f0` | Page background color and optional pattern image |
+| `slider` | `#fff` | Featured slider background color and pattern |
 
-Blogger is a very limited and outdated platform. Thefefore, here are the best alternatives that you can use to create a blog using tools that are modern, fast and uses drag & drop user interface for website building.
-* [Free Blog Themes](https://colorlib.com/wp/free-wordpress-blog-themes/) - A list of completely free WordPress blog themes. We have selected the best ones and we believe you will enjoy them as much as we. 
-* [Free WordPress Themes](https://colorlib.com/wp/free-wordpress-themes/) - A huge list of mobile friendly and responsive WordPress themes that are completely free. Most of them are made by Colorlib or our trusted partners such as CPO Themes, Macho Themes and more. 
-* [Blog Themes](https://colorlib.com/wp/best-personal-blog-wordpress-themes/) - Above we listed all the free examples but if you are looking for something trully beautiful and well designed you might want to check these premium examples. Most of them comes with page builder that will allow to take your website to the levels no free themes ever will. 
+### Social Media Icons
+
+Edit the social widget in **Layout** > **Social Bar** to add or remove social links. Supported platforms:
+
+Facebook, X (Twitter), Instagram, YouTube, Pinterest, TikTok, Threads, Telegram, WhatsApp, LinkedIn, GitHub, Tumblr, Reddit, VK, Dribbble, Behance, SoundCloud, CodePen, Vimeo, WordPress, Dropbox, Skype, Stack Overflow
+
+### Menu Setup
+
+Configure the navigation menu in **Layout** > **Main Menu**. The template supports:
+
+- Single-level links
+- Multi-level dropdowns (add `hasSubmenu` class)
+- Mega menus (add `isMega` class)
+
+## Tech Stack
+
+| Library | Version | Purpose |
+| ------- | ------- | ------- |
+| [Bootstrap](https://getbootstrap.com/) | 5.3.8 | CSS framework and grid system |
+| [Swiper](https://swiperjs.com/) | 11 | Touch-friendly featured post slider |
+| [Font Awesome](https://fontawesome.com/) | 7 | Scalable vector icons |
+| [Google Fonts](https://fonts.google.com/) | — | Josefin Sans (headings) + Open Sans (body) |
+
+All assets are loaded via CDN — no build tools, package managers, or compilation needed.
+
+## File Structure
+
+```text
+Pixel-Blogger-Template/
+├── Pixel-Blogger-Template.xml   # Main template (paste into Blogger)
+├── Pixel Demo Content.xml       # Sample blog content for import
+├── CHANGELOG.md                 # Version history and release notes
+└── README.md                    # This file
+```
+
+## Browser Support
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+- Opera (latest)
+- Mobile browsers (iOS Safari, Chrome for Android)
+
+## Contributing
+
+Contributions are welcome! To contribute:
+
+1. Fork this repository
+2. Create a feature branch (`git checkout -b feature/improvement`)
+3. Commit your changes (`git commit -m 'Add new feature'`)
+4. Push to the branch (`git push origin feature/improvement`)
+5. Open a Pull Request
+
+## License
+
+Pixel is free for both personal and commercial use. You are free to modify and redistribute the template. Attribution to [Colorlib](https://colorlib.com) is appreciated but not required.
+
+---
+
+## More Free Templates by Colorlib
+
+Looking for more templates? Colorlib has 1,000+ free templates for every platform and niche:
+
+### Blogger Templates
+
+- [Free Blogger Templates](https://colorlib.com/wp/free-blogger-templates/) — curated collection of the best free Blogger/Blogspot templates for every niche
+
+### WordPress Themes
+
+Blogger is a solid starting point, but if you need more flexibility, WordPress offers thousands of plugins, drag-and-drop page builders, and full design control:
+
+- [Free WordPress Themes](https://colorlib.com/wp/free-wordpress-themes/) — 100+ responsive, mobile-friendly WordPress themes by Colorlib and trusted partners
+- [Free Blog Themes](https://colorlib.com/wp/free-wordpress-blog-themes/) — the best free WordPress themes specifically designed for bloggers
+- [Premium Blog Themes](https://colorlib.com/wp/best-personal-blog-wordpress-themes/) — professionally designed themes with page builders for bloggers who want to stand out
+
+### Website Templates
+
+- [Free HTML Website Templates](https://colorlib.com/wp/templates/) — Bootstrap-based HTML templates for business, portfolio, landing pages, and more
+- [Free Bootstrap Templates](https://colorlib.com/wp/free-bootstrap-templates/) — responsive templates built with the latest Bootstrap framework
+
+### Getting Started Guides
+
+- [How to Start a Blog](https://colorlib.com/wp/how-to-start-a-blog/) — complete step-by-step guide for beginners
+- [How to Make a Website](https://colorlib.com/wp/how-to-make-a-website/) — beginner-friendly guide to creating your first website
+- [Best Blogging Platforms](https://colorlib.com/wp/best-blogging-platforms/) — compare Blogger, WordPress, and other platforms
+
+---
+
+Made with care by [Colorlib](https://colorlib.com) — free website templates and WordPress themes since 2014.
