@@ -146,7 +146,6 @@ Blogger is a solid starting point, but if you need more flexibility, WordPress o
 
 ### Getting Started Guides
 
-- [How to Start a Blog](https://colorlib.com/wp/how-to-start-a-blog/) — complete step-by-step guide for beginners
 - [How to Make a Website](https://colorlib.com/wp/how-to-make-a-website/) — beginner-friendly guide to creating your first website
 - [Best Blogging Platforms](https://colorlib.com/wp/best-blogging-platforms/) — compare Blogger, WordPress, and other platforms
 
