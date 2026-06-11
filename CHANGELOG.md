@@ -4,7 +4,14 @@ All notable changes to the Pixel Blogger Template are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
-## [Unreleased]
+## [2.0.0] - 2026-06-11
+
+Major modernization release: zero frameworks, zero render-blocking external assets, structured data, and a full accessibility pass.
+
+### Upgrade notes
+
+- When saving the theme, Blogger may warn that the **FollowByEmail (Newsletter) widget will be deleted** — confirm the deletion; the widget posted to FeedBurner email subscriptions, which Google shut down in 2021
+- In **Theme → mobile settings (gear icon)**, choose **"Desktop"** — the template is fully responsive, and serving it directly removes Blogger's legacy mobile wrapper and its `?m=1` redirect (~500 ms per mobile visit)
 
 ### Performance
 
@@ -17,6 +24,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - **Facebook SDK lazy-loads** — fetched once (was loaded twice), only when facebook comments are configured, and only when the comment area scrolls near the viewport; upgraded v2.0 → v21.0
 - **Preconnect hints** for cdn.jsdelivr.net, fonts.googleapis.com, and fonts.gstatic.com
 - **Native lazy loading** (`loading="lazy"`, `decoding="async"`) on below-the-fold template images
+- **Server-side image resizing** — post cards use Blogger's `resizeImage()` expression (800px) so full-size originals never reach the browser; the sidebar Featured Post background is resized the same way
+- **Blogger's render-blocking widget CSS bundle suppressed** via `b:css='false'` (~750 ms off the critical path); the template ships its own styles for all widgets
+- **Swiper pinned to an exact version** (11.1.14) for 1-year immutable CDN caching instead of jsDelivr's 7-day range cache, and its on-demand CSS loads outside the critical request chain
+- Removed the dead Google+ follow button from the Profile widget, which pulled in `apis.google.com/js/platform.js` (~58 KiB) on every page
 - Removed duplicated scripts that ran multiple times per page (`.format-date` ×4, author/ad injection ×2), the hidden Navbar widget's dead Google+ scripts, and the eager hidden YouTube iframe in gallery widgets
 
 ### SEO
@@ -31,9 +42,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Accessibility
 
 - Skip-to-content link, visually hidden until focused
+- `lang` attribute from the blog's locale on the `html` element and a `main` landmark on the content wrapper
 - Labeled search buttons (`aria-label`), keyboard-focusable search trigger, Escape closes the search overlay, and the search input is focused on open
-- Sidebar and comment tabs expose `tablist`/`tab`/`tabpanel` roles with `aria-selected`
-- Labeled mega menu arrows and mobile navigation selects
+- Sidebar and comment tabs expose valid `tablist`/`tab`/`tabpanel` roles (`role='presentation'` list items) with `aria-selected` kept in sync
+- `aria-label` with the post title on every background-image post link (featured hero and secondary cards, recent-post thumbnails, list-widget thumbnails, mega menu covers, grid cards)
+- Contact form fields and the archive dropdown are labeled with Blogger's own localized strings
+- Icon-only pager arrows carry screen-reader-only text; labeled mega menu arrows and mobile navigation selects
+- Profile widget uses valid markup instead of a definition list whose `dt` could appear without a `dd`
 
 ### Fixed
 

@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
+<!--
+=============================================================
+ Pixel - Free News & Magazine Blogger Template
+ Version: 2.0.0
+ Author: Colorlib (https://colorlib.com)
+ Demo: https://pixel-template.blogspot.com
+ Documentation: https://pixel-template.blogspot.com/p/documentation.html
+ License: GPL v3 (https://www.gnu.org/licenses/gpl-3.0)
+=============================================================
+-->
 <html b:css='false' b:version='2' class='v2' expr:dir='data:blog.languageDirection' expr:lang='data:blog.locale' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
   <head>
 
