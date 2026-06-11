@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
-<html b:version='2' class='v2' expr:dir='data:blog.languageDirection' expr:lang='data:blog.locale' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<html b:css='false' b:version='2' class='v2' expr:dir='data:blog.languageDirection' expr:lang='data:blog.locale' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
   <head>
 
     <b:if cond='data:blog.pageType == &quot;index&quot;'>
@@ -2002,7 +2002,7 @@ loadCSS("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&
            <article class='hentry pixel-first-article'>
              <div class='pixel-article-image'>
                <div class='post-image'>
-                 <a expr:href='data:post.url'><b:if cond='data:post.firstImageUrl'><img class='pixel-featured-wid' decoding='async' expr:alt='data:post.title' expr:src='data:post.firstImageUrl' loading='lazy'/><b:else/><img class='pixel-featured-wid' decoding='async' expr:alt='data:post.title' loading='lazy' src='https://4.bp.blogspot.com/-wPwjv7-YYGY/Wc98wlDT8qI/AAAAAAAAAEE/mH8YkPl8qJAH9FMuFKcShQvXXYMmVyrIgCLcBGAs/s1600/notfound.png'/></b:if></a>
+                 <a expr:href='data:post.url'><b:if cond='data:post.firstImageUrl'><img class='pixel-featured-wid' decoding='async' expr:alt='data:post.title' expr:src='resizeImage(data:post.firstImageUrl, 800)' loading='lazy'/><b:else/><img class='pixel-featured-wid' decoding='async' expr:alt='data:post.title' loading='lazy' src='https://4.bp.blogspot.com/-wPwjv7-YYGY/Wc98wlDT8qI/AAAAAAAAAEE/mH8YkPl8qJAH9FMuFKcShQvXXYMmVyrIgCLcBGAs/s1600/notfound.png'/></b:if></a>
 				</div>
 			 </div>
              <span class='pixel-rgb'/>
@@ -2024,7 +2024,7 @@ loadCSS("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&
              <div class='pixel-article-image'>
                <div class='pixel-post-image'>
                  <div class='pixel-bgr'/>
-                 <a expr:aria-label='data:post.title' expr:href='data:post.url'><b:if cond='data:post.firstImageUrl'><div class='pixel-featured-wid' expr:style='&quot;background:url(&quot; + data:post.firstImageUrl + &quot;)&quot;'/><b:else/><div class='pixel-featured-wid' style='background:url(https://4.bp.blogspot.com/-wPwjv7-YYGY/Wc98wlDT8qI/AAAAAAAAAEE/mH8YkPl8qJAH9FMuFKcShQvXXYMmVyrIgCLcBGAs/s1600/notfound.png)'/></b:if></a>
+                 <a expr:aria-label='data:post.title' expr:href='data:post.url'><b:if cond='data:post.firstImageUrl'><div class='pixel-featured-wid' expr:style='&quot;background:url(&quot; + resizeImage(data:post.firstImageUrl, 800) + &quot;)&quot;'/><b:else/><div class='pixel-featured-wid' style='background:url(https://4.bp.blogspot.com/-wPwjv7-YYGY/Wc98wlDT8qI/AAAAAAAAAEE/mH8YkPl8qJAH9FMuFKcShQvXXYMmVyrIgCLcBGAs/s1600/notfound.png)'/></b:if></a>
                  <div class='social share-links clearfix'>
 					<ul class='social-icons list-unstyled list-inline'>
                       <li class='social-item facebook'>
@@ -2075,7 +2075,7 @@ loadCSS("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&
              <div class='pixel-article-image'>
                <div class='pixel-post-image'>
                  <div class='pixel-bgr'/>
-                 <a expr:aria-label='data:post.title' expr:href='data:post.url'><b:if cond='data:post.firstImageUrl'><div class='pixel-featured-wid' expr:style='&quot;background:url(&quot; + data:post.firstImageUrl + &quot;)&quot;'/><b:else/><div class='pixel-featured-wid' style='background:url(https://4.bp.blogspot.com/-wPwjv7-YYGY/Wc98wlDT8qI/AAAAAAAAAEE/mH8YkPl8qJAH9FMuFKcShQvXXYMmVyrIgCLcBGAs/s1600/notfound.png)'/></b:if></a>
+                 <a expr:aria-label='data:post.title' expr:href='data:post.url'><b:if cond='data:post.firstImageUrl'><div class='pixel-featured-wid' expr:style='&quot;background:url(&quot; + resizeImage(data:post.firstImageUrl, 800) + &quot;)&quot;'/><b:else/><div class='pixel-featured-wid' style='background:url(https://4.bp.blogspot.com/-wPwjv7-YYGY/Wc98wlDT8qI/AAAAAAAAAEE/mH8YkPl8qJAH9FMuFKcShQvXXYMmVyrIgCLcBGAs/s1600/notfound.png)'/></b:if></a>
                  <div class='social share-links clearfix'>
 					<ul class='social-icons list-unstyled list-inline'>
                       <li class='social-item facebook'>
@@ -3421,7 +3421,7 @@ function initFeaturedPostWidget() {
   document.querySelectorAll(".FeaturedPost .post-summary").forEach(function (card) {
     var image = card.querySelector(".image");
     if (image && image.getAttribute("src")) {
-      card.setAttribute("style", "background-image:url(" + image.getAttribute("src") + ");");
+      card.setAttribute("style", "background-image:url(" + pixelResizeImage(image.getAttribute("src"), "s800") + ");");
     }
     card.insertAdjacentHTML("beforeend", "<div class='overlay'></div>");
   });
@@ -3744,13 +3744,13 @@ function pixelLoadSwiper() {
     pixelSwiperReady = new Promise(function (resolve) {
       var css = document.createElement("link");
       css.rel = "stylesheet";
-      css.href = "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css";
+      css.href = "https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css";
       // load without joining the critical request chain
       css.media = "print";
       css.onload = function () { css.media = "all"; };
       document.head.appendChild(css);
       var js = document.createElement("script");
-      js.src = "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js";
+      js.src = "https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js";
       js.onload = resolve;
       document.head.appendChild(js);
     });
