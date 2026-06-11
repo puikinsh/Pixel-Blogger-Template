@@ -1472,7 +1472,7 @@ loadCSS("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&
        <b:includable id='backlinkDeleteIcon' var='backlink'>
   <span expr:class='&quot;item-control &quot; + data:backlink.adminClass'>
     <a expr:href='data:backlink.deleteUrl' expr:title='data:top.deleteBacklinkMsg'>
-      <img src='https://resources.blogblog.com/img/icon_delete13.gif'/>
+      <img alt='' loading='lazy' src='https://resources.blogblog.com/img/icon_delete13.gif'/>
     </a>
   </span>
 </b:includable>
@@ -1533,7 +1533,7 @@ loadCSS("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&
       </div>
     <b:else/>
       <a class='comment-delete' expr:href='data:comment.deleteUrl' expr:title='data:top.deleteCommentMsg'>
-        <img src='https://resources.blogblog.com/img/icon_delete13.gif'/>
+        <img alt='' loading='lazy' src='https://resources.blogblog.com/img/icon_delete13.gif'/>
       </a>
     </b:if>
   </span>
@@ -1588,7 +1588,7 @@ loadCSS("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&
           <b:loop values='data:post.comments' var='comment'>
             <dt expr:class='&quot;comment-author &quot; + data:comment.authorClass' expr:id='data:comment.anchorName'>
               <b:if cond='data:comment.favicon'>
-                <img expr:src='data:comment.favicon' height='16px' style='margin-bottom:-2px;' width='16px'/>
+                <img alt='' expr:src='data:comment.favicon' height='16px' loading='lazy' style='margin-bottom:-2px;' width='16px'/>
               </b:if>
               <a expr:name='data:comment.anchorName'/>
               <b:if cond='data:blog.enabledCommentProfileImages'>
@@ -1724,7 +1724,7 @@ loadCSS("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&
           <b:if cond='data:post.thumbnailUrl'>
             <div class='mobile-index-thumbnail'>
               <div class='Image'>
-                <img expr:src='data:post.thumbnailUrl'/>
+                <img decoding='async' expr:alt='data:post.title' expr:src='data:post.thumbnailUrl' loading='lazy'/>
               </div>
             </div>
           </b:if>
@@ -1944,7 +1944,7 @@ loadCSS("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&
            <article class='hentry pixel-first-article'>
              <div class='pixel-article-image'>
                <div class='post-image'>
-                 <a expr:href='data:post.url'><b:if cond='data:post.firstImageUrl'><img class='pixel-featured-wid' expr:src='data:post.firstImageUrl'/><b:else/><img class='pixel-featured-wid' src='https://4.bp.blogspot.com/-wPwjv7-YYGY/Wc98wlDT8qI/AAAAAAAAAEE/mH8YkPl8qJAH9FMuFKcShQvXXYMmVyrIgCLcBGAs/s1600/notfound.png'/></b:if></a>
+                 <a expr:href='data:post.url'><b:if cond='data:post.firstImageUrl'><img class='pixel-featured-wid' decoding='async' expr:alt='data:post.title' expr:src='data:post.firstImageUrl' loading='lazy'/><b:else/><img class='pixel-featured-wid' decoding='async' expr:alt='data:post.title' loading='lazy' src='https://4.bp.blogspot.com/-wPwjv7-YYGY/Wc98wlDT8qI/AAAAAAAAAEE/mH8YkPl8qJAH9FMuFKcShQvXXYMmVyrIgCLcBGAs/s1600/notfound.png'/></b:if></a>
 				</div>
 			 </div>
              <span class='pixel-rgb'/>
@@ -2160,9 +2160,9 @@ $('.pixel-navigation').after($('#hpick').html());
   <div class='post-author'>
     <div class='author-img'>
       <b:if cond='data:post.authorPhoto.url'>
-        <img alt='' class='avatar avatar-100 photo' expr:src='data:post.authorPhoto.url' height='100' width='100'/>
+        <img alt='' class='avatar avatar-100 photo' expr:src='data:post.authorPhoto.url' height='100' loading='lazy' width='100'/>
       <b:else/>
-        <img alt='' class='avatar avatar-100 photo' height='100' src='https://lh3.googleusercontent.com/a/default-user=s100-c' width='100'/>
+        <img alt='' class='avatar avatar-100 photo' height='100' loading='lazy' src='https://lh3.googleusercontent.com/a/default-user=s100-c' width='100'/>
       </b:if>
     </div>
     <div class='author-content'>
@@ -2189,7 +2189,7 @@ $('.pixel-navigation').after($('#hpick').html());
   <b:if cond='data:post.editUrl'>
     <span expr:class='&quot;item-control &quot; + data:post.adminClass'>
       <a expr:href='data:post.editUrl' expr:title='data:top.editPostMsg'>
-        <img alt='' class='icon-action' height='18' src='https://resources.blogblog.com/img/icon18_edit_allbkg.gif' width='18'/>
+        <img alt='' class='icon-action' height='18' loading='lazy' src='https://resources.blogblog.com/img/icon18_edit_allbkg.gif' width='18'/>
       </a>
     </span>
   </b:if>
@@ -2749,7 +2749,7 @@ $('.pixel-navigation').after(codei);
                             <b:if cond='data:post.thumbnail'>
                               <div class='item-thumbnail'>
                                 <a expr:href='data:post.href'>
-                                  <img border='0' expr:alt='data:post.title' expr:height='data:thumbnailSize' expr:src='data:post.thumbnail' expr:width='data:thumbnailSize'/>
+                                  <img decoding='async' expr:alt='data:post.title' expr:height='data:thumbnailSize' expr:src='data:post.thumbnail' expr:width='data:thumbnailSize' loading='lazy'/>
                                 </a>
                               </div>
                             </b:if>
@@ -2897,7 +2897,7 @@ $('.pixel-navigation').after(codei);
       </p>
     </b:if>
     <b:if cond='data:showFirstImage and data:postFirstImage != &quot;&quot;'>
-      <img class='image' expr:src='data:postFirstImage'/>
+      <img alt='' class='image' expr:src='data:postFirstImage' loading='lazy'/>
     </b:if>
   </div>
 
@@ -3000,7 +3000,7 @@ $('.pixel-navigation').after(codei);
     <b:else/> <!-- normal blog profile -->
 
       <b:if cond='data:photo.url != &quot;&quot;'>
-        <a expr:href='data:userUrl'><img class='profile-img' expr:alt='data:messages.myPhoto' expr:height='data:photo.height' expr:src='data:photo.url' expr:width='data:photo.width'/></a>
+        <a expr:href='data:userUrl'><img class='profile-img' expr:alt='data:messages.myPhoto' expr:height='data:photo.height' expr:src='data:photo.url' expr:width='data:photo.width' loading='lazy'/></a>
       </b:if>
 
       <dl class='profile-datablock'>
