@@ -3062,8 +3062,8 @@ var msg = &#39;<data:navMessage/>&#39;;
         <a expr:href='data:userUrl'><img class='profile-img' expr:alt='data:messages.myPhoto' expr:height='data:photo.height' expr:src='data:photo.url' expr:width='data:photo.width' loading='lazy'/></a>
       </b:if>
 
-      <dl class='profile-datablock'>
-        <dt class='profile-data'>
+      <div class='profile-datablock'>
+        <div class='profile-data'>
           <a class='profile-name-link g-profile' expr:href='data:userUrl' expr:style='&quot;background-image: url(&quot; + data:profileLogo + &quot;);&quot;' rel='author'>
             <data:displayname/>
           </a>
@@ -3071,14 +3071,14 @@ var msg = &#39;<data:navMessage/>&#39;;
             <br/>
             <div class='g-follow' data-annotation='bubble' data-height='20' expr:data-href='data:userUrl'/>
           </b:if>
-        </dt>
+        </div>
 
         <b:if cond='data:showlocation'>
-          <dd class='profile-data'><data:location/></dd>
+          <div class='profile-data'><data:location/></div>
         </b:if>
 
-        <b:if cond='data:aboutme != &quot;&quot;'><dd class='profile-textblock'><data:aboutme/></dd></b:if>
-      </dl>
+        <b:if cond='data:aboutme != &quot;&quot;'><div class='profile-textblock'><data:aboutme/></div></b:if>
+      </div>
       <a class='profile-link' expr:href='data:userUrl' rel='author'><data:viewProfileMsg/></a>
     </b:if>
 
