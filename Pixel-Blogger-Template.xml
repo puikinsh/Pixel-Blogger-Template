@@ -2229,7 +2229,7 @@ a.postmarg .article-meta, .postmarg .article-meta a,.postmarg .article-meta i{co
     <div class='author-content'>
       <div class='top-author'>
         <h5>
-          <a expr:href='data:post.authorUrl' rel='author' title='Posts by Diago'><data:post.author/>
+          <a expr:href='data:post.authorUrl' expr:title='&quot;Posts by &quot; + data:post.author' rel='author'><data:post.author/>
           </a>
         </h5>
       </div>
