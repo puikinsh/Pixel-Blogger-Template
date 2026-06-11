@@ -26,8 +26,6 @@
     <link crossorigin='anonymous' href='https://fonts.gstatic.com' rel='preconnect'/>
     <link href='https://ajax.googleapis.com' rel='preconnect'/>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" crossorigin="anonymous"></link>
-
   <b:skin><![CDATA[
 /* Variable definitions
 -----------------------
@@ -39,6 +37,23 @@
 </Group>
 -----------------------
 */
+
+/* Bootstrap replacement - only the pieces this template actually uses
+----------------------------------------------------------------------- */
+*,*::before,*::after{box-sizing:border-box}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+.row{display:flex;flex-wrap:wrap;margin-right:-12px;margin-left:-12px}
+.row>*{flex-shrink:0;width:100%;max-width:100%;padding-right:12px;padding-left:12px}
+.col-md-12{flex:0 0 auto;width:100%}
+@media (min-width:576px){.col-sm-3{flex:0 0 auto;width:25%}}
+.float-end{float:right!important}
+.list-inline,.list-unstyled{padding-left:0;list-style:none}
+.list-inline li{display:inline-block;list-style:none}
+.input-group{position:relative;display:flex;flex-wrap:wrap;align-items:stretch;width:100%}
+.input-group>.form-control{position:relative;flex:1 1 auto;width:1%;min-width:0}
+.form-control{display:block;width:100%;padding:6px 12px;font-size:14px;line-height:1.5;color:#2e2e2e;background-color:#fff;border:1px solid #ced4da;border-radius:4px}
+.btn{display:inline-block;padding:6px 12px;font-size:14px;line-height:1.5;text-align:center;vertical-align:middle;cursor:pointer;-webkit-user-select:none;user-select:none;border:1px solid transparent;border-radius:4px;background-color:transparent;color:inherit}
+.btn-primary{color:#fff;background-color:$maincolor;border-color:$maincolor}
 
 /* Global */
 *::selection {background: $maincolor;color: #ffffff;}
