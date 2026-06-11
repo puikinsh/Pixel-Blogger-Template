@@ -1654,7 +1654,7 @@ loadCSS("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&
         </b:if>
       </p>
       <b:else/>
-      <script>var cmtal = false;var $= jQuery;$(&#39;#pixel-comment-placer&#39;).remove();</script>
+      <script>var cmtal = false;</script>
     </b:if>
     <b:if cond='data:showCmtPopup'>
       <div id='comment-popup'>
@@ -2476,7 +2476,7 @@ $('.pixel-navigation').after(codei);
               </div>
               <script type='text/javascript'>
               //<![CDATA[
-                $('#comments').remove();
+                (function () { var c = document.getElementById("comments"); if (c) c.remove(); })();
               //]]>
               </script>    
             </b:if>
@@ -2486,7 +2486,7 @@ $('.pixel-navigation').after(codei);
               </div>
               <script type='text/javascript'>
               //<![CDATA[
-                $('#comments').remove();
+                (function () { var c = document.getElementById("comments"); if (c) c.remove(); })();
               //]]>
               </script>
             </b:if>
@@ -2514,7 +2514,7 @@ $('.pixel-navigation').after(codei);
                 <div data-tab='disqus'><div class='disqus-tab'><div id='disqus_thread'/></div></div>
               <script type='text/javascript'>
               //<![CDATA[
-                $('#comments').remove();
+                (function () { var c = document.getElementById("comments"); if (c) c.remove(); })();
               //]]>
               </script>
               </div>
@@ -2532,7 +2532,7 @@ $('.pixel-navigation').after(codei);
               </div>
               <script type='text/javascript'>
               //<![CDATA[
-                $('#comments').remove();
+                (function () { var c = document.getElementById("comments"); if (c) c.remove(); })();
               //]]>
               </script>
             </b:if>
@@ -3175,19 +3175,33 @@ $('.pixel-navigation').after(codei);
     </div>
 
 &lt;/div&gt;
-<script async='async' type='text/javascript'>
-var $ = jQuery;
-  $(&#39;.pixel-serch&#39;).click(function(){
-
-	$(&#39;.searchform-wrap&#39;).fadeIn();
-
-	});
-  $(&#39;.searchform-wrap .btn-mini-close&#39;).click(function(){
-
-
-	$(&#39;.searchform-wrap&#39;).fadeOut();
-	});
-
+<script type='text/javascript'>
+//<![CDATA[
+function initSearchOverlay() {
+  var overlay = document.querySelector(".searchform-wrap");
+  if (!overlay) return;
+  var input = overlay.querySelector("input[name='q']");
+  function openOverlay() {
+    overlay.style.opacity = "0";
+    overlay.style.display = "block";
+    requestAnimationFrame(function () { overlay.style.opacity = "1"; });
+    if (input) input.focus();
+  }
+  function closeOverlay() {
+    overlay.style.opacity = "0";
+    setTimeout(function () { overlay.style.display = "none"; }, 150);
+  }
+  document.querySelectorAll(".pixel-serch").forEach(function (btn) {
+    btn.addEventListener("click", openOverlay);
+  });
+  var closeBtn = overlay.querySelector(".btn-mini-close");
+  if (closeBtn) closeBtn.addEventListener("click", closeOverlay);
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && overlay.style.display === "block") closeOverlay();
+  });
+}
+initSearchOverlay();
+//]]>
 </script>
 <script async='async' type='text/javascript'> 
 //<![CDATA[
@@ -3275,10 +3289,23 @@ var $=jQuery;$(".custwid .pixel-widget").map(function(){function e(e,i){return e
 </script>
 </b:if>
 <!--Page Navigation Ends -->
-<script async='async' type='text/javascript'>
+<script type='text/javascript'>
 //<![CDATA[
-$(document).ready(function(){$("img").map(function(){var t=$(this),a=t.attr("src");t.attr("title",a.substring(a.lastIndexOf("/")+1,a.lastIndexOf("."))),t.attr("alt",a.substring(a.lastIndexOf("/")+1,a.lastIndexOf(".")))})}),$(".Label a, .pixel-max-limit").attr("href",function(t,a){return a.replace(a,a+"?&max-results="+perPage)});
-  //]]>
-</script>  
+// Fill alt text from the filename only when an image has none at all;
+// never overwrite author-provided alt or title attributes
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll("img:not([alt])").forEach(function (img) {
+    var src = img.getAttribute("src") || "";
+    var name = src.substring(src.lastIndexOf("/") + 1, src.lastIndexOf("."));
+    if (name) img.setAttribute("alt", name);
+  });
+});
+// Label links honor the configured posts-per-page
+document.querySelectorAll(".Label a, .pixel-max-limit").forEach(function (a) {
+  var href = a.getAttribute("href");
+  if (href && href.indexOf("max-results=") === -1) a.setAttribute("href", href + "?&max-results=" + perPage);
+});
+//]]>
+</script>
 </body>
 </html>
