@@ -54,6 +54,8 @@ button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
 .btn{display:inline-block;padding:6px 12px;font-size:14px;line-height:1.5;text-align:center;vertical-align:middle;cursor:pointer;-webkit-user-select:none;user-select:none;border:1px solid transparent;border-radius:4px;background-color:transparent;color:inherit}
 .btn-primary{color:#fff;background-color:$maincolor;border-color:$maincolor}
 @keyframes pixelFadeIn{from{opacity:0}to{opacity:1}}
+.skip-link{position:absolute;left:-9999px;top:0;background:$maincolor;color:#fff!important;padding:10px 16px;z-index:100000}
+.skip-link:focus{left:0}
 @media (min-width:769px){.pixel_featured_widget.pixel-initiate{min-height:490px}}
 
 /* Global */
@@ -951,8 +953,9 @@ loadCSS("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&
 </script>
 </head>
 <body expr:class='data:blog.pageType'>
+<a class='skip-link' href='#main-wrapper'>Skip to content</a>
 
-<div class='searchform-wrap search-transition-wrap'><div class='search-transition-inner'><form action='/search' class='searchform' method='get'><div class='input-group'> <input class='form-control' name='q' placeholder='Search ... ' type='text' value=''/> <button class='btn btn-primary' type='submit'></button> </div></form>                                <button class='btn-mini-close float-end'><i class='fa-solid fa-xmark'/></button></div></div>
+<div class='searchform-wrap search-transition-wrap'><div class='search-transition-inner'><form action='/search' class='searchform' method='get'><div class='input-group'> <input class='form-control' name='q' placeholder='Search ... ' type='text' value=''/> <button aria-label='Search' class='btn btn-primary' type='submit'></button> </div></form>                                <button aria-label='Close search' class='btn-mini-close float-end'><i aria-hidden='true' class='fa-solid fa-xmark'/></button></div></div>
 <div class='adminbar' style='display:none'>
 <div class='theme-opt'>
     <b:section class='option' id='option' maxwidgets='1' name='Layout Setup' preferred='no' showaddelement='no'>
@@ -1235,7 +1238,7 @@ loadCSS("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&
           </b:includable>
           </b:widget>
         </b:section>
-  <div class='pixel-search-btn'><span><a class='pixel-serch'/></span></div>
+  <div class='pixel-search-btn'><span><a aria-label='Open search' class='pixel-serch' href='#' role='button'/></span></div>
   </div>
       </div>
 <div style='clear: both;'/> 
@@ -1324,7 +1327,7 @@ loadCSS("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&
 <div class='pixel-wrapper padders'>
   <div class='body-row midalizer'>
     <p>It looks like nothing was found at this location. Maybe try a search?</p>
-<form action='/search' class='searchform' method='get'><div class='input-group'> <input class='form-control' name='q' placeholder='Search ... ' type='text' value=''/> <button class='btn btn-primary' type='submit'></button> </div><div/></form>
+<form action='/search' class='searchform' method='get'><div class='input-group'> <input class='form-control' name='q' placeholder='Search ... ' type='text' value=''/> <button aria-label='Search' class='btn btn-primary' type='submit'></button> </div><div/></form>
 </div>
 </div>
 <!--ERROR PAGE-->
@@ -3193,7 +3196,10 @@ function initSearchOverlay() {
     setTimeout(function () { overlay.style.display = "none"; }, 150);
   }
   document.querySelectorAll(".pixel-serch").forEach(function (btn) {
-    btn.addEventListener("click", openOverlay);
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
+      openOverlay();
+    });
   });
   var closeBtn = overlay.querySelector(".btn-mini-close");
   if (closeBtn) closeBtn.addEventListener("click", closeOverlay);
@@ -3348,7 +3354,7 @@ function initMegaMenus() {
       var perStage = parseInt(data.feed.openSearch$itemsPerPage.$t, 10);
       var stages = Math.ceil(total / perStage);
       var html = '<ul data-itemnums="' + perStage + '" data-label="' + label + '" data-start="' + start + '" data-stages="' + stages + '" data-cstage="1" data-tpst="' + total + '">' +
-        '<div class="mega-nav"><a class="mega-prev disable" href="javascript:;"><i class="fa-solid fa-arrow-left"></i></a><a class="mega-next" href="javascript:;"><i class="fa-solid fa-arrow-right"></i></a></div>' +
+        '<div class="mega-nav"><a aria-label="Previous posts" class="mega-prev disable" href="javascript:;" role="button"><i aria-hidden="true" class="fa-solid fa-arrow-left"></i></a><a aria-label="Next posts" class="mega-next" href="javascript:;" role="button"><i aria-hidden="true" class="fa-solid fa-arrow-right"></i></a></div>' +
         '<div class="pixel-mega-loading" style="display:none"><div class="pixel-loading-inner"><div class="pixel-thecube"><div class="pixel-cube pixel-c1"></div><div class="pixel-cube pixel-c2"></div><div class="pixel-cube pixel-c4"></div><div class="pixel-cube pixel-c3"></div></div></div></div>' +
         '<div class="mega-inner row">' + data.feed.entry.map(pixelMegaItemHtml).join("") + "</div></ul>";
       link.insertAdjacentHTML("afterend", html);
@@ -3538,6 +3544,9 @@ function initCommentScroll() {
 initMainMenu();
 initMegaMenus();
 selectnav("nav");
+document.querySelectorAll("select.selectnav").forEach(function (sel) {
+  sel.setAttribute("aria-label", "Site navigation");
+});
 initFeaturedPostWidget();
 initPostThumbnails();
 initPostInjections();
@@ -3562,8 +3571,15 @@ function initSidebarTabs() {
   });
   var tabs = Array.prototype.slice.call(container.querySelectorAll(".pixel-sidebar-tab li"));
   var panels = Array.prototype.filter.call(container.children, function (el) { return el.tagName === "DIV"; });
+  var nav = container.querySelector(".pixel-sidebar-tab");
+  if (nav) nav.setAttribute("role", "tablist");
+  panels.forEach(function (panel) { panel.setAttribute("role", "tabpanel"); });
   function activate(index, animate) {
-    tabs.forEach(function (li, i) { li.classList.toggle("active", i === index); });
+    tabs.forEach(function (li, i) {
+      li.classList.toggle("active", i === index);
+      var link = li.querySelector("a");
+      if (link) link.setAttribute("aria-selected", i === index ? "true" : "false");
+    });
     panels.forEach(function (panel, i) {
       panel.style.display = i === index ? "block" : "none";
       if (i === index && animate) panel.style.animation = "pixelFadeIn .4s ease";
@@ -3572,6 +3588,7 @@ function initSidebarTabs() {
   tabs.forEach(function (li, i) {
     li.classList.add("pixel-hide");
     var link = li.querySelector("a");
+    if (link) link.setAttribute("role", "tab");
     (link || li).addEventListener("click", function (e) {
       e.preventDefault();
       activate(i, true);
@@ -3598,25 +3615,35 @@ function initCommentTabs() {
     header.className = "pixel-tabs-header";
     var wrapper = document.createElement("ul");
     wrapper.className = "pixel-tab-wrapper";
+    wrapper.setAttribute("role", "tablist");
     header.appendChild(wrapper);
     tabs.insertBefore(header, tabs.firstChild);
+    var links = [];
     panes.forEach(function (pane, i) {
       pane.classList.add("content-tab");
+      pane.setAttribute("role", "tabpanel");
       pane.style.display = i === 0 ? "block" : "none";
       var item = document.createElement("li");
       var link = document.createElement("a");
       link.href = "#";
       link.textContent = pane.getAttribute("data-tab");
+      link.setAttribute("role", "tab");
+      link.setAttribute("aria-selected", i === 0 ? "true" : "false");
       if (i === 0) link.className = "activeTab";
       link.addEventListener("click", function (e) {
         e.preventDefault();
-        wrapper.querySelectorAll(".activeTab").forEach(function (el) { el.classList.remove("activeTab"); });
+        links.forEach(function (el) {
+          el.classList.remove("activeTab");
+          el.setAttribute("aria-selected", "false");
+        });
         link.classList.add("activeTab");
+        link.setAttribute("aria-selected", "true");
         panes.forEach(function (p, j) {
           p.style.display = j === i ? "block" : "none";
           if (j === i) p.style.animation = "pixelFadeIn .4s ease";
         });
       });
+      links.push(link);
       item.appendChild(link);
       wrapper.appendChild(item);
     });
