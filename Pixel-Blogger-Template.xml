@@ -24,7 +24,6 @@
     <link crossorigin='anonymous' href='https://cdn.jsdelivr.net' rel='preconnect'/>
     <link href='https://fonts.googleapis.com' rel='preconnect'/>
     <link crossorigin='anonymous' href='https://fonts.gstatic.com' rel='preconnect'/>
-    <link href='https://ajax.googleapis.com' rel='preconnect'/>
 
   <b:skin><![CDATA[
 /* Variable definitions
@@ -943,7 +942,6 @@ body#layout #option h4{width: 100%;}
   <style>.hidehome{display:none}</style>
 </b:if>
 <b:include data='blog' name='google-analytics'/>
-<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js' type='text/javascript'/>
 <script async='async' type='text/javascript'>
 //<![CDATA[
 //CSS Ready
