@@ -86,6 +86,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Featured grid secondary items: text overlay (label, title, author, date) now stays anchored to its respective image instead of being displaced to only one image — moved `.pixel-content` inside `.pixelfeatured-thumb` and added `position: relative; overflow: hidden` to the thumb container
 - Author description updated from "Blossom Themes" to "Colorlib"
 - Demo content XML cleaned up and modernized
+- Demo content no longer embeds an obsolete copy of the template — the original blog export carried the full jQuery-era theme as a kind#template entry (51% of the file); only posts, pages, comments, and settings remain
 
 ## [1.1.0] - 2023-01-25
 
