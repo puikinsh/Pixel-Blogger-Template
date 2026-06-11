@@ -97,9 +97,7 @@ button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
 
 /* Global */
 *::selection {background: $maincolor;color: #ffffff;}
-*::-o-selection {background: $maincolor;color: #ffffff;}
 *::-moz-selection {background: $maincolor;color: #ffffff;}
-*::-webkit-selection {background: $maincolor;color: #ffffff;}
 a:link{text-decoration:none}
 html,body,.section,.widget,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,figure{margin:0;padding:0}
 html{overflow-x:hidden}
@@ -138,7 +136,7 @@ img{max-width:100%;vertical-align:middle;border:0}
 .status-msg-body{color:$maincolor;font-family:'Open Sans', sans-serif;letter-spacing:0;font-weight:400}
 
 /* Layout */
-*{outline:0;transition:all .2s ease;-webkit-transition:all .2s ease;-moz-transition:all .2s ease;-o-transition:all .2s ease}
+*{outline:0;transition:all .2s ease}
 body{color:#2e2e2e;font-family:'Open Sans', sans-serif;font-size:14px;font-weight:400;line-height:21px;background:$(body.background)}
 #body-wrapper{max-width:100%;margin:0 auto;background-color:#FFF;box-shadow:0 0 5px RGBA(0,0,0,0.2)}
 .body-row{width:1170px}
@@ -470,10 +468,10 @@ div.pixel-empty{width: 100%;text-align:center;background:rgb(236,239,241);box-si
 .grid-item.secondary{padding-top:20px}
 .pixel-article{margin-bottom: 30px;border-radius: 0px;position: relative;}
 .pixel-article .pixel-article-image{position: relative;display: inline-block;width:100%}
-.pixel-article .pixel-bgr{bottom: 0;left: 0;opacity: 0.7;position: absolute;right: 0;top: 0;-webkit-transition: 0.4s;-o-transition: 0.4s;transition: 0.4s;}
+.pixel-article .pixel-bgr{bottom: 0;left: 0;opacity: 0.7;position: absolute;right: 0;top: 0;transition: 0.4s;}
 .pixel-article .pixel-article-image .pixel-featured-wid{width: 100%;height:280px;display: block;background-size:cover !important;background-position: center center !important;}
-.pixel-article .pixel-post-image:hover .pixel-bgr{background: rgba(0, 0, 0, 0.5);opacity: 1;-webkit-transition: 0.4s;-o-transition: 0.4s;transition: 0.4s;}
-.pixel-article .share-links{opacity: 0;left: 0;margin-top: -15px;position:absolute;right: 0;top: 50%;-webkit-transition: 0.4s;-o-transition: 0.4s;transition: 0.4s;display: inline;text-align: center;}
+.pixel-article .pixel-post-image:hover .pixel-bgr{background: rgba(0, 0, 0, 0.5);opacity: 1;transition: 0.4s;}
+.pixel-article .share-links{opacity: 0;left: 0;margin-top: -15px;position:absolute;right: 0;top: 50%;transition: 0.4s;display: inline;text-align: center;}
 .pixel-article .pixel-post-image:hover .share-links{opacity:1}
 .pixel-article .share-links .social-icons {margin: 0; text-align: right; display: inline-block;}
 .pixel-article .share-links .social-item {border: none;background: transparent; box-shadow: none; margin: 5px;}
@@ -507,7 +505,7 @@ div.pixel-empty{width: 100%;text-align:center;background:rgb(236,239,241);box-si
 .pixel-right-share ul li{float: left;}
 .pixel-right-share ul li a{display: inline-block;color: #FFF;text-align: center;font-size: 12px;}
 .pixel-right-share .share-links .social-item.facebook {background: #3b5998}
-.pixel-right-share .share-links .social-item {padding: 4px 10px;box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); cursor: pointer; margin-left: 5px; text-align: center;-webkit-transition: 0.2s;-o-transition: 0.2s;transition: 0.2s;}
+.pixel-right-share .share-links .social-item {padding: 4px 10px;box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); cursor: pointer; margin-left: 5px; text-align: center;transition: 0.2s;}
 .pixel-left-tags, .pixel-right-share{position: relative;display: block;width: 100%;padding: 5px 0px;}
 .pixel-right-share .share-links .social-item.twitter {background: #00aced}
 .pixel-right-share .share-links .social-item.google {background: #dd4b39}
@@ -641,7 +639,7 @@ div.pixel-empty{width: 100%;text-align:center;background:rgb(236,239,241);box-si
 .pixel-tabs.simplyTab .pixel-tab-wrapper li a.activeTab{border-bottom: 2px solid $(maincolor);}
 .pixel-tabs.simplyTab .pixel-tab-wrapper li{margin:0;list-style:none}
 .pixel-tab-wrapper{list-style:none}
-.content-tab{transition:all 0 ease;-webkit-transition:all 0 ease;-moz-transition:all 0 ease;-o-transition:all 0 ease}
+.content-tab{transition:all 0 ease}
 
 /* Blog Pager */
 #blog-pager{clear:both;text-align:center;padding:15px 0;background:#fff;color:#4d4d4d}
@@ -665,7 +663,7 @@ body.index #blog-pager, body.archive #blog-pager{background-color: $(lightcolor)
 .sidebar .widget{margin-bottom:20px;position:relative}
 .sidebar ul,.sidebar li{list-style-type:none;margin:0;padding:0}
 .sidebar .widget-content{padding:10px 0}
-.pixel-sidebar-tab li a,.pixel-sidebar-tabs .section{transition:all 0 ease;-webkit-transition:all 0 ease;-moz-transition:all 0 ease;-o-transition:all 0 ease;-ms-transition:all 0 ease}
+.pixel-sidebar-tab li a,.pixel-sidebar-tabs .section{transition:all 0 ease;-ms-transition:all 0 ease}
 .pixel-sidebar-tab{display:flex;clear:both;padding:0;margin:0}
 .pixel-sidebar-tabs .widget h2{display:none}
 .pixel-sidebar-tab li{width:33.3%;float:left;display:inline-block;padding:0;position:relative}
@@ -697,21 +695,6 @@ select#BlogArchive1_ArchiveMenu{width:100%;padding:10px;}
 .contact-form-button-submit:hover{background-color:#303030;background-image:none;border:0}
 
 /* Follow By Email */
-.sidebar .FollowByEmail > h3.title,.sidebar .FollowByEmail .title-wrap{margin-bottom:0}
-#FollowByEmail1{clear:both}
-.FollowByEmail td{width:100%;float:left;box-sizing:border-box}
-.FollowByEmail .follow-by-email-inner .follow-by-email-submit{margin-left:0;width:100%;border-radius:0;height:30px;font-size:11px;color:#fff;background-color:$maincolor;font-family:'Josefin Sans', sans-serif;text-transform:uppercase;font-weight:700;letter-spacing:1px}
-.FollowByEmail .follow-by-email-inner .follow-by-email-submit:hover{background-color:#000}
-.FollowByEmail .follow-by-email-inner .follow-by-email-address{padding-left:10px;height:30px;border:1px solid #FFF;margin-bottom:5px;box-sizing:border-box;font-size:11px;font-family:'Josefin Sans', sans-serif;}
-.FollowByEmail .follow-by-email-inner .follow-by-email-address:focus{border:1px solid #FFF}
-.FollowByEmail .widget-content{box-sizing:border-box;padding:10px}
-.pixel-fcols-inner .FollowByEmail .widget-content{margin-top:10px}
-.widget.FollowByEmail .widget-content:before{content: "\f1d9";font-family: "Font Awesome 7 Free";font-weight:900;width: 100%;display: inline-block;text-align: center;font-size:30px;padding: 5px 0px;color:#757575;}
-.FollowByEmail .widget-content .follow-by-email-inner:before {content: "Get the latest news in your inbox!";font-size: 14px;color: #757575;line-height: 1.4em;margin-bottom: 5px;display: block;padding: 0 2px;text-align: center;padding-bottom: 5px}
-.FollowByEmail .follow-by-email-inner .follow-by-email-address{border: 1px solid $(lightcolor) ;font-size:13px;box-sizing:border-box;margin-top:10px;}
-.FollowByEmail .follow-by-email-inner .follow-by-email-submit{background: $(lightcolor) ;color: #000;font-size:12px;font-weight: 400;margin-top:5px;}
-.FollowByEmail .follow-by-email-inner .follow-by-email-submit:hover{background: $maincolor;color: #fff;}
-.FollowByEmail .follow-by-email-inner .follow-by-email-address:focus{border: 1px solid $(lightcolor) ;}
 
 /* Recent Post Widget */
 .pixel-recent .pixel-recent-item{overflow:hidden;border-bottom:1px solid $(lightcolor);padding:10px 0}
@@ -735,8 +718,8 @@ select#BlogArchive1_ArchiveMenu{width:100%;padding:10px;}
 .FeaturedPost .post-summary p{z-index:2;position: relative;}
 .FeaturedPost .post-summary a,.FeaturedPost .post-summary {color:#fff;}
 .FeaturedPost a:hover{color:#ccc}
-.FeaturedPost .overlay{position: absolute;left: 0px;top:0px;height: 100%;width: 100%;background: rgba(0, 0, 0, 0) linear-gradient(to bottom, transparent 0%, transparent 0%, rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.1) 100%) repeat scroll 0 0;;z-index: 1;transition:.2s all ease-in-out;-moz-transition:.2s all ease-in-out;-o-transition:.2s all ease-in-out;-ms-transition:.2s all ease-in-out;-webkit-transition:.2s all ease-in-out;}
-.FeaturedPost:hover .overlay{position: absolute;left: 0px;top:0px;height: 100%;width: 100%;background: rgba(0, 0, 0, 0) linear-gradient(to bottom, transparent 0%, transparent 0%, rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.1) 100%) repeat scroll 0 0;;z-index: 1;transition:.2s all ease-in-out;-moz-transition:.2s all ease-in-out;-o-transition:.2s all ease-in-out;-ms-transition:.2s all ease-in-out;-webkit-transition:.2s all ease-in-out;}
+.FeaturedPost .overlay{position: absolute;left: 0px;top:0px;height: 100%;width: 100%;background: rgba(0, 0, 0, 0) linear-gradient(to bottom, transparent 0%, transparent 0%, rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.1) 100%) repeat scroll 0 0;;z-index: 1;transition:.2s all ease-in-out;-ms-transition:.2s all ease-in-out;}
+.FeaturedPost:hover .overlay{position: absolute;left: 0px;top:0px;height: 100%;width: 100%;background: rgba(0, 0, 0, 0) linear-gradient(to bottom, transparent 0%, transparent 0%, rgba(0, 0, 0, 0.5) 100%, rgba(0, 0, 0, 0.1) 100%) repeat scroll 0 0;;z-index: 1;transition:.2s all ease-in-out;-ms-transition:.2s all ease-in-out;}
 .FeaturedPost h2.title{margin-bottom: 0px !important;}
 .FeaturedPost > h2:after{margin-bottom: 0px !important;}
 
@@ -924,15 +907,15 @@ h1.post-title{font-size:17px}
 #Header1 h1, #Header1 h1 a{font-weight: 800;font-size:40px;color: #222;}
 .pixel-center-header{ border-bottom: 1px solid $(lightcolor) ;}
 .pixel-navigation{border-bottom: 1px solid $(lightcolor) ;}
-.search-transition-wrap{display:none;background:rgba(20, 22, 24, 0.95);bottom:0;height:100%;left:0;position:fixed;right:0;top:0;width:100% !important;-webkit-transition:0.1s;-o-transition:0.1s;transition:0.1s;z-index:99999;}
+.search-transition-wrap{display:none;background:rgba(20, 22, 24, 0.95);bottom:0;height:100%;left:0;position:fixed;right:0;top:0;width:100% !important;transition:0.1s;z-index:99999;}
 .search-transition-wrap .search-transition-inner{padding:0 25%;position:absolute;text-align:center;top:50%;width:100%;border:none !important;box-sizing:border-box;}
-.search-transition-wrap .searchform .input-group, .search-transition-wrap .woocommerce-product-search .input-group{border-bottom:1px solid #fff;padding:0 !important;}
-.search-transition-wrap .searchform .form-control, .search-transition-wrap .woocommerce-product-search .form-control{background:none;border:none;font-size:20px;color:#FFF;height:50px;padding:0;}
+.search-transition-wrap .searchform .input-group{border-bottom:1px solid #fff;padding:0 !important;}
+.search-transition-wrap .searchform .form-control{background:none;border:none;font-size:20px;color:#FFF;height:50px;padding:0;}
 .search-transition-wrap .searchform .form-control{width:100%;box-sizing:border-box;padding-right:60px;font-family: Josefin Sans;font-size: 30px;}
 .search-transition-wrap .input-group .btn{position:absolute;right:0px;top:10px;border:0px;color:#fff;background:rgba(0,0,0,0);}
 .search-transition-wrap .input-group .btn:before{font-family:"Font Awesome 7 Free";font-weight:900;content:"\f002";font-size:25px;padding:10px;}
 .search-transition-wrap form > .input-group{position:relative;}
-.search-transition-wrap .btn-mini-close{background:rgba(0, 0, 0, 0) none repeat scroll 0 0;border:medium none;color:#fff !important;font-size:35px;position:fixed;top:50px;right:50px;margin-right:0px;opacity:1;-webkit-transition:0.4s;-o-transition:0.4s;transition:0.4s;}
+.search-transition-wrap .btn-mini-close{background:rgba(0, 0, 0, 0) none repeat scroll 0 0;border:medium none;color:#fff !important;font-size:35px;position:fixed;top:50px;right:50px;margin-right:0px;opacity:1;transition:0.4s;}
 .search-transition-wrap .btn-mini-close:hover{cursor:pointer;}
 .midalizer{
 margin: 0 auto;
@@ -981,7 +964,7 @@ body#layout #option h4{width: 100%;}
   <style>.hidehome{display:none}</style>
 </b:if>
 <b:include data='blog' name='google-analytics'/>
-<script async='async' type='text/javascript'>
+<script type='text/javascript'>
 //<![CDATA[
 //CSS Ready
 function loadCSS(e,t,n){"use strict";var i=window.document.createElement("link");var o=t||window.document.getElementsByTagName("script")[0];i.rel="stylesheet";i.href=e;i.media="only x";o.parentNode.insertBefore(i,o);setTimeout(function(){i.media=n||"all"})}
@@ -3103,32 +3086,6 @@ var msg = &#39;<data:navMessage/>&#39;;
     </div>
   </b:includable>
    </b:widget>
-   <b:widget id='FollowByEmail1' locked='false' title='Newsletter' type='FollowByEmail' version='1'>
-     <b:includable id='main'>
-  <b:if cond='data:title != &quot;&quot;'><h2 class='title'><data:title/></h2></b:if>
-  <div class='widget-content'>
-    <div class='follow-by-email-inner'>
-      <form action='https://feedburner.google.com/fb/a/mailverify' expr:onsubmit='&quot;window.open(\&quot;https://feedburner.google.com/fb/a/mailverify?uri=&quot; + data:feedPath + &quot;\&quot;, \&quot;popupwindow\&quot;, \&quot;scrollbars=yes,width=550,height=520\&quot;); return true&quot;' method='post' target='popupwindow'>
-        <table width='100%'>
-          <tr>
-            <td>
-              <input class='follow-by-email-address' name='email' placeholder='Email address...' type='text'/>
-            </td>
-            <td width='64px'>
-              <input class='follow-by-email-submit' type='submit' value='Submit'/>
-            </td>
-          </tr>
-        </table>
-        <input expr:value='data:feedPath' name='uri' type='hidden'/>
-        <input name='loc' type='hidden' value='en_US'/>
-      </form>
-    </div>
-  </div>
-  <span class='item-control blog-admin'>
-  <!--b:include name='quickedit'/-->
-  </span>
-</b:includable>
-   </b:widget>
    <b:widget id='Label3' locked='false' title='Labels' type='Label' version='1'>
      <b:widget-settings>
        <b:widget-setting name='sorting'>ALPHA</b:widget-setting>
@@ -3282,7 +3239,7 @@ function initSearchOverlay() {
 initSearchOverlay();
 //]]>
 </script>
-<script async='async' type='text/javascript'> 
+<script type='text/javascript'> 
 //<![CDATA[
 var no_image = "https://3.bp.blogspot.com/-Yw8BIuvwoSQ/VsjkCIMoltI/AAAAAAAAC4c/s55PW6xEKn0/s1600-r/nth.png";
 var month_format = [, "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
@@ -3301,7 +3258,7 @@ document.querySelectorAll("time.format-date").forEach(function (el) {
 });
 //]]>
 </script>
-<script async='async' type='text/javascript'>
+<script type='text/javascript'>
 //<![CDATA[
 
 // Plugin: SelectNav.js ~ url: https://github.com/lukaszfiszer/selectnav.js
@@ -3746,7 +3703,7 @@ article {
   }
 </style>
 <!--Page Navigation Starts-->
-<script async='async' type='text/javascript'>
+<script type='text/javascript'>
   /*<![CDATA[*/
     var numPages=5;
     var firstText ='<i class="fa-solid fa-arrow-left"></i> First';
@@ -3757,7 +3714,7 @@ article {
     var home_page="/";
   /*]]>*/
 </script>
-<script async='async' type='text/javascript'>
+<script type='text/javascript'>
  /*<![CDATA[*/
  function looppagecurrentg(e){var a="";pageNumber=parseInt(numPages/2),pageNumber==numPages-pageNumber&&(numPages=2*pageNumber+1),pageStart=currentPageNo-pageNumber,pageStart<1&&(pageStart=1),lastPageNo=parseInt(e/perPage)+1,lastPageNo-1==e/perPage&&(lastPageNo-=1),pageEnd=pageStart+numPages-1,pageEnd>lastPageNo&&(pageEnd=lastPageNo),a+="<span class='showpageOf'>Page "+currentPageNo+" of "+lastPageNo+"</span>";var t=parseInt(currentPageNo)-1;currentPageNo>1&&(a+="page"==currentPage?'<span class="showpage firstpage"><a href="'+home_page+'">'+firstText+"</a></span>":'<span class="displaypageNum firstpage"><a href="/search/label/'+postLabel+"?&max-results="+perPage+'">'+firstText+"</a></span>"),currentPageNo>2&&(a+=3==currentPageNo?"page"==currentPage?'<span class="showpage"><a href="'+home_page+'">'+prevText+"</a></span>":'<span class="displaypageNum"><a href="/search/label/'+postLabel+"?&max-results="+perPage+'">'+prevText+"</a></span>":"page"==currentPage?'<span class="displaypageNum"><a href="#" onclick="redirectpage('+t+');return false">'+prevText+"</a></span>":'<span class="displaypageNum"><a href="#" onclick="redirectlabel('+t+');return false">'+prevText+"</a></span>"),pageStart>1&&(a+="page"==currentPage?'<span class="displaypageNum"><a href="'+home_page+'">1</a></span>':'<span class="displaypageNum"><a href="/search/label/'+postLabel+"?&max-results="+perPage+'">1</a></span>'),pageStart>2&&(a+=" ... ");for(var s=pageStart;s<=pageEnd;s++)a+=currentPageNo==s?'<span class="pagecurrent">'+s+"</span>":1==s?"page"==currentPage?'<span class="displaypageNum"><a href="'+home_page+'">1</a></span>':'<span class="displaypageNum"><a href="/search/label/'+postLabel+"?&max-results="+perPage+'">1</a></span>':"page"==currentPage?'<span class="displaypageNum"><a href="#" onclick="redirectpage('+s+');return false">'+s+"</a></span>":'<span class="displaypageNum"><a href="#" onclick="redirectlabel('+s+');return false">'+s+"</a></span>";pageEnd<lastPageNo-1&&(a+="..."),pageEnd<lastPageNo&&(a+="page"==currentPage?'<span class="displaypageNum"><a href="#" onclick="redirectpage('+lastPageNo+');return false">'+lastPageNo+"</a></span>":'<span class="displaypageNum"><a href="#" onclick="redirectlabel('+lastPageNo+');return false">'+lastPageNo+"</a></span>");var r=parseInt(currentPageNo)+1;currentPageNo<lastPageNo-1&&(a+="page"==currentPage?'<span class="displaypageNum"><a href="#" onclick="redirectpage('+r+');return false">'+nextText+"</a></span>":'<span class="displaypageNum"><a href="#" onclick="redirectlabel('+r+');return false">'+nextText+"</a></span>"),currentPageNo<lastPageNo&&(a+="page"==currentPage?'<span class="displaypageNum lastpage"><a href="#" onclick="redirectpage('+lastPageNo+');return false">'+lastText+"</a></span>":'<span class="displaypageNum lastpage"><a href="#" onclick="redirectlabel('+lastPageNo+');return false">'+lastText+"</a></span>");for(var p=document.getElementsByName("pageArea"),n=document.getElementById("blog-pager"),l=0;l<p.length;l++)p[l].innerHTML=a;p&&p.length>0&&(a=""),n&&(n.innerHTML=a)}function totalcountdata(e){var a=e.feed;looppagecurrentg(parseInt(a.openSearch$totalResults.$t,10))}function pagecurrentg(){var e=urlactivepage;-1!=e.indexOf("/search/label/")&&(postLabel=-1!=e.indexOf("?updated-max")?e.substring(e.indexOf("/search/label/")+14,e.indexOf("?updated-max")):e.substring(e.indexOf("/search/label/")+14,e.indexOf("?&max"))),-1==e.indexOf("?q=")&&-1==e.indexOf(".html")&&(-1==e.indexOf("/search/label/")?(currentPage="page",currentPageNo=-1!=urlactivepage.indexOf("#PageNo=")?urlactivepage.substring(urlactivepage.indexOf("#PageNo=")+8,urlactivepage.length):1,document.write('<script src="'+home_page+'feeds/posts/summary?max-results=1&alt=json-in-script&callback=totalcountdata"><\/script>')):(currentPage="label",-1==e.indexOf("&max-results=")&&(perPage=20),currentPageNo=-1!=urlactivepage.indexOf("#PageNo=")?urlactivepage.substring(urlactivepage.indexOf("#PageNo=")+8,urlactivepage.length):1,document.write('<script src="'+home_page+"feeds/posts/summary/-/"+postLabel+'?alt=json-in-script&callback=totalcountdata&max-results=1" ><\/script>')))}function redirectpage(e){jsonstart=(e-1)*perPage,noPage=e;var a=document.getElementsByTagName("head")[0],t=document.createElement("script");t.type="text/javascript",t.setAttribute("src",home_page+"feeds/posts/summary?start-index="+jsonstart+"&max-results=1&alt=json-in-script&callback=finddatepost"),a.appendChild(t)}function redirectlabel(e){jsonstart=(e-1)*perPage,noPage=e;var a=document.getElementsByTagName("head")[0],t=document.createElement("script");t.type="text/javascript",t.setAttribute("src",home_page+"feeds/posts/summary/-/"+postLabel+"?start-index="+jsonstart+"&max-results=1&alt=json-in-script&callback=finddatepost"),a.appendChild(t)}function finddatepost(e){post=e.feed.entry[0];var a=post.published.$t.substring(0,19)+post.published.$t.substring(23,29),t=encodeURIComponent(a);if("page"==currentPage)s="/search?updated-max="+t+"&max-results="+perPage+"#PageNo="+noPage;else var s="/search/label/"+postLabel+"?updated-max="+t+"&max-results="+perPage+"#PageNo="+noPage;location.href=s}"undefined"==typeof firstText&&(firstText="First"),"undefined"==typeof lastText&&(lastText="Last");var noPage,currentPage,currentPageNo,postLabel;pagecurrentg();
       /*]]>*/
