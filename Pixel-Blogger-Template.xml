@@ -20,6 +20,43 @@
 	<!-- Blogger main head data and meta -->
     <b:include data='blog' name='all-head-content'/>
 
+    <!-- Social sharing meta -->
+    <meta expr:content='data:blog.pageTitle' property='og:title'/>
+    <b:if cond='data:blog.pageType == &quot;item&quot;'>
+    <meta content='article' property='og:type'/>
+    <b:else/>
+    <meta content='website' property='og:type'/>
+    </b:if>
+    <meta expr:content='data:blog.canonicalUrl' property='og:url'/>
+    <b:if cond='data:blog.postImageUrl'>
+    <meta expr:content='data:blog.postImageUrl' property='og:image'/>
+    </b:if>
+    <b:if cond='data:blog.metaDescription'>
+    <meta expr:content='data:blog.metaDescription' property='og:description'/>
+    </b:if>
+    <meta content='summary_large_image' name='twitter:card'/>
+    <meta expr:content='data:blog.pageTitle' name='twitter:title'/>
+    <b:if cond='data:blog.postImageUrl'>
+    <meta expr:content='data:blog.postImageUrl' name='twitter:image'/>
+    </b:if>
+    <b:if cond='data:blog.metaDescription'>
+    <meta expr:content='data:blog.metaDescription' name='twitter:description'/>
+    </b:if>
+
+    <script type='application/ld+json'>
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "<data:blog.title/>",
+      "url": "<data:blog.homepageUrl/>",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "<data:blog.homepageUrl/>search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
     <link href='https://cdn.jsdelivr.net' rel='preconnect'/>
     <link crossorigin='anonymous' href='https://cdn.jsdelivr.net' rel='preconnect'/>
     <link href='https://fonts.googleapis.com' rel='preconnect'/>
@@ -209,7 +246,7 @@ article{padding:0;overflow:hidden}
 #pixel-wide-wrapper{color:#fff;padding:30px 0;margin:0 auto}
 #header-inner{background-position:left;background-repeat:no}
 .pixel-wide img{height:auto;max-height:100%;margin:0}
-.pixel-wide h1,.pixel-wide h1 a,.pixel-wide h1 a:hover,.pixel-wide h1 a:visited{font-family:'Josefin Sans', sans-serif;color:$maincolor;font-size:52px;font-weight:400;line-height:1.2em;margin:0;padding:0 0 5px;text-decoration:none;text-transform:uppercase;letter-spacing:1px}
+.pixel-wide h1,.pixel-wide h1 a,.pixel-wide h1 a:hover,.pixel-wide h1 a:visited,.pixel-wide p.title,.pixel-wide p.title a,.pixel-wide p.title a:hover,.pixel-wide p.title a:visited{font-family:'Josefin Sans', sans-serif;color:$maincolor;font-size:52px;font-weight:400;line-height:1.2em;margin:0;padding:0 0 5px;text-decoration:none;text-transform:uppercase;letter-spacing:1px}
 .pixel-wide h3{font-weight:400;margin:0;padding:0}
 .pixel-wide .description{color:#666;margin:0;padding:0 0 10px;text-transform:capitalize;text-align:center;text-indent:0;letter-spacing:1px}
 .pixel-wide {margin: 0;padding: 0;width: 100%;text-align: center;}
@@ -1146,18 +1183,30 @@ loadCSS("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&
       <b:if cond='data:mobile'>
         <div id='header-inner'>
           <div class='titlewrapper' style='background: transparent'>
+            <b:if cond='data:blog.url == data:blog.homepageUrl'>
             <h1 class='title' style='background: transparent; border-width: 0px'>
               <b:include name='title'/>
             </h1>
+            <b:else/>
+            <p class='title' style='background: transparent; border-width: 0px'>
+              <b:include name='title'/>
+            </p>
+            </b:if>
           </div>
           <b:include name='description'/>
         </div>
       <b:else/>
         <div expr:style='&quot;background-image: url(\&quot;&quot; + data:sourceUrl + &quot;\&quot;); &quot;                      + &quot;background-position: &quot;                      + data:backgroundPositionStyleStr + &quot;; &quot;                      + data:widthStyleStr                      + &quot;min-height: &quot; + data:height                      + &quot;_height: &quot; + data:height                      + &quot;background-repeat: no-repeat; &quot;' id='header-inner'>
           <div class='titlewrapper' style='background: transparent'>
+            <b:if cond='data:blog.url == data:blog.homepageUrl'>
             <h1 class='title' style='background: transparent; border-width: 0px'>
               <b:include name='title'/>
             </h1>
+            <b:else/>
+            <p class='title' style='background: transparent; border-width: 0px'>
+              <b:include name='title'/>
+            </p>
+            </b:if>
           </div>
           <b:include name='description'/>
         </div>
@@ -1165,7 +1214,7 @@ loadCSS("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&
     <b:else/>
       <!--Show the image only-->
       <div id='header-inner'>
-        <a expr:href='data:blog.homepageUrl' style='display: block'><h1 style='display:none'/>
+        <a expr:href='data:blog.homepageUrl' style='display: block'>
           <img expr:alt='data:title' expr:height='data:height' expr:id='data:widget.instanceId + &quot;_headerimg&quot;' expr:src='data:sourceUrl' expr:width='data:width' style='display: block'/>
         </a>
         <!--Show the description-->
@@ -1178,9 +1227,15 @@ loadCSS("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&
     <!--No header image -->
     <div id='header-inner'>
       <div class='titlewrapper'>
+        <b:if cond='data:blog.url == data:blog.homepageUrl'>
         <h1 class='title'>
           <b:include name='title'/>
         </h1>
+        <b:else/>
+        <p class='title'>
+          <b:include name='title'/>
+        </p>
+        </b:if>
       </div>
       <b:include name='description'/>
     </div>
@@ -1842,9 +1897,26 @@ loadCSS("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&
           <data:post.title/> 
         </b:if> 
      </b:if> 
-      </h1> 
-</b:if> 
-                    </b:if> 
+      </h1>
+</b:if>
+                    </b:if>
+
+          <b:if cond='data:blog.pageType == &quot;item&quot;'>
+          <script type='application/ld+json'>
+          {
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "mainEntityOfPage": { "@type": "WebPage", "@id": "<data:post.url/>" },
+            "headline": "<data:post.title/>",
+            <b:if cond='data:post.firstImageUrl'>"image": "<data:post.firstImageUrl/>",</b:if>
+            "datePublished": "<data:post.timestampISO8601/>",
+            "dateModified": "<data:post.lastUpdatedISO8601/>",
+            "author": { "@type": "Person", "name": "<data:post.author/>" },
+            "publisher": { "@type": "Organization", "name": "<data:blog.title/>" },
+            "url": "<data:post.url/>"
+          }
+          </script>
+          </b:if>
 
           <div class='post-header'>
             <div class='post-header-line-1'/>
