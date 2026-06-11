@@ -1,11 +1,11 @@
 # Pixel — Free News & Magazine Blogger Template
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3.8-7952B3?logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
+[![Vanilla JS](https://img.shields.io/badge/Vanilla_JS-zero_frameworks-F7DF1E?logo=javascript&logoColor=black)](http://vanilla-js.com/)
 [![Swiper](https://img.shields.io/badge/Swiper-11-6332F6?logo=swiper&logoColor=white)](https://swiperjs.com/)
 [![Font Awesome](https://img.shields.io/badge/Font%20Awesome-7-528DD7?logo=fontawesome&logoColor=white)](https://fontawesome.com/)
 
-Pixel is a free, open-source Blogger/Blogspot template designed for news, magazine, and content-rich websites. Built with Bootstrap 5.3.8, Swiper 11, and vanilla JavaScript — no jQuery required. Created and maintained by [Colorlib](https://colorlib.com).
+Pixel is a free, open-source Blogger/Blogspot template designed for news, magazine, and content-rich websites. Built with 100% vanilla JavaScript and lean custom CSS — no jQuery, no Bootstrap, and zero render-blocking external assets. Created and maintained by [Colorlib](https://colorlib.com).
 
 **[Live Demo](https://pixel-template.blogspot.com)** | **[Documentation](https://pixel-template.blogspot.com/p/documentation.html)** | **[Download](https://github.com/nicsuspended/Pixel-Blogger-Template/archive/refs/heads/master.zip)** | **[Changelog](CHANGELOG.md)**
 
@@ -14,14 +14,15 @@ Pixel is a free, open-source Blogger/Blogspot template designed for news, magazi
 ## Features
 
 - **Responsive design** — 7 CSS breakpoints from 1200px down to 300px for perfect display on desktop, tablet, and mobile
-- **Bootstrap 5.3.8** — modern CSS framework with no jQuery dependency
-- **Swiper 11 featured slider** — touch-friendly carousel with hero + secondary post layout
+- **Zero frameworks** — no Bootstrap, no jQuery; lean custom CSS and modular vanilla JavaScript
+- **Swiper 11 gallery slider** — touch-friendly carousel for gallery widgets, loaded on demand only when used
 - **Font Awesome 7 icons** — 2,000+ scalable vector icons for social media, UI elements, and navigation
 - **AdSense-ready** — 3 built-in advertisement slots optimized for Google AdSense and other ad networks
 - **Mega menu navigation** — multi-level dropdown menus with support for mega menu columns
-- **Tabbed sidebar** — recent, popular, and random posts with tab switching
-- **SEO-optimized markup** — clean HTML structure, proper heading hierarchy, and meta tag support
-- **Fast page load** — non-blocking CSS loading with `loadCSS()`, CDN-hosted assets, and minimal dependencies
+- **Tabbed sidebar** — recent, popular, and random posts with accessible tab switching
+- **SEO-optimized markup** — single h1 per page, JSON-LD structured data (WebSite, SearchAction, BlogPosting), Open Graph and Twitter card meta
+- **Fast page load** — zero render-blocking external assets, preconnect hints, native lazy loading, right-sized images, and an LCP-optimized featured grid
+- **Accessible** — skip link, labeled controls, ARIA tab roles, and keyboard-friendly search overlay
 - **Customizable colors** — Blogger variable system lets you change the main color scheme and background from the theme editor
 - **Social media integration** — 20+ social platform icons including X (Twitter), TikTok, Threads, Instagram, Facebook, YouTube, and more
 - **Related posts widget** — automatically displays related content to increase page views
@@ -81,10 +82,11 @@ Configure the navigation menu in **Layout** > **Main Menu**. The template suppor
 
 | Library | Version | Purpose |
 | ------- | ------- | ------- |
-| [Bootstrap](https://getbootstrap.com/) | 5.3.8 | CSS framework and grid system |
-| [Swiper](https://swiperjs.com/) | 11 | Touch-friendly featured post slider |
+| [Swiper](https://swiperjs.com/) | 11 | Touch-friendly gallery slider, loaded on demand |
 | [Font Awesome](https://fontawesome.com/) | 7 | Scalable vector icons |
 | [Google Fonts](https://fonts.google.com/) | — | Josefin Sans (headings) + Open Sans (body) |
+
+Everything else is hand-written CSS and vanilla JavaScript inside the template — no Bootstrap, no jQuery, no build step.
 
 All assets are loaded via CDN — no build tools, package managers, or compilation needed.
 
