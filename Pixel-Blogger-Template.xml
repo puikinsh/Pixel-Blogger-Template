@@ -3205,7 +3205,7 @@ var msg = &#39;<data:navMessage/>&#39;;
         <div class='pixel-cwrap body-row'>
          
                     <div class='pixel-credit_copyright'>
-                      Copyright 2026, <a expr:href='data:blog.homepageUrl'><data:blog.title/></a>. All rights Reserved.</div> |  Designed by <a href='https://colorlib.com/' target='_blank' rel='nofollow noopener'>Colorlib</a>
+                      Copyright <span class='copyright-year'>2026</span>, <a expr:href='data:blog.homepageUrl'><data:blog.title/></a>. All rights Reserved.</div> |  Designed by <a href='https://colorlib.com/' target='_blank' rel='nofollow noopener'>Colorlib</a>
                 
                
               
@@ -3939,6 +3939,11 @@ document.querySelectorAll(".Label a, .pixel-max-limit").forEach(function (a) {
   var href = a.getAttribute("href");
   if (href && href.indexOf("max-results=") === -1) a.setAttribute("href", href + "?&max-results=" + perPage);
 });
+//]]>
+</script>
+<script>
+//<![CDATA[
+document.querySelectorAll(".copyright-year").forEach(function (el) { el.textContent = new Date().getFullYear(); });
 //]]>
 </script>
 </body>
