@@ -273,15 +273,15 @@ ul#pixel_menu{list-style:none;margin:0;padding:0;text-align: center;}
 .menu-wrap{margin:0 auto;position:relative}
 #pixel-menu ul > li{position:relative;vertical-align:middle;display:inline-block;padding:0;margin:0}
 #pixel-menu ul > li > a{color:#2f2f33;font-size:14px;font-weight:600;line-height:60px;display:inline-block;text-transform:uppercase;text-decoration:none;letter-spacing:1px;margin:0;padding:0 12px;font-family:'Josefin Sans', sans-serif;}
-#pixel-menu ul > li > ul{position:absolute;background:#fff;top:100%;left:0;min-width:210px;padding:0;z-index:9999;margin-top:0;visibility:hidden;opacity:0;-webkit-transform:translateY(10px);-moz-transform:translateY(10px);transform:translateY(10px);box-shadow: 1px 5px 10px 0 rgba(0, 0, 0, 0.15);}
-#pixel-menu ul > li > ul > li > ul{position:absolute;top:0;left:210px;width:210px;background:#fff;z-index:99;margin-top:0;margin-left:0;padding:0;border-left:1px solid #6d6d6d;visibility:hidden;opacity:0;-webkit-transform:translateY(10px);-moz-transform:translateY(10px);transform:translateY(10px)}
+#pixel-menu ul > li > ul{position:absolute;pointer-events:none;background:#fff;top:100%;left:0;min-width:210px;padding:0;z-index:9999;margin-top:0;visibility:hidden;opacity:0;-webkit-transform:translateY(10px);-moz-transform:translateY(10px);transform:translateY(10px);box-shadow: 1px 5px 10px 0 rgba(0, 0, 0, 0.15);}
+#pixel-menu ul > li > ul > li > ul{position:absolute;pointer-events:none;top:0;left:210px;width:210px;background:#fff;z-index:99;margin-top:0;margin-left:0;padding:0;border-left:1px solid #6d6d6d;visibility:hidden;opacity:0;-webkit-transform:translateY(10px);-moz-transform:translateY(10px);transform:translateY(10px)}
 #pixel-menu ul > li > ul > li{display:block;float:none;text-align:left;position:relative;border-bottom: 1px solid #f3f3f3;border-top:none;}
 #pixel-menu ul > li > ul > li:last-child{border:0}
 #pixel-menu ul li.hasSubmenu ul li:after,#pixel-menu ul li:last-child:after{display:none}
 #pixel-menu ul > li:hover > a{color:$maincolor}
 #pixel-menu ul > li > ul > li a{font-size:14px;line-height:22px;display:block;color: #63636a;text-transform:uppercase;text-decoration:none;margin:0;padding:15px 25px;border-right:0;border:0}
 #pixel-menu ul > li.hasSubmenu > a:after{content:'\f107';font-family:"Font Awesome 7 Free";font-weight:900;float:right;margin-left:5px;font-size:12px;}
-#pixel-menu ul > li:hover > ul,#pixel-menu ul > li > ul > li:hover > ul{opacity:1;visibility:visible;-webkit-transform:translateY(0);-moz-transform:translateY(0);transform:translateY(0)}
+#pixel-menu ul > li:hover > ul,#pixel-menu ul > li > ul > li:hover > ul{opacity:1;visibility:visible;pointer-events:auto;-webkit-transform:translateY(0);-moz-transform:translateY(0);transform:translateY(0)}
 #pixel-menu ul > li > ul > li.hasSubmenu > a:after{content:'\f105';float:right}
 
 /* Mega Menu */
