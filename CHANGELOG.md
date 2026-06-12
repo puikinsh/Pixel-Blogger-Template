@@ -4,6 +4,18 @@ All notable changes to the Pixel Blogger Template are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [2.2.0] - 2026-06-12
+
+Stability and polish release: layout regressions fixed, menus made instant and reliable, typography refined, and accessibility tightened.
+
+- **Instant mega menu paging** — pages are cached and the next page (feed and images) prefetches in the background, so the pager arrows flip with zero waiting; the heavy solid-color loading overlay is replaced by a subtle dim with an accent spinner
+- **Post content typography overhaul** — a real heading scale with vertical rhythm, properly indented lists with accent-colored markers, underlined accent links, and refined blockquote styling inside post bodies
+- **Dropdown hover fix** — hidden dropdown and mega menus are now pointer-inert, eliminating a loop where the closing mega menu kept re-opening while using the regular dropdowns
+- **Accessibility/SEO** — every image, server-rendered or JavaScript-generated, now carries an alt attribute (post covers use the post title, ads and avatars are labeled appropriately)
+- **Mixed content eliminated** — remaining http:// logos, background images, share endpoints, and social links upgraded to https
+- **Self-updating footer copyright year** (with 2026 fallback) and removal of leftover Owl Carousel license comments
+- **Documentation** — README rebuilt with a live preview screenshot and a cross-linked gallery of all nine Colorlib Blogger templates
+
 ## [2.0.0] - 2026-06-11
 
 Major modernization release: zero frameworks, zero render-blocking external assets, structured data, and a full accessibility pass.

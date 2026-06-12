@@ -1,6 +1,6 @@
 # Pixel — Free News & Magazine Blogger Template
 
-[![Version](https://img.shields.io/badge/Version-2.1.0-2942ee.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/Version-2.2.0-2942ee.svg)](CHANGELOG.md)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Vanilla JS](https://img.shields.io/badge/Vanilla_JS-zero_frameworks-F7DF1E?logo=javascript&logoColor=black)](http://vanilla-js.com/)
 [![Font Awesome](https://img.shields.io/badge/Font%20Awesome-7-528DD7?logo=fontawesome&logoColor=white)](https://fontawesome.com/)
