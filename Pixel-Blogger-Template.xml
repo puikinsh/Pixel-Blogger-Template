@@ -958,6 +958,13 @@ padding: 20px 0px;
 .post-body img{margin:.6em auto}
 .post-body hr{margin:2.2em 0}
 
+
+/* Mega menu pager loader */
+.mega-spinner{position:absolute;top:50%;left:50%;width:30px;height:30px;margin:-15px 0 0 -15px;border:3px solid rgba(0,0,0,0.12);border-top-color:$(maincolor);border-radius:50%;animation:pixelMegaSpin .7s linear infinite;z-index:101}
+@keyframes pixelMegaSpin{to{transform:rotate(360deg)}}
+.mega-inner{transition:opacity .15s ease}
+.mega-inner.mega-busy{opacity:.35;pointer-events:none}
+
 ]]></b:skin>
 <b:template-skin>
 <![CDATA[
@@ -3401,9 +3408,34 @@ function pixelMegaItemHtml(entry) {
   return '<div class="pixel-mega-item col-sm-3"><div class="pixel-m-thumb" style="background:url(\'' + thumb + '\')"><a aria-label="' + pixelAttr(entry.title.$t) + '" class="linkcover" href="' + url + '"></a></div><div class="pixel-text"><a href="' + url + '">' + entry.title.$t + "</a></div></div>";
 }
 
+function pixelMegaImageUrls(entries) {
+  return entries.map(function (entry) {
+    return entry.media$thumbnail ? pixelResizeImage(entry.media$thumbnail.url, "s400") : PIXEL_NO_THUMB;
+  });
+}
+
+// Resolves once every image is cached (capped at 2.5s) so page flips swap in one paint
+function pixelPreloadImages(urls) {
+  return new Promise(function (resolve) {
+    var pending = urls.length;
+    if (!pending) return resolve();
+    var done = false;
+    function finish() { if (!done) { done = true; resolve(); } }
+    setTimeout(finish, 2500);
+    urls.forEach(function (u) {
+      var img = new Image();
+      img.onload = img.onerror = function () { pending--; if (pending <= 0) finish(); };
+      img.src = u;
+    });
+  });
+}
+
 function initMegaMenus() {
   document.querySelectorAll("#pixel_menu a.mega-link").forEach(function (link) {
     var label = link.textContent;
+    function feedPath(startIndex, count) {
+      return "/feeds/posts/default/-/" + encodeURIComponent(label) + "?alt=json&start-index=" + startIndex + "&max-results=" + count;
+    }
     pixelFetchFeed("/feeds/posts/default/-/" + encodeURIComponent(label) + "?alt=json&max-results=4", function (data) {
       var item = link.closest("li");
       if (item) {
@@ -3415,39 +3447,62 @@ function initMegaMenus() {
       });
       if (!data.feed.entry) return;
       var total = parseInt(data.feed.openSearch$totalResults.$t, 10);
-      var start = parseInt(data.feed.openSearch$startIndex.$t, 10);
       var perStage = parseInt(data.feed.openSearch$itemsPerPage.$t, 10);
-      var stages = Math.ceil(total / perStage);
-      var html = '<ul data-itemnums="' + perStage + '" data-label="' + label + '" data-start="' + start + '" data-stages="' + stages + '" data-cstage="1" data-tpst="' + total + '">' +
-        '<div class="mega-nav"><a aria-label="Previous posts" class="mega-prev disable" href="javascript:;" role="button"><i aria-hidden="true" class="fa-solid fa-arrow-left"></i></a><a aria-label="Next posts" class="mega-next" href="javascript:;" role="button"><i aria-hidden="true" class="fa-solid fa-arrow-right"></i></a></div>' +
-        '<div class="pixel-mega-loading" style="display:none"><div class="pixel-loading-inner"><div class="pixel-thecube"><div class="pixel-cube pixel-c1"></div><div class="pixel-cube pixel-c2"></div><div class="pixel-cube pixel-c4"></div><div class="pixel-cube pixel-c3"></div></div></div></div>' +
-        '<div class="mega-inner row">' + data.feed.entry.map(pixelMegaItemHtml).join("") + "</div></ul>";
-      link.insertAdjacentHTML("afterend", html);
+      var stageCount = Math.ceil(total / perStage);
+      var stageCache = { 1: data.feed.entry };
+      var currentStage = 1;
+      var busy = false;
+      link.insertAdjacentHTML("afterend", '<ul>' +
+        '<div class="mega-nav"><a aria-label="Previous posts" class="mega-prev disable" href="javascript:;" role="button"><i aria-hidden="true" class="fa-solid fa-arrow-left"></i></a><a aria-label="Next posts" class="mega-next' + (stageCount > 1 ? '' : ' disable') + '" href="javascript:;" role="button"><i aria-hidden="true" class="fa-solid fa-arrow-right"></i></a></div>' +
+        '<div class="mega-spinner" style="display:none"></div>' +
+        '<div class="mega-inner row">' + data.feed.entry.map(pixelMegaItemHtml).join("") + "</div></ul>");
       var mega = link.nextElementSibling;
-      function loadStage(forward) {
-        var startIndex = Number(mega.getAttribute("data-start"));
-        var stage = Number(mega.getAttribute("data-cstage"));
-        var perPageMega = Number(mega.getAttribute("data-itemnums"));
-        var stageCount = Number(mega.getAttribute("data-stages"));
-        if (forward ? stage >= stageCount : stage <= 1) return;
-        var newStart = forward ? startIndex + perPageMega : startIndex - perPageMega;
-        var newStage = forward ? stage + 1 : stage - 1;
-        var loading = mega.querySelector(".pixel-mega-loading");
-        if (loading) loading.style.display = "block";
-        function hideLoading() {
-          setTimeout(function () { if (loading) loading.style.display = "none"; }, 300);
-        }
-        pixelFetchFeed("/feeds/posts/default/-/" + encodeURIComponent(label) + "?alt=json&start-index=" + newStart + "&max-results=" + perPageMega, function (page) {
-          mega.setAttribute("data-start", newStart);
-          mega.setAttribute("data-cstage", newStage);
-          mega.querySelector(".mega-prev").classList.toggle("disable", newStage <= 1);
-          mega.querySelector(".mega-next").classList.toggle("disable", newStage >= stageCount);
-          if (page.feed.entry) mega.querySelector(".mega-inner").innerHTML = page.feed.entry.map(pixelMegaItemHtml).join("");
-          hideLoading();
-        }, hideLoading);
+      var inner = mega.querySelector(".mega-inner");
+      var prevBtn = mega.querySelector(".mega-prev");
+      var nextBtn = mega.querySelector(".mega-next");
+      var spinner = mega.querySelector(".mega-spinner");
+      function setBusy(on) {
+        busy = on;
+        inner.classList.toggle("mega-busy", on);
+        spinner.style.display = on ? "block" : "none";
       }
-      mega.querySelector(".mega-prev").addEventListener("click", function () { loadStage(false); });
-      mega.querySelector(".mega-next").addEventListener("click", function () { loadStage(true); });
+      // Quietly fetch a neighboring page and warm its images so the flip is instant
+      function prefetchStage(stage) {
+        if (stage < 1 || stage > stageCount || stageCache[stage]) return;
+        pixelFetchFeed(feedPath((stage - 1) * perStage + 1, perStage), function (page) {
+          stageCache[stage] = page.feed.entry || [];
+          pixelMegaImageUrls(stageCache[stage]).forEach(function (u) {
+            var img = new Image();
+            img.src = u;
+          });
+        });
+      }
+      function showStage(stage) {
+        var entries = stageCache[stage];
+        pixelPreloadImages(pixelMegaImageUrls(entries)).then(function () {
+          inner.innerHTML = entries.map(pixelMegaItemHtml).join("");
+          currentStage = stage;
+          prevBtn.classList.toggle("disable", stage <= 1);
+          nextBtn.classList.toggle("disable", stage >= stageCount);
+          setBusy(false);
+          prefetchStage(stage + 1);
+          prefetchStage(stage - 1);
+        });
+      }
+      function loadStage(forward) {
+        if (busy) return;
+        var target = forward ? currentStage + 1 : currentStage - 1;
+        if (target < 1 || target > stageCount) return;
+        setBusy(true);
+        if (stageCache[target]) return showStage(target);
+        pixelFetchFeed(feedPath((target - 1) * perStage + 1, perStage), function (page) {
+          stageCache[target] = page.feed.entry || [];
+          showStage(target);
+        }, function () { setBusy(false); });
+      }
+      prevBtn.addEventListener("click", function () { loadStage(false); });
+      nextBtn.addEventListener("click", function () { loadStage(true); });
+      prefetchStage(2);
     });
   });
 }
