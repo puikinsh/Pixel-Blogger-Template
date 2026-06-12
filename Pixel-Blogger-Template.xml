@@ -1328,7 +1328,7 @@ loadCSS("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&
 <b:section class='ad-home-widget' id='pixel-advert-1' maxwidgets='1' name='Home Advertisement [Full Width]' preferred='no' showaddelement='no'>
   <b:widget id='HTML994' locked='false' title='Full width home advertisement' type='HTML' version='1'>
     <b:widget-settings>
-      <b:widget-setting name='content'><![CDATA[<a href="https://colorlib.com" target="_blank"><img style="width:100%;" src="https://2.bp.blogspot.com/-MYa_e2xc3_Y/WgV3kYHsmGI/AAAAAAAAA-M/FWZXZ8oHizg1emaYhz1owih_0gIM2UvcQCLcBGAs/s1600/728%2B3.png"/></a>]]></b:widget-setting>
+      <b:widget-setting name='content'><![CDATA[<a href="https://colorlib.com" target="_blank"><img alt="Advertisement" style="width:100%;" src="https://2.bp.blogspot.com/-MYa_e2xc3_Y/WgV3kYHsmGI/AAAAAAAAA-M/FWZXZ8oHizg1emaYhz1owih_0gIM2UvcQCLcBGAs/s1600/728%2B3.png"/></a>]]></b:widget-setting>
     </b:widget-settings>
     <b:includable id='main'>
   <!-- only display title if it's non-empty -->
@@ -1427,7 +1427,7 @@ loadCSS("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&
 <b:section class='ad-top-widget' id='pixel-advert-2' maxwidgets='1' name='Post Page Advertisement [Top]' preferred='no' showaddelement='no'>
   <b:widget id='HTML991' locked='true' title='Post Page Advertisement [Top]' type='HTML' version='1'>
     <b:widget-settings>
-      <b:widget-setting name='content'><![CDATA[<a href="https://colorlib.com" target="_blank"><img style="width:100%;" src="https://2.bp.blogspot.com/-MYa_e2xc3_Y/WgV3kYHsmGI/AAAAAAAAA-M/FWZXZ8oHizg1emaYhz1owih_0gIM2UvcQCLcBGAs/s1600/728%2B3.png"/></a>]]></b:widget-setting>
+      <b:widget-setting name='content'><![CDATA[<a href="https://colorlib.com" target="_blank"><img alt="Advertisement" style="width:100%;" src="https://2.bp.blogspot.com/-MYa_e2xc3_Y/WgV3kYHsmGI/AAAAAAAAA-M/FWZXZ8oHizg1emaYhz1owih_0gIM2UvcQCLcBGAs/s1600/728%2B3.png"/></a>]]></b:widget-setting>
     </b:widget-settings>
     <b:includable id='main'>
   <!-- only display title if it's non-empty -->
@@ -2709,7 +2709,7 @@ var msg = &#39;<data:navMessage/>&#39;;
 <b:section class='ad-bottom-widget' id='pixel-advert-3' maxwidgets='1' name='Bottom Ad [Post Page]' preferred='no' showaddelement='no'>
   <b:widget id='HTML988' locked='true' title='Bottom Ad [Post Page]' type='HTML' version='1'>
     <b:widget-settings>
-      <b:widget-setting name='content'><![CDATA[<a href="https://colorlib.com" target="_blank"><img style="width:100%;" src="https://2.bp.blogspot.com/-MYa_e2xc3_Y/WgV3kYHsmGI/AAAAAAAAA-M/FWZXZ8oHizg1emaYhz1owih_0gIM2UvcQCLcBGAs/s1600/728%2B3.png"/></a>]]></b:widget-setting>
+      <b:widget-setting name='content'><![CDATA[<a href="https://colorlib.com" target="_blank"><img alt="Advertisement" style="width:100%;" src="https://2.bp.blogspot.com/-MYa_e2xc3_Y/WgV3kYHsmGI/AAAAAAAAA-M/FWZXZ8oHizg1emaYhz1owih_0gIM2UvcQCLcBGAs/s1600/728%2B3.png"/></a>]]></b:widget-setting>
     </b:widget-settings>
     <b:includable id='main'>
   <!-- only display title if it's non-empty -->
@@ -2746,7 +2746,7 @@ var msg = &#39;<data:navMessage/>&#39;;
       </b:widget>
       <b:widget id='HTML2' locked='false' title='Advertisement' type='HTML' version='1'>
         <b:widget-settings>
-          <b:widget-setting name='content'><![CDATA[<a href="https://colorlib.com" target="_blank"><img style="width:100%;" src="https://2.bp.blogspot.com/-NVxIuVUclr4/WgV5GuACJbI/AAAAAAAAA-Y/_2F3SjGqgwgPWvdAEId87UN8DpH1_QNGACLcBGAs/s1600/3200250.png"/></a>]]></b:widget-setting>
+          <b:widget-setting name='content'><![CDATA[<a href="https://colorlib.com" target="_blank"><img alt="Advertisement" style="width:100%;" src="https://2.bp.blogspot.com/-NVxIuVUclr4/WgV5GuACJbI/AAAAAAAAA-Y/_2F3SjGqgwgPWvdAEId87UN8DpH1_QNGACLcBGAs/s1600/3200250.png"/></a>]]></b:widget-setting>
         </b:widget-settings>
         <b:includable id='main'>
   <!-- only display title if it's non-empty -->
@@ -3515,7 +3515,7 @@ function initFeaturedGrid() {
           }
         });
       } else {
-        html += '<style>.pixel-empty-panel img{max-width: 600px; width:100%}.pixel-empty-panel{text-align: center;}.pixel-empty-text h3{font-weight: 600;font-size:18px;line-height: 24px;margin-bottom:50px;}</style><div class="pixel-empty-panel"><div class="pixel-empty-thumb"><img src="https://1.bp.blogspot.com/-FCuCIgXt2v8/WdDfhsYYoZI/AAAAAAAAAhk/X-ke9mcD1KsrOnsxV2z15nup1TkXkw36wCLcBGAs/s1600/trpgrid.png"></div><div class="pixel-empty-text"><h3>No posts found for label : "' + label + '". <br/> <span class="pixel-small">You can disable this widget by removing all the widget content from layout tab.</span></h3></div></div>';
+        html += '<style>.pixel-empty-panel img{max-width: 600px; width:100%}.pixel-empty-panel{text-align: center;}.pixel-empty-text h3{font-weight: 600;font-size:18px;line-height: 24px;margin-bottom:50px;}</style><div class="pixel-empty-panel"><div class="pixel-empty-thumb"><img alt="" src="https://1.bp.blogspot.com/-FCuCIgXt2v8/WdDfhsYYoZI/AAAAAAAAAhk/X-ke9mcD1KsrOnsxV2z15nup1TkXkw36wCLcBGAs/s1600/trpgrid.png"></div><div class="pixel-empty-text"><h3>No posts found for label : "' + label + '". <br/> <span class="pixel-small">You can disable this widget by removing all the widget content from layout tab.</span></h3></div></div>';
       }
       html += "</div>";
       content.innerHTML = html;
@@ -3530,7 +3530,7 @@ function initFeaturedGrid() {
 }
 
 // ---- Sidebar feed widgets: recent comments, recent posts, posts by tag ----
-var PIXEL_EMPTY_PANEL = '<style>.pixel-empty-panel img{max-width: 600px; width:100%}.pixel-empty-panel{text-align: center;}.pixel-empty-text h3{font-weight: 600;font-size:18px;line-height: 24px;margin-bottom:50px;}.bgr{background: rgb(236,239,241);}.bgr{box-sizing: border-box;padding:5px 10px;}</style><div class="pixel-empty-panel bgr"><div class="pixel-empty-thumb"><img src="' + PIXEL_NO_THUMB + '"></div><div class="pixel-empty-text"><h3>{message} <br/></h3></div></div>';
+var PIXEL_EMPTY_PANEL = '<style>.pixel-empty-panel img{max-width: 600px; width:100%}.pixel-empty-panel{text-align: center;}.pixel-empty-text h3{font-weight: 600;font-size:18px;line-height: 24px;margin-bottom:50px;}.bgr{background: rgb(236,239,241);}.bgr{box-sizing: border-box;padding:5px 10px;}</style><div class="pixel-empty-panel bgr"><div class="pixel-empty-thumb"><img alt="" src="\' + PIXEL_NO_THUMB + \'"></div><div class="pixel-empty-text"><h3>{message} <br/></h3></div></div>';
 
 function pixelRecentItemHtml(entry) {
   var url = pixelEntryUrl(entry);
@@ -3569,7 +3569,7 @@ function initSidebarFeedWidgets() {
           var avatar = entry.author[0].gd$image.src;
           if (avatar.indexOf("img1.blogblog.com/img/blank.gif") > -1 || avatar.indexOf("img2.blogblog.com/img/b16-rounded.gif") > -1) avatar = "https://img1.blogblog.com/img/anon36.png";
           if (avatar.indexOf("//") === 0) avatar = "https:" + avatar;
-          html += '<div class="pixel-comment"><div class="pixel-comment-profile"><img class="pixel-comment-thumb" loading="lazy" src="' + avatar + '"/></div><a href="' + url + '">' + author + '</a><span>"' + text + '"</span></div>';
+          html += '<div class="pixel-comment"><div class="pixel-comment-profile"><img alt="" class="pixel-comment-thumb" loading="lazy" src="' + avatar + '"/></div><a href="' + url + '">' + author + '</a><span>"' + text + '"</span></div>';
         });
       } else {
         html += PIXEL_EMPTY_PANEL.replace("{message}", "No comments!");
