@@ -932,6 +932,32 @@ margin: 0 auto;
 padding: 20px 0px;
 }
 
+
+/* Post content typography
+----------------------------------------------------------------------- */
+.post-body{font-size:15px;line-height:1.85;color:#3b3b3f}
+.post-body h1,.post-body h2,.post-body h3,.post-body h4,.post-body h5,.post-body h6{font-weight:600;line-height:1.35;color:#1c1c1c;margin:1.5em 0 .55em;padding:0}
+.post-body h1:first-child,.post-body h2:first-child,.post-body h3:first-child,.post-body h4:first-child,.post-body h5:first-child,.post-body h6:first-child{margin-top:.2em}
+.post-body h1{font-size:30px}
+.post-body h2{font-size:25px}
+.post-body h3{font-size:21px}
+.post-body h4{font-size:18px}
+.post-body h5{font-size:15px;text-transform:uppercase;letter-spacing:.6px}
+.post-body h6{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:#8e8e95}
+.post-body p{margin:0 0 1.5em;padding:0}
+.post-body ul,.post-body ol{margin:0 0 1.6em;padding:0 0 0 1.5em}
+.post-body li{margin:0 0 .5em;padding:0;line-height:1.75}
+.post-body ul li{list-style-type:disc}
+.post-body ul ul li{list-style-type:circle}
+.post-body ol li{list-style-type:decimal}
+.post-body ul ul,.post-body ol ol,.post-body ul ol,.post-body ol ul{margin:.5em 0 .2em}
+.post-body li::marker{color:$(maincolor)}
+.post-body a{color:$(maincolor);text-decoration:underline;text-underline-offset:2px}
+.post-body blockquote{margin:1.9em 0;font-style:italic;font-size:17px;line-height:1.75}
+.post-body blockquote p:last-child{margin-bottom:0}
+.post-body img{margin:.6em auto}
+.post-body hr{margin:2.2em 0}
+
 ]]></b:skin>
 <b:template-skin>
 <![CDATA[
