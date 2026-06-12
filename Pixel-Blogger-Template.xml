@@ -2038,7 +2038,7 @@ loadCSS("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&
                  <div class='social share-links clearfix'>
 					<ul class='social-icons list-unstyled list-inline'>
                       <li class='social-item facebook'>
-                          <a class='post_share_facebook facebook' expr:href='&quot;http://www.facebook.com/sharer.php?u=&quot;+ data:post.url' onclick='javascript:window.open(this.href,&apos;&apos;, &apos;menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=220,width=600&apos;);return false;' title='facebook'> <i class='fa-brands fa-facebook'/></a>
+                          <a class='post_share_facebook facebook' expr:href='&quot;https://www.facebook.com/sharer.php?u=&quot;+ data:post.url' onclick='javascript:window.open(this.href,&apos;&apos;, &apos;menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=220,width=600&apos;);return false;' title='facebook'> <i class='fa-brands fa-facebook'/></a>
                       </li>
                       <li class='social-item twitter'>
                           <a class='product_share_twitter twitter' expr:href='&quot;https://twitter.com/share?url=&quot;+ data:post.url' onclick='javascript:window.open(this.href,&apos;&apos;, &apos;menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=260,width=600&apos;);return false;' title='twitter'> <i class='fa-brands fa-x-twitter'/></a>
@@ -2089,7 +2089,7 @@ loadCSS("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&
                  <div class='social share-links clearfix'>
 					<ul class='social-icons list-unstyled list-inline'>
                       <li class='social-item facebook'>
-                          <a class='post_share_facebook facebook' expr:href='&quot;http://www.facebook.com/sharer.php?u=&quot;+ data:post.url' onclick='javascript:window.open(this.href,&apos;&apos;, &apos;menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=220,width=600&apos;);return false;' title='facebook'> <i class='fa-brands fa-facebook'/></a>
+                          <a class='post_share_facebook facebook' expr:href='&quot;https://www.facebook.com/sharer.php?u=&quot;+ data:post.url' onclick='javascript:window.open(this.href,&apos;&apos;, &apos;menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=220,width=600&apos;);return false;' title='facebook'> <i class='fa-brands fa-facebook'/></a>
                       </li>
                       <li class='social-item twitter'>
                           <a class='product_share_twitter twitter' expr:href='&quot;https://twitter.com/share?url=&quot;+ data:post.url' onclick='javascript:window.open(this.href,&apos;&apos;, &apos;menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=260,width=600&apos;);return false;' title='twitter'> <i class='fa-brands fa-x-twitter'/></a>
@@ -2202,7 +2202,7 @@ a.postmarg .article-meta, .postmarg .article-meta a,.postmarg .article-meta i{co
 			<div class='count-share'>
               <ul class='social-icons list-unstyled list-inline'>
                 <li class='social-item facebook'>
-                  <a class='post_share_facebook facebook' expr:href='&quot;http://www.facebook.com/sharer.php?u=&quot; + data:post.url' onclick='javascript:window.open(this.href,&apos;&apos;, &apos;menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=220,width=600&apos;);return false;' title='facebook'>
+                  <a class='post_share_facebook facebook' expr:href='&quot;https://www.facebook.com/sharer.php?u=&quot; + data:post.url' onclick='javascript:window.open(this.href,&apos;&apos;, &apos;menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=220,width=600&apos;);return false;' title='facebook'>
                     <i class='fa-brands fa-facebook'>
                     </i> facebook
                   </a>
