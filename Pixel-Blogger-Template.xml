@@ -67,6 +67,19 @@
     }
     </script>
 
+    <b:if cond='data:blog.pageType == &quot;static_page&quot;'>
+    <script type='application/ld+json'>
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "<data:blog.title/>", "item": "<data:blog.homepageUrl/>" },
+        { "@type": "ListItem", "position": 2, "name": "<data:blog.pageName/>", "item": "<data:blog.url/>" }
+      ]
+    }
+    </script>
+    </b:if>
+
     <link crossorigin='anonymous' href='https://cdn.jsdelivr.net' rel='preconnect'/>
     <link href='https://fonts.googleapis.com' rel='preconnect'/>
     <link crossorigin='anonymous' href='https://fonts.gstatic.com' rel='preconnect'/>
@@ -1999,6 +2012,18 @@ window.addEventListener("load", pixelIconFallback);
             "author": { "@type": "Person", "name": "<data:post.author/>" },
             "publisher": { "@type": "Organization", "name": "<data:blog.title/>" },
             "url": "<data:post.url/>"
+          }
+          </script>
+          <script type='application/ld+json'>
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "<data:blog.title/>", "item": "<data:blog.homepageUrl/>" }<b:if cond='data:post.labels'><b:loop values='data:post.labels' var='label'><b:if cond='data:label.isFirst'>,
+              { "@type": "ListItem", "position": 2, "name": "<data:label.name/>", "item": "<data:label.url/>" }</b:if></b:loop>,
+              { "@type": "ListItem", "position": 3, "name": "<data:post.title/>", "item": "<data:post.url/>" }<b:else/>,
+              { "@type": "ListItem", "position": 2, "name": "<data:post.title/>", "item": "<data:post.url/>" }</b:if>
+            ]
           }
           </script>
           </b:if>

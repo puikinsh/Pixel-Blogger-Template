@@ -21,7 +21,7 @@ Created and maintained by [Colorlib](https://colorlib.com), Pixel is a fast, AdS
 - **Tabbed sidebar** - Recent, Popular, and Comments tabs with accessible keyboard-friendly switching
 - **Custom list and gallery widgets** - magazine-style homepage sections fed by post labels, including a touch-friendly Swiper gallery with YouTube video support
 - **Mobile-first responsive design** - 7 CSS breakpoints from 1200px down to 300px
-- **SEO-optimized markup** — exactly one `h1` per page, JSON-LD structured data (`WebSite`, `SearchAction`, `BlogPosting`), Open Graph and Twitter card meta tags, semantic landmarks
+- **SEO-optimized markup** — exactly one `h1` per page, JSON-LD structured data (`WebSite`, `SearchAction`, `BlogPosting`, `BreadcrumbList`), Open Graph and Twitter card meta tags, semantic landmarks
 - **Fast page load** — zero jQuery, zero CSS frameworks, no render-blocking external assets, no `document.write()`, preconnect hints, native lazy loading, and right-sized images served by Blogger's CDN
 - **Accessible** — skip-to-content link, labeled controls, ARIA tab roles, keyboard-operable dropdown and mega menus, visible focus rings, `prefers-reduced-motion` support, and no user-zoom blocking
 - **Easy color customization** — change the color scheme from Blogger's theme editor, no code required

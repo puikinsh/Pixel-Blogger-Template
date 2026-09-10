@@ -15,6 +15,10 @@ Dependency refresh and payload release: icons are now embedded rather than downl
 - This trades roughly **16 KB of extra gzipped HTML per page** for **~260 KB and one third-party connection on first visit**. It is a clear win for search traffic, which is most blog traffic; the break-even is around 16 page views in a single session
 - **Pagination no longer uses `document.write()`** — the pager bootstrapped itself by writing a JSONP `<script>` during parse, which blocked the HTML parser and is flagged directly by Lighthouse. It now reads the same feeds over same-origin `fetch()` with `alt=json`, matching the rest of the template. The last JSONP in the theme is gone
 
+### SEO
+
+- **`BreadcrumbList` structured data** on post and static pages. Posts emit Home > first label > post title, falling back to Home > post title when a post carries no labels; static pages emit Home > page name. This is the markup Google uses to replace the raw URL in a search result with a breadcrumb trail
+
 ### Fixed
 
 - **Post titles containing a double quote** no longer break the lead post's `<img>` in the homepage list widget — the `alt` attribute is escaped through `pixelAttr()`, as its sibling attributes already were
