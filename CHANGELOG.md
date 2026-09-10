@@ -4,6 +4,34 @@ All notable changes to the Pixel Blogger Template are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [2.3.0] - 2026-09-10
+
+Dependency refresh and payload release: icons are now embedded rather than downloaded, the last blocking scripts are gone, and a keyboard trap in the navigation is fixed.
+
+### Performance
+
+- **Icons no longer download anything** — the Font Awesome CDN stylesheet is replaced by a 66-glyph subset of Font Awesome Free 7.3.1, embedded directly in the template as three base64 `woff2` faces. A stock install previously fetched a 20 KB stylesheet plus `fa-solid` (112 KB), `fa-brands` (107 KB) and `fa-regular` (18 KB) — roughly 260 KB — to draw a handful of icons
+- The subset covers **all 50 `fa-*` classes the skin styles**, so every social brand the author-bio and social widgets colour renders with no network at all. If a post or widget references an icon outside the subset, `pixelIconFallback()` notices the unresolved glyph and loads the real Font Awesome once, so nothing a user adds silently disappears
+- This trades roughly **16 KB of extra gzipped HTML per page** for **~260 KB and one third-party connection on first visit**. It is a clear win for search traffic, which is most blog traffic; the break-even is around 16 page views in a single session
+- **Pagination no longer uses `document.write()`** — the pager bootstrapped itself by writing a JSONP `<script>` during parse, which blocked the HTML parser and is flagged directly by Lighthouse. It now reads the same feeds over same-origin `fetch()` with `alt=json`, matching the rest of the template. The last JSONP in the theme is gone
+
+### Fixed
+
+- **Post titles containing a double quote** no longer break the lead post's `<img>` in the homepage list widget — the `alt` attribute is escaped through `pixelAttr()`, as its sibling attributes already were
+- **Dropdown and mega menus are reachable by keyboard** — they opened on `:hover` only, so keyboard users could not open a submenu at all (WCAG 2.1.1 Keyboard). They now also open on `:focus-within`
+
+### Changed
+
+- **Swiper 11.1.14 → 11.2.10.** Staying on v11 is deliberate. Swiper 14 ships a slightly *larger* JS bundle, deletes the `swiper-icons` font that the template's `.swiper-button-*:after` sizing override depends on, and uses native CSS nesting that silently drops whole rule blocks below Chrome 112 / Safari 16.4 / Firefox 117. There is no payload win to justify that, so v14 is deferred
+- **Facebook SDK v21.0 → v26.0.** Graph API v21.0 reaches end of life on **2027-01-21**, which would have broken Facebook comments for every blog using the theme
+- Font Awesome reference pinned to 7.3.1 (from 7.2.0) for the on-demand fallback path
+
+### Accessibility
+
+- Submenu parents carry `aria-haspopup`
+- Visible `:focus-visible` rings for keyboard users, with a light-on-dark variant for the menu bar and image tiles, leaving pointer interaction unchanged
+- A `prefers-reduced-motion: reduce` block that neutralises animations and transitions
+
 ## [2.2.0] - 2026-06-12
 
 Stability and polish release: layout regressions fixed, menus made instant and reliable, typography refined, and accessibility tightened.

@@ -1,6 +1,6 @@
 # Pixel — Free News & Magazine Blogger Template
 
-[![Version](https://img.shields.io/badge/Version-2.2.0-2942ee.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/Version-2.3.0-2942ee.svg)](CHANGELOG.md)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Vanilla JS](https://img.shields.io/badge/Vanilla_JS-zero_frameworks-F7DF1E?logo=javascript&logoColor=black)](http://vanilla-js.com/)
 [![Font Awesome](https://img.shields.io/badge/Font%20Awesome-7-528DD7?logo=fontawesome&logoColor=white)](https://fontawesome.com/)
@@ -22,10 +22,10 @@ Created and maintained by [Colorlib](https://colorlib.com), Pixel is a fast, AdS
 - **Custom list and gallery widgets** - magazine-style homepage sections fed by post labels, including a touch-friendly Swiper gallery with YouTube video support
 - **Mobile-first responsive design** - 7 CSS breakpoints from 1200px down to 300px
 - **SEO-optimized markup** — exactly one `h1` per page, JSON-LD structured data (`WebSite`, `SearchAction`, `BlogPosting`), Open Graph and Twitter card meta tags, semantic landmarks
-- **Fast page load** — zero jQuery, zero CSS frameworks, no render-blocking external assets, preconnect hints, native lazy loading, and right-sized images served by Blogger's CDN
-- **Accessible** — skip-to-content link, labeled controls, ARIA tab roles, keyboard-friendly navigation, and no user-zoom blocking
+- **Fast page load** — zero jQuery, zero CSS frameworks, no render-blocking external assets, no `document.write()`, preconnect hints, native lazy loading, and right-sized images served by Blogger's CDN
+- **Accessible** — skip-to-content link, labeled controls, ARIA tab roles, keyboard-operable dropdown and mega menus, visible focus rings, `prefers-reduced-motion` support, and no user-zoom blocking
 - **Easy color customization** — change the color scheme from Blogger's theme editor, no code required
-- **Font Awesome 7 icons** and Google Fonts, loaded without blocking the first paint
+- **Font Awesome 7 icons, embedded** — the icons the theme uses ship inside the template as a subsetted font, so a stock install downloads no icon files at all; Google Fonts still load without blocking the first paint
 - **Self-updating copyright year** in the footer
 
 ## How to Install a Blogger Template
@@ -55,8 +55,8 @@ To preview the template with sample posts before publishing your own:
 
 | Library | Version | Loading |
 | ------- | ------- | ------- |
-| [Swiper](https://swiperjs.com/) | 11 (pinned) | On demand, only when a slider/carousel exists on the page |
-| [Font Awesome](https://fontawesome.com/) | 7 | Non-blocking, pinned via jsDelivr |
+| [Swiper](https://swiperjs.com/) | 11.2.10 (pinned) | On demand, only when a slider/carousel exists on the page |
+| [Font Awesome](https://fontawesome.com/) | 7.3.1 (66-glyph subset) | Embedded in the template — no request. Full stylesheet fetched only if a page uses an icon outside the subset |
 | [Google Fonts](https://fonts.google.com/) | — | `display=swap`, non-blocking |
 
 Everything else is hand-written CSS and vanilla JavaScript inside the single template file — no jQuery, no Bootstrap, no build step. Feeds load over same-origin `fetch()` with `alt=json`.
@@ -67,7 +67,7 @@ Everything else is hand-written CSS and vanilla JavaScript inside the single tem
 
 **Does it work with AdSense?** Yes. The layout includes dedicated ad widgets, and you can add more ad units through Blogger's Layout editor.
 
-**Will it slow down my blog?** No — the template loads zero render-blocking external assets and removed all legacy frameworks (jQuery, Bootstrap, Owl Carousel) in version 2.0. See the [changelog](CHANGELOG.md) for the full performance work.
+**Will it slow down my blog?** No — the template loads zero render-blocking external assets and removed all legacy frameworks (jQuery, Bootstrap, Owl Carousel) in version 2.0. Version 2.3 went further and embedded the icon font, so a stock install downloads no icon files at all. See the [changelog](CHANGELOG.md) for the full performance work.
 
 **Can I use it on multiple blogs?** Yes, on as many blogs as you like.
 
