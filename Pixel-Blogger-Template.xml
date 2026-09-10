@@ -2877,7 +2877,7 @@ var msg = &#39;<data:navMessage/>&#39;;
 <!--b:include name='quickedit'/-->
 </b:includable>
       </b:widget>
-      <b:widget id='Navbar1' locked='false' title='Navbar' type='Navbar' version='1'>
+      <b:widget id='Navbar1' locked='true' title='Navbar' type='Navbar' version='1'>
         <b:includable id='main'/>
       </b:widget>
     </b:section>
