@@ -18,6 +18,7 @@ Dependency refresh and payload release: icons are now embedded rather than downl
 ### Fixed
 
 - **Post titles containing a double quote** no longer break the lead post's `<img>` in the homepage list widget — the `alt` attribute is escaped through `pixelAttr()`, as its sibling attributes already were
+- **The RSS and Bloglovin icons in the social widget rendered as empty boxes** — `.pixel-social #social a:before` outranked the two per-icon rules on specificity, so their `font-family` and weight never applied and both glyphs were looked up in the wrong family. Longstanding; visible with the CDN stylesheet too
 - **Dropdown and mega menus are reachable by keyboard** — they opened on `:hover` only, so keyboard users could not open a submenu at all (WCAG 2.1.1 Keyboard). They now also open on `:focus-within`
 
 ### Changed

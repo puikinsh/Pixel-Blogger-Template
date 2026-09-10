@@ -167,11 +167,11 @@ article{padding:0;overflow:hidden}
 .pixel-social .LinkList ul{text-align:center;margin:0 20px 0 0}
 .pixel-social #social a{display:block;width:30px;height:30px;line-height:30px;font-size:14px;color:#fff;transition:background .3s linear}
 .pixel-social #social a:before{display:inline-block;font-family:"Pixel Icons Brands";font-size:inherit;font-style:normal;font-weight:400;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-.pixel-social .bloglovin:before{content:"\f004";font-family:"Pixel Icons";font-weight:900}
+.pixel-social #social a.bloglovin:before{content:"\f004";font-family:"Pixel Icons";font-weight:900}
 .pixel-social .facebook:before{content:"\f09a"}
 .pixel-social .twitter:before{content:"\e61b"}
 .pixel-social .x-twitter:before{content:"\e61b"}
-.pixel-social .rss:before{content:"\f09e";font-family:"Pixel Icons";font-weight:900}
+.pixel-social #social a.rss:before{content:"\f09e";font-family:"Pixel Icons";font-weight:900}
 .pixel-social .youtube:before{content:"\f167"}
 .pixel-social .skype:before{content:"\f17e"}
 .pixel-social .tumblr:before{content:"\f173"}
