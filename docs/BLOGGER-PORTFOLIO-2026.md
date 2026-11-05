@@ -35,11 +35,11 @@ Every complete theme saved successfully in Blogger. Live home/post and paginatio
 
 The published ZIP and standalone XML downloads were downloaded again and verified against `SHA256SUMS`; release tags match the tested commits. Private theme backups are retained separately and excluded from releases. These checks cover the identified regressions; custom post HTML, ad/consent widgets and third-party comment configuration still require normal owner testing.
 
-## Colorlib website updates still needed
+## Colorlib website links corrected
 
-The [Blogger template collection](https://colorlib.com/wp/free-blogger-templates/) was audited on November 5, 2026. Its nine download targets are still `https://downloads.colorlib.com/theme/<name>.zip`. The public ZIP contents do not match these maintained releases:
+The [Blogger template collection](https://colorlib.com/wp/free-blogger-templates/) was audited and corrected on November 5, 2026. At the initial audit, its nine download targets used `https://downloads.colorlib.com/theme/<name>.zip`. Those legacy ZIPs did not match the maintained releases. The article now uses the maintained GitHub downloads below:
 
-| Download name | Current Colorlib package | Recommended maintained download |
+| Download name | Legacy package at audit time | Published maintained download |
 | --- | --- | --- |
 | pixel | 126 files; no XML theme | [Latest Pixel ZIP](https://github.com/puikinsh/Pixel-Blogger-Template/releases/latest/download/pixel-blogger-template.zip) |
 | minimal | Theme version 2.2.0 | [Latest Minimal ZIP](https://github.com/puikinsh/Minimal-Blogger-Template/releases/latest/download/minimal-blogger-template.zip) |
@@ -51,6 +51,8 @@ The [Blogger template collection](https://colorlib.com/wp/free-blogger-templates
 | futuremag | Older unversioned XML and macOS metadata | [Latest FutureMag ZIP](https://github.com/puikinsh/FutureMag-Blogger-Template/releases/latest/download/futuremag-blogger-template.zip) |
 | shutter | 180 files; no XML theme | [Latest Shutter ZIP](https://github.com/puikinsh/Shutter-Blogger-Template/releases/latest/download/shutter-blogger-template.zip) |
 
-Update the collection's Download links to the maintained URLs above, or update the download service's routing to serve these Blogger archives. Pixel and Shutter need distinct Blogger download names if the short names also serve HTML products; replacing an HTML product's archive would break its own users.
+All nine Download buttons and the linked Pixel heading now use the maintained URLs above. The legacy download-service objects were left intact: Pixel and Shutter's short names may serve separate HTML products, so replacing those archives could break their existing users.
 
-The Shutter Documentation link currently points to Colorlib search; Simplify's points to the demo home. Point these to each repository's README/upgrade guide, and add FutureMag documentation alongside its Download/Preview links. The repository documentation is current; hosted legacy documentation pages have not been rewritten in this rollout. The Colorlib website and download service have been audited, not edited.
+All nine Documentation buttons now point to their matching public GitHub repository's maintained README (`https://github.com/puikinsh/<Template>-Blogger-Template#readme`), which links to setup/upgrade instructions. This replaces Shutter's search link and Simplify's home-page link, and adds FutureMag's missing Documentation button. Preview URLs are preserved; mislabeled Preview/Documentation tooltips were corrected.
+
+WordPress confirmed the update to article 43413. The anonymous public page was fetched independently and all eighteen Download/Documentation destinations returned HTTP 200. The first nine sections were checked individually, and the remaining nineteen template sections and following article content were preserved unchanged. Source backups and before/after verification files are retained locally, outside version control. Hosted legacy Blogger documentation pages and the legacy download service were not rewritten; Colorlib now directs visitors to maintained repository documentation and releases.

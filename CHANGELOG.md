@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Documentation
 
 - Added a portfolio maintenance report covering the eight sibling templates' 2.3.0 releases, demo validation and outstanding Colorlib download/documentation link corrections.
+- Recorded completion of the Colorlib link corrections for all nine templates, including FutureMag's new Documentation button and independent public-page/HTTP verification.
 
 ## [2.4.1] - 2026-11-05
 

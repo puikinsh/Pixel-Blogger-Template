@@ -1,14 +1,14 @@
 # Colorlib and hosted-demo audit
 
-Checked November 5, 2026. These observations describe the public sites at audit time; publishing a GitHub release does not change either site's content.
+Checked November 5, 2026. The initial observations below describe the sites before correction. Colorlib's links were subsequently updated on the same day; see the completion record at the end and the [portfolio report](BLOGGER-PORTFOLIO-2026.md).
 
-## Colorlib: urgent download correction
+## Colorlib: original download issue (resolved)
 
 Page: [Free Blogger Templates, Pixel section](https://colorlib.com/wp/free-blogger-templates/#pixel).
 
-Both the Pixel heading and its Download button point to `https://downloads.colorlib.com/theme/pixel.zip`. Downloading and inspecting that archive returned **Pixel - Digital Agency HTML Template**: 126 entries, HTML agency pages, Sass caches, and **no XML files**. This is a different product and cannot be installed as a Blogger theme.
+Both the Pixel heading and its Download button originally pointed to `https://downloads.colorlib.com/theme/pixel.zip`. Downloading and inspecting that archive returned **Pixel - Digital Agency HTML Template**: 126 entries, HTML agency pages, Sass caches, and **no XML files**. This is a different product and cannot be installed as a Blogger theme.
 
-Replace both URLs with:
+Both URLs have now been replaced with:
 
 `https://github.com/puikinsh/Pixel-Blogger-Template/releases/latest/download/pixel-blogger-template.zip`
 
@@ -16,7 +16,7 @@ Alternatively, create a distinct Blogger-specific download route that redirects 
 
 ## Colorlib: documentation and copy
 
-The Preview URL correctly points to [the existing Blogger demo](https://pixel-template.blogspot.com/). Keep that address. At the start of this audit, the Documentation button led to an obsolete guide. The target [documentation page](https://pixel-template.blogspot.com/p/documentation.html) has now been replaced with the 2.4.0 guide, so the existing button can remain.
+The Preview URL correctly points to [the existing Blogger demo](https://pixel-template.blogspot.com/) and is preserved. At the start of this audit, the Documentation button led to an obsolete guide. The hosted [documentation page](https://pixel-template.blogspot.com/p/documentation.html) was refreshed during the demo update. Colorlib's Documentation button now points to the [maintained repository README](https://github.com/puikinsh/Pixel-Blogger-Template#readme), consistently with the other eight themes.
 
 A version-pinned repository documentation link is also available:
 
@@ -54,8 +54,12 @@ Live editing requires a Blogger session with permission to manage this blog. The
 - Chose native Blogger comments for the demo; optional-provider scripts require their own configuration.
 - Verified live article and breadcrumb JSON-LD. Existing duplicate sample-post text and placeholder author identity remain editorial cleanup, rather than deleting published posts or changing the account's shared profile.
 
-**Still required on Colorlib:** replace both incorrect Pixel download links. The demo and documentation URLs can remain as they are.
+**Completed on Colorlib:** both incorrect Pixel download links were replaced, and the Documentation button now targets the maintained README. The demo URL is unchanged.
 
 ### Pagination follow-up, 2.4.1
 
 The demo's duplicate publication dates exposed a 2.4.0 UI regression: a separate numbered pager offered jumps that were then rejected. Version 2.4.1 uses one pagination bar and selects native links immediately for known duplicate dates. Existing post dates and content are preserved.
+
+### All-nine link publication, November 5, 2026
+
+Updated Colorlib article 43413 through its WordPress editor: all nine Download buttons use the latest GitHub release assets; all nine Documentation buttons use their matching repository README, including a newly added FutureMag button. The linked Pixel heading was corrected too. Preview URLs and the article's remaining template sections were preserved. WordPress confirmed the save, the anonymous public page showed the new targets, and all eighteen download/documentation destinations returned HTTP 200. Existing legacy archive objects were not overwritten.
