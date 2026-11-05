@@ -5,7 +5,7 @@ for (const width of [320, 1200]) {
 test(`numbered navigation and label links work at ${width}px`, { skip: !chrome }, () => {
   const body = `<div class="pixel-navigation"></div><div id="hpick"><h1>Post title</h1></div>
     <div id="Blog1"><div class="blog-posts">${'<div class="grid-item"></div>'.repeat(6)}</div>
-    <div id="blog-pager"><a class="blog-pager-older-link" href="https://example.com/search?updated-max=2026-11-01T10%3A00%3A00Z&amp;max-results=6">Older Posts</a></div></div>
+    <div id="blog-pager" role="navigation" aria-label="Post pages"><span id="blog-pager-older-link"><a class="blog-pager-older-link" href="https://example.com/search?updated-max=2026-11-01T10%3A00%3A00Z&amp;max-results=6">Older Posts</a></span></div></div>
     <div class="Label"><a id="with-query" href="https://example.com/search/label/Travel?m=1#posts">Travel</a>
     <a id="configured" href="https://example.com/search/label/Travel?max-results=20#posts">Travel</a>
     <a id="malformed" href="http://[">Invalid custom link</a></div>
@@ -23,7 +23,7 @@ test(`numbered navigation and label links work at ${width}px`, { skip: !chrome }
       else if (url.includes('start-index')) {
         if (mode === 'failure') error();
         else success({feed: {entry: [{published: {$t: '2026-11-05T10:00:00Z'}}, {published: {$t: '2026-11-05T10:00:00Z'}}]}});
-      } else success({feed: {openSearch$totalResults: {$t: '60'}}});
+      } else success({feed: {openSearch$totalResults: {$t: '60'},entry:Array.from({length:7},function (_,i) { return {published:{$t:new Date(Date.UTC(2026,10,5,12)-(mode==='duplicate-dates'?0:i*60000)).toISOString()}}; })}});
     }
     ${production}
     function check(ok, message) { if (!ok) throw new Error(message); }
@@ -33,17 +33,23 @@ test(`numbered navigation and label links work at ${width}px`, { skip: !chrome }
       pagecurrentg();
       var area = document.getElementById('pixel-numbered-pager');
       check(area && native.querySelector('a') === oldLink && oldLink.href === originalHref, 'native pager must remain intact');
+      check(area.parentElement === native && document.querySelectorAll('#Blog1 [role="navigation"]').length === 1, 'one combined pager, not two navigation blocks');
+      check(area.querySelectorAll('button[data-page="10"]').length === 1, 'last page must not be duplicated');
       check(area.scrollWidth <= innerWidth, 'numbered navigation must wrap on mobile');
       check(!area.querySelector('a[href="#"]'), 'numbered controls must not masquerade as crawlable links');
       var button = area.querySelector('button[data-page="2"]');
       check(button && button.getAttribute('type') === 'button', 'numbered page button');
       button.click();
-      check(!button.disabled && area.getAttribute('aria-busy') === 'false', 'failed request restores controls');
-      check(document.getElementById('pixel-pager-status').textContent.includes('Older Posts'), 'visible fallback after failure');
-      mode = 'ties'; button.click();
-      check(!button.disabled && native.querySelector('a') === oldLink, 'tied dates preserve real navigation');
+      check(!document.getElementById('pixel-numbered-pager') && native.querySelector('a') === oldLink, 'failed request leaves only working native controls');
+      check(!native.textContent.includes('Unable to open'), 'no dead-end fallback message');
+      mode = 'ties'; pagecurrentg();
+      document.querySelector('button[data-page="2"]').click();
+      check(!document.getElementById('pixel-numbered-pager') && native.querySelector('a') === oldLink, 'tied dates preserve real navigation');
       pagecurrentg();
       check(document.querySelectorAll('#pixel-numbered-pager').length === 1, 'avoid duplicate numbered controls');
+      document.getElementById('pixel-numbered-pager').remove();
+      mode = 'duplicate-dates'; pagecurrentg();
+      check(!document.getElementById('pixel-numbered-pager') && oldLink.href === originalHref, 'known duplicate dates offer only native navigation');
       pixelLimitLabelLinks();
       var label = new URL(document.getElementById('with-query').href);
       check(label.searchParams.get('m') === '1' && label.searchParams.get('max-results') === '6' && label.hash === '#posts', 'preserve label query and fragment');

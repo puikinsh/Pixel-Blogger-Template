@@ -3,7 +3,7 @@
 <!--
 =============================================================
  Pixel - Free News & Magazine Blogger Template
- Version: 2.4.0
+ Version: 2.4.1
  Author: Colorlib (https://colorlib.com)
  Demo: https://pixel-template.blogspot.com
  Documentation: https://pixel-template.blogspot.com/p/documentation.html
@@ -657,11 +657,11 @@ div.pixel-empty{width: 100%;text-align:center;background:rgb(236,239,241);box-si
 .content-tab{transition:all 0 ease}
 
 /* Blog Pager */
-#blog-pager{clear:both;text-align:center;padding:15px 0;background:#fff;color:#4d4d4d}
+#blog-pager{clear:both;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;text-align:center;padding:15px 0;background:#fff;color:#4d4d4d}
 .displaypageNum a,.showpage a,.pagecurrent,.blog-pager-older-link,.blog-pager-newer-link{padding:5px 13px;margin-right:8px;color:#fff;background-color:$maincolor;border:1px solid #2d2d2d;display:inline-block;line-height:20px;-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px;margin-top:10px}
 .displaypageNum a:hover,.showpage a:hover,.pagecurrent,.blog-pager-older-link:hover,.blog-pager-newer-link:hover{background:$maincolor;border:1px solid #1bcdda;text-decoration:none;color:#fff}
 .showpageOf{display:none!important;overflow:hidden}
-.pixel-numbered-pager{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:12px 0}
+.pixel-numbered-pager{display:inline-flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:0}
 .pixel-numbered-pager .displaypageNum{display:inline-flex}
 .pixel-numbered-pager a,.pixel-numbered-pager button,.pixel-numbered-pager .pagecurrent{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:8px 12px;margin:0;border:1px solid #ddd;border-radius:2px;background:#fff;color:#282828;font:inherit;line-height:1.4;text-decoration:none}
 .pixel-numbered-pager button{cursor:pointer}
@@ -1934,7 +1934,7 @@ window.addEventListener("load", pixelIconFallback);
    <b:include name='mobile-nextprev'/>
 </b:includable>
        <b:includable id='mobile-nextprev'>
-  <div class='blog-pager' id='blog-pager'>
+  <div aria-label='Post pages' class='blog-pager' id='blog-pager' role='navigation'>
     <b:if cond='data:newerPageUrl'>
       <div class='mobile-link-button' id='blog-pager-newer-link'>
       <a class='blog-pager-newer-link' expr:href='data:newerPageUrl' expr:id='data:widget.instanceId + &quot;_blog-pager-newer-link&quot;' expr:title='data:newerPageTitle'>&amp;lsaquo;</a>
@@ -2079,7 +2079,7 @@ window.addEventListener("load", pixelIconFallback);
   </div>
 </b:includable>
        <b:includable id='nextprev'>
-  <div class='blog-pager' id='blog-pager'>
+  <div aria-label='Post pages' class='blog-pager' id='blog-pager' role='navigation'>
     <b:if cond='data:newerPageUrl'>
       <span id='blog-pager-newer-link'>
       <a class='blog-pager-newer-link' expr:href='data:newerPageUrl' expr:id='data:widget.instanceId + &quot;_blog-pager-newer-link&quot;' expr:title='data:newerPageTitle'><data:newerPageTitle/></a>
@@ -3973,7 +3973,7 @@ article {
  function looppagecurrentg(total) {
    if (!Number.isSafeInteger(total) || total <= 0) return;
    var lastPage = Math.ceil(total / perPage);
-   if (currentPageNo > lastPage) return;
+   if (lastPage < 2 || currentPageNo > lastPage) return;
    var posts = document.querySelectorAll("#Blog1 .blog-posts > .grid-item");
    // Blogger may shorten a page regardless of the configured post count.
    if (posts.length !== Math.min(perPage, total - (currentPageNo - 1) * perPage)) return;
@@ -3990,23 +3990,17 @@ article {
      var control = page === 1 ? '<a href="' + pixelAttr(firstUrl) + '">' + text + '</a>' : '<button type="button" data-page="' + page + '" aria-label="Page ' + page + '">' + text + '</button>';
      return '<span class="displaypageNum ' + (extraClass || "") + '">' + control + '</span>';
    }
-   if (currentPageNo > 1) {
-     html += pageLink(1, firstText, "firstpage");
-   }
    if (start > 1) html += pageLink(1, "1");
    if (start > 2) html += '<span aria-hidden="true"> … </span>';
    for (var page = start; page <= end; page++) html += pageLink(page, page);
    if (end < lastPage - 1) html += '<span aria-hidden="true"> … </span>';
    if (end < lastPage) html += pageLink(lastPage, lastPage);
-   if (currentPageNo < lastPage) {
-     html += pageLink(lastPage, lastText, "lastpage");
-   }
-   var area = document.createElement("nav");
+   var area = document.createElement("span");
    area.id = "pixel-numbered-pager";
    area.className = "pixel-numbered-pager";
-   area.innerHTML = html + '<p id="pixel-pager-status" role="status" aria-live="polite"></p>';
-   area.setAttribute("aria-label", "Numbered post pages");
-   nativePager.insertAdjacentElement("beforebegin", area);
+   area.innerHTML = html + '<span class="sr-only" id="pixel-pager-status" role="status" aria-live="polite"></span>';
+   var older = nativePager.querySelector("#blog-pager-older-link");
+   nativePager.insertBefore(area, older);
    area.querySelectorAll("button[data-page]").forEach(function (link) {
        var page = Number(link.getAttribute("data-page"));
        if (page === 1) return;
@@ -4019,7 +4013,16 @@ article {
  }
 
  function totalcountdata(data) {
-   looppagecurrentg(Number(data.feed.openSearch$totalResults.$t));
+   var total = Number(data.feed.openSearch$totalResults.$t);
+   var entries = data.feed.entry || [];
+   // Do not offer numbered jumps when the visible feed already has tied dates.
+   // Blogger's cursor links stay available without adding a second pager.
+   if (entries.length < Math.min(perPage + 1, total)) return;
+   for (var i = 0; i < entries.length; i++) {
+     var time = Date.parse(entries[i].published && entries[i].published.$t);
+     if (!Number.isFinite(time) || (i && time >= Date.parse(entries[i - 1].published.$t))) return;
+   }
+   looppagecurrentg(total);
  }
 
  function pagecurrentg() {
@@ -4041,7 +4044,7 @@ article {
    perPage = Number(url.searchParams.get("max-results") || nativeSize || perPage || 6);
    if (!Number.isSafeInteger(perPage) || perPage < 1) return;
    var path = "/feeds/posts/summary" + (label ? "/-/" + postLabel : "");
-   pixelPagerFeed(path + "?max-results=1&alt=json&orderby=published", totalcountdata);
+   pixelPagerFeed(path + "?max-results=" + (perPage + 1) + "&alt=json&orderby=published", totalcountdata);
  }
 
  function pixelPagerState(message, busy) {
@@ -4062,7 +4065,10 @@ article {
    if (!Number.isSafeInteger(start)) return;
    var request = ++pixelPagerRequest;
    pixelPagerState("Loading page…", true);
-   var failureMessage = "Unable to open this numbered page. Use Older Posts or Newer Posts below.";
+   function fallback() {
+     var area = document.getElementById("pixel-numbered-pager");
+     if (area) area.remove();
+   }
    pixelPagerFeed(path + "?start-index=" + start + "&max-results=2&alt=json&orderby=published", function (data) {
      if (request !== pixelPagerRequest) return;
      var entries = data.feed.entry || [];
@@ -4070,12 +4076,12 @@ article {
      var next = entries[1] && entries[1].published && entries[1].published.$t;
      // A timestamp cannot identify a position inside a group of tied posts.
      if (!previous || !next || !Number.isFinite(Date.parse(previous)) || !Number.isFinite(Date.parse(next)) || Date.parse(previous) <= Date.parse(next)) {
-       pixelPagerState(failureMessage, false);
+       fallback();
        return;
      }
      location.href = pixelPagerPath() + "?updated-max=" + encodeURIComponent(previous) + "&max-results=" + perPage + "#PageNo=" + page;
    }, function () {
-     if (request === pixelPagerRequest) pixelPagerState(failureMessage, false);
+     if (request === pixelPagerRequest) fallback();
    });
  }
  function redirectpage(page) { pixelRedirectPage(page); }

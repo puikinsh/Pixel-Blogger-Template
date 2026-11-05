@@ -6,6 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [2.4.1] - 2026-11-05
+
+### Fixed
+
+- Integrated optional page numbers into Blogger's existing pagination bar instead of adding a second navigation block.
+- Duplicate or invalid publication dates in the initial feed now select native Older/Newer navigation before numbered controls are displayed. This handles the hosted demo's duplicated sample dates without presenting buttons that immediately fail.
+- A later failed or ambiguous numbered jump removes the optional numbers and leaves native links intact, without a dead-end error message.
+- Removed repeated first/last-page controls and unnecessary page numbers on single-page blogs.
+
 ## [2.4.0] - 2026-11-05
 
 Pagination, mobile, accessibility, SEO, and documentation release. Includes the changes made after 2.3.0; GitHub users upgrading from the previous published release, 2.2.0, should also review the 2.3.0 entry below.

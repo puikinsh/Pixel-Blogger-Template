@@ -15,7 +15,7 @@ Under **Settings → Site feed**, use **Allow blog feed → Full** for the riche
 
 Set **Layout → Posts Per Page** to a positive whole number, such as `6`. Match it to **Settings → Posts → Max posts shown on main page**. Numbered pagination assumes a consistent page size. Search results and date archives use Blogger's native Older/Newer navigation.
 
-Older/Newer links remain available beside the optional numbered controls. Blogger can automatically serve fewer posts than requested; on those pages, the template omits page numbers to avoid skipping posts. Numbered jumps also stop safely when two posts share the same publication timestamp at a page boundary. Use Older/Newer in that case. This follows [Blogger's automatic pagination behavior](https://blogger.googleblog.com/2010/02/auto-pagination-on-blogger.html).
+There is one pagination bar. Older/Newer links remain available, with optional page numbers inside that same bar. Blogger can automatically serve fewer posts than requested; on those pages, the template omits page numbers to avoid skipping posts. If the initial feed contains tied or invalid publication dates, only native links are shown. If a later numbered jump fails or has an ambiguous date boundary, the optional numbers are removed and native navigation remains. This follows [Blogger's automatic pagination behavior](https://blogger.googleblog.com/2010/02/auto-pagination-on-blogger.html).
 
 ## Navigation
 

@@ -2,6 +2,10 @@
 
 Released November 5, 2026. This release updates the existing Blogger theme; it does not migrate posts or require a new blog.
 
+## Pagination hotfix in 2.4.1
+
+Version 2.4.1 replaces the double pagination UI from 2.4.0 with one bar. Known duplicate publication dates select native Older/Newer links immediately. A failed numbered jump falls back to native navigation without leaving unusable buttons or an error message. Use the latest released XML; the installation steps below also apply to this patch.
+
 ## Before installation
 
 1. Download a theme backup from **Theme → Customize dropdown → Backup**.

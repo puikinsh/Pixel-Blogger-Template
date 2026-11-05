@@ -19,7 +19,8 @@ function makePager(url, total = 60, options = {}) {
   const elements = {};
   const native = {
     innerHTML: 'native older/newer links',
-    insertAdjacentElement(position, area) {
+    querySelector() { return null; },
+    insertBefore(area) {
       elements[area.id] = area;
       elements['pixel-pager-status'] = { textContent: '' };
     },
@@ -35,12 +36,14 @@ function makePager(url, total = 60, options = {}) {
       querySelectorAll: () => Array(count).fill({}),
       querySelector: () => options.olderUrl ? { href: options.olderUrl } : null,
       getElementById: id => elements[id] || null,
-      createElement: () => ({ innerHTML: '', setAttribute() {}, querySelectorAll: () => [] }),
+      createElement: () => ({ innerHTML: '', setAttribute() {}, querySelectorAll: () => [], remove() { delete elements[this.id]; delete elements['pixel-pager-status']; } }),
     },
     pixelAttr: value => String(value).replace(/&/g, '&amp;').replace(/"/g, '&quot;'),
     pixelFetchFeed(path, success) {
       requests.push(path);
-      if (total !== null) success({ feed: { openSearch$totalResults: { $t: String(total) } } });
+      const feedSize = options.olderUrl ? Number(new URL(options.olderUrl).searchParams.get('max-results')) : size;
+      const entries = options.entries || Array.from({ length: Math.min(feedSize + 1, Number(total) || 0) }, (_, i) => ({ published: { $t: new Date(Date.UTC(2026, 10, 5, 12) - i * 60000).toISOString() } }));
+      if (total !== null) success({ feed: { openSearch$totalResults: { $t: String(total) }, entry: entries } });
     },
   };
   vm.createContext(context);
@@ -63,7 +66,7 @@ test('empty-state image uses the real fallback URL', () => {
 
 test('clean label URLs retain the complete encoded label and configured page size', () => {
   const { requests, context } = makePager('https://example.com/search/label/Travel%20%26%20Food%2FTrips');
-  assert.equal(requests[0], '/feeds/posts/summary/-/Travel%20%26%20Food%2FTrips?max-results=1&alt=json&orderby=published');
+  assert.equal(requests[0], '/feeds/posts/summary/-/Travel%20%26%20Food%2FTrips?max-results=7&alt=json&orderby=published');
   assert.equal(context.perPage, 6);
 });
 
@@ -149,7 +152,7 @@ for (const boundary of [
     context.pixelFetchFeed = (path, success) => success({ feed: { entry: boundary.map(value => ({ published: { $t: value } })) } });
     context.redirectpage(2);
     assert.equal(context.location.href, 'https://example.com/');
-    assert.match(elements['pixel-pager-status'].textContent, /Older Posts/);
+    assert.equal(elements['pixel-numbered-pager'], undefined);
   });
 }
 
@@ -157,8 +160,20 @@ test('cursor fetch failure reports the native fallback', () => {
   const { context, elements, native } = makePager('https://example.com/');
   context.pixelFetchFeed = (path, success, error) => error();
   context.redirectpage(2);
-  assert.match(elements['pixel-pager-status'].textContent, /Unable/);
+  assert.equal(elements['pixel-numbered-pager'], undefined);
   assert.equal(native.innerHTML, 'native older/newer links');
+});
+
+test('known duplicate publication dates keep the native pager without offering broken numbers', () => {
+  const entries = Array.from({ length: 7 }, () => ({ published: { $t: '2017-11-05T10:00:00Z' } }));
+  const { native, elements } = makePager('https://example.com/', 60, { entries });
+  assert.equal(elements['pixel-numbered-pager'], undefined);
+  assert.equal(native.innerHTML, 'native older/newer links');
+});
+
+test('a single page has no unnecessary numbered controls', () => {
+  const { elements } = makePager('https://example.com/', 6);
+  assert.equal(elements['pixel-numbered-pager'], undefined);
 });
 
 test('stale cursor response cannot overwrite a newer navigation request', () => {

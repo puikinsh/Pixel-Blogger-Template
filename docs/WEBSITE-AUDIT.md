@@ -55,3 +55,7 @@ Live editing requires a Blogger session with permission to manage this blog. The
 - Verified live article and breadcrumb JSON-LD. Existing duplicate sample-post text and placeholder author identity remain editorial cleanup, rather than deleting published posts or changing the account's shared profile.
 
 **Still required on Colorlib:** replace both incorrect Pixel download links. The demo and documentation URLs can remain as they are.
+
+### Pagination follow-up, 2.4.1
+
+The demo's duplicate publication dates exposed a 2.4.0 UI regression: a separate numbered pager offered jumps that were then rejected. Version 2.4.1 uses one pagination bar and selects native links immediately for known duplicate dates. Existing post dates and content are preserved.

@@ -1,6 +1,6 @@
 # Pixel — Free News & Magazine Blogger Template
 
-[![Version](https://img.shields.io/badge/Version-2.4.0-2942ee.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/Version-2.4.1-2942ee.svg)](CHANGELOG.md)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Vanilla JS](https://img.shields.io/badge/Vanilla_JS-zero_frameworks-F7DF1E?logo=javascript&logoColor=black)](http://vanilla-js.com/)
 [![Font Awesome](https://img.shields.io/badge/Font%20Awesome-7-528DD7?logo=fontawesome&logoColor=white)](https://fontawesome.com/)
@@ -28,9 +28,9 @@ Created and maintained by [Colorlib](https://colorlib.com), Pixel is a fast, AdS
 - **Font Awesome 7 icons, embedded** — the icons the theme uses ship inside the template as a subsetted font, so a stock install downloads no icon files at all; Google Fonts still load without blocking the first paint
 - **Self-updating copyright year** in the footer
 
-## What’s new in 2.4.0
+## What’s new in 2.4.1
 
-Safer pagination, complete article structured data in the responsive renderer, improved mobile layouts, keyboard navigation, and a focus-managed search dialog. See the [release notes](docs/releases/2.4.0.md) and [upgrade guide](docs/UPGRADING.md). The live demo is deployed separately; deployment status is recorded in the release notes.
+One pagination bar replaces the duplicated controls from 2.4.0. Blogs with tied publication dates use native Older/Newer links immediately; unsafe numbered controls are not offered. Includes the responsive SEO, mobile, and keyboard improvements from 2.4.0. See the [release notes](docs/releases/2.4.1.md) and [upgrade guide](docs/UPGRADING.md). The live demo is deployed separately; deployment status is recorded in the release notes.
 
 ## How to Install a Blogger Template
 
