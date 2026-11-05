@@ -4,6 +4,47 @@ All notable changes to the Pixel Blogger Template are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+## [2.4.0] - 2026-11-05
+
+Pagination, mobile, accessibility, SEO, and documentation release. Includes the changes made after 2.3.0; GitHub users upgrading from the previous published release, 2.2.0, should also review the 2.3.0 entry below.
+
+### Fixed
+
+- Main-menu nesting now reads only leading underscores, preserves literal menu text and internal underscores, and builds valid sibling lists. Mega-menu label links encode spaces and special characters.
+- Numbered pagination preserves Blogger's crawlable Older/Newer links, uses publication-ordered feeds and complete timestamp cursors, and follows the native page size. Numbered controls are omitted on shortened pages and unknown cursors; tied timestamps and failed requests show a native-navigation fallback instead of skipping posts. Stale requests cannot override a newer jump.
+- Feed titles, authors, labels, comments, and excerpts render as escaped text. Gallery author attributes preserve quotes; excerpts decode entities once and respect their word limit.
+- Empty sidebar widgets use the actual fallback image URL instead of a literal concatenation expression.
+- Gallery selection updates the preview's video ID, machine-readable date, and date permalink, preventing a photo from replaying the original video.
+- Label page-size links preserve existing query parameters and fragments.
+- Failed featured-grid feeds show a visible message and release the reserved loading space instead of leaving an invisible homepage block.
+- Disqus loads only when its comment pane exists and a valid site shortname is configured. New installations default to native Blogger comments, with no unrelated sample Disqus account.
+
+### SEO
+
+- Article and post-breadcrumb JSON-LD now share an includable called by both the standard responsive renderer and legacy mobile renderer; previously it was emitted only on legacy mobile posts.
+- All JSON-LD substitutions use Blogger's JSON escaping, post/static breadcrumb URLs use canonical values, and absent modification dates are omitted.
+- Standard post/static titles use a visible `h1`; the hero node is moved instead of copied, avoiding duplicate hidden titles and keeping it readable without JavaScript.
+- Removed conflicting Open Graph title, URL, image, and description tags already supplied by Blogger's `all-head-content`.
+
+### Mobile
+
+- Search fields use available phone width; navigation and tab controls have larger touch targets. Search and sidebar content remain available below 300px.
+- Stacked sidebars stop sticking on tablets; long titles/URLs, wide tables, code blocks, images, and YouTube embeds fit narrow viewports without stretching media.
+
+### Accessibility
+
+- Search uses a labeled native modal dialog with an actual button trigger, contained focus, Escape dismissal, and focus restoration. Search fields have explicit accessible names.
+- Sidebar and comment tabs have linked tab/panel IDs, one tab stop, arrow-key navigation, Home/End, and Enter/Space activation. Empty sidebar tabs are omitted.
+- Gallery preview selectors and video previews support keyboard activation; video iframes have an accessible title.
+
+### Documentation and validation
+
+- Added a repository setup guide with widget snippets, backup and upgrade steps, feed configuration, and troubleshooting.
+- Added dependency-free XML/JavaScript checks, Node regression tests, an offline Chrome DOM test, and a Blogger release checklist.
+- Added exact-width responsive fixtures, mobile/desktop pager DOM checks, and JSON-LD branch tests for both post renderers.
+
 ## [2.3.0] - 2026-09-10
 
 Dependency refresh and payload release: icons are now embedded rather than downloaded, the last blocking scripts are gone, and a keyboard trap in the navigation is fixed.

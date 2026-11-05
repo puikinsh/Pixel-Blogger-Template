@@ -3,7 +3,7 @@
 <!--
 =============================================================
  Pixel - Free News & Magazine Blogger Template
- Version: 2.3.0
+ Version: 2.4.0
  Author: Colorlib (https://colorlib.com)
  Demo: https://pixel-template.blogspot.com
  Documentation: https://pixel-template.blogspot.com/p/documentation.html
@@ -30,19 +30,11 @@
 	<!-- Blogger main head data and meta -->
     <b:include data='blog' name='all-head-content'/>
 
-    <!-- Social sharing meta -->
-    <meta expr:content='data:blog.pageTitle' property='og:title'/>
+    <!-- all-head-content supplies canonical URLs and Open Graph title/image/description. -->
     <b:if cond='data:blog.pageType == &quot;item&quot;'>
     <meta content='article' property='og:type'/>
     <b:else/>
     <meta content='website' property='og:type'/>
-    </b:if>
-    <meta expr:content='data:blog.canonicalUrl' property='og:url'/>
-    <b:if cond='data:blog.postImageUrl'>
-    <meta expr:content='data:blog.postImageUrl' property='og:image'/>
-    </b:if>
-    <b:if cond='data:blog.metaDescription'>
-    <meta expr:content='data:blog.metaDescription' property='og:description'/>
     </b:if>
     <meta content='summary_large_image' name='twitter:card'/>
     <meta expr:content='data:blog.pageTitle' name='twitter:title'/>
@@ -57,11 +49,11 @@
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "<data:blog.title/>",
-      "url": "<data:blog.homepageUrl/>",
+      "name": "<data:blog.title.jsonEscaped/>",
+      "url": "<data:blog.homepageUrl.jsonEscaped/>",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "<data:blog.homepageUrl/>search?q={search_term_string}",
+        "target": "<data:blog.homepageUrl.jsonEscaped/>search?q={search_term_string}",
         "query-input": "required name=search_term_string"
       }
     }
@@ -73,8 +65,8 @@
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "<data:blog.title/>", "item": "<data:blog.homepageUrl/>" },
-        { "@type": "ListItem", "position": 2, "name": "<data:blog.pageName/>", "item": "<data:blog.url/>" }
+        { "@type": "ListItem", "position": 1, "name": "<data:blog.title.jsonEscaped/>", "item": "<data:blog.homepageUrl.jsonEscaped/>" },
+        { "@type": "ListItem", "position": 2, "name": "<data:blog.pageName.jsonEscaped/>", "item": "<data:blog.canonicalUrl.jsonEscaped/>" }
       ]
     }
     </script>
@@ -347,9 +339,9 @@ li.hasSubmenu.isMega > ul{position: absolute;width: 100%;left:0px;right:0px;}
 
 /* Search Button */
 .pixel-search-btn{position:absolute;right:0;top:0;z-index:99}
-.pixel-search-btn a.pixel-serch{cursor:pointer;display:block;height:60px;text-align:center;position:relative;right:0;top:0;width:50px;border-radius:0;box-sizing:border-box;color:#2f2f33}
-.pixel-search-btn a.pixel-serch:hover{color:$maincolor}
-.pixel-search-btn a.pixel-serch:before{color:#2f2f33;content: "\f002";font-family:"Pixel Icons";font-weight:900;font-size:20px;line-height:60px;}
+.pixel-search-btn button.pixel-serch{background:none;border:0;padding:0;cursor:pointer;display:block;height:60px;text-align:center;position:relative;right:0;top:0;width:50px;border-radius:0;box-sizing:border-box;color:#2f2f33}
+.pixel-search-btn button.pixel-serch:hover{color:$maincolor}
+.pixel-search-btn button.pixel-serch:before{color:#2f2f33;content: "\f002";font-family:"Pixel Icons";font-weight:900;font-size:20px;line-height:60px;}
 .pixel-search-btn span{list-style:none}
 
 /* Featued Post Widget */
@@ -519,7 +511,7 @@ div.pixel-empty{width: 100%;text-align:center;background:rgb(236,239,241);box-si
 .post-body img{max-width:100%;padding:10px 0;position:relative;margin:0 auto}
 .comment-link{white-space:normal}
 .postmarg{padding: 50px 0px !important;}
-.postmarg h3{font-size:36px;line-height:38px;padding: 10px 0px;font-weight: 600}
+.postmarg .entry-title{font-size:36px;line-height:38px;padding: 10px 0px;font-weight: 600}
 .postmarg .article-meta, .postmarg .article-meta a{color: #8e8e95; font-weight: 400;}
 .postmarg .article-meta a{font-size: 12px;margin-right: 15px;}
 .postmarg .article-meta i{font-size: 15px;}
@@ -669,6 +661,13 @@ div.pixel-empty{width: 100%;text-align:center;background:rgb(236,239,241);box-si
 .displaypageNum a,.showpage a,.pagecurrent,.blog-pager-older-link,.blog-pager-newer-link{padding:5px 13px;margin-right:8px;color:#fff;background-color:$maincolor;border:1px solid #2d2d2d;display:inline-block;line-height:20px;-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px;margin-top:10px}
 .displaypageNum a:hover,.showpage a:hover,.pagecurrent,.blog-pager-older-link:hover,.blog-pager-newer-link:hover{background:$maincolor;border:1px solid #1bcdda;text-decoration:none;color:#fff}
 .showpageOf{display:none!important;overflow:hidden}
+.pixel-numbered-pager{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:12px 0}
+.pixel-numbered-pager .displaypageNum{display:inline-flex}
+.pixel-numbered-pager a,.pixel-numbered-pager button,.pixel-numbered-pager .pagecurrent{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:8px 12px;margin:0;border:1px solid #ddd;border-radius:2px;background:#fff;color:#282828;font:inherit;line-height:1.4;text-decoration:none}
+.pixel-numbered-pager button{cursor:pointer}
+.pixel-numbered-pager .pagecurrent{background:$(maincolor);color:#fff}
+.pixel-numbered-pager button:disabled{opacity:.5;cursor:wait}
+#pixel-pager-status{width:100%;font-size:14px}
 #blog-pager .pages{margin:10px 0;border:none}
 .blog-pager-newer-link{background: #fff;font-size: 12px;padding-left: 7px;color: #2f2f33;border:0px solid #000}
 .blog-pager-newer-link:before{content: "\f060";font-family:"Pixel Icons";font-weight:900;color: #2f2f33;padding: 10px;font-size: 14px;background: $(lightcolor) ;border-radius: 100%;text-align: center;margin: 10px;display: inline-block;line-height: 10px;}
@@ -841,7 +840,7 @@ form input[type='text']:hover,#pixel-footer .contact-form-widget textarea:hover{
 #featured ul li{width:100%;float:none;margin:0 auto 20px;clear:both}
 #main-wrapper,#sidebar-wrapper,#pixel-footer-cols{float:none;clear:both;width:100%;margin:0 auto}
 #main-wrapper{max-width:100%}
-#sidebar-wrapper{padding-top:20px}
+#sidebar-wrapper{padding-top:20px;position:static;max-width:100%}
 #pixel_menu,#nav{display:none}
 .selectnav{width:auto;color:#222;background:#f4f4f4;border:1px solid rgba(255,255,255,0.1);position:relative;border:0;padding:6px 10px!important;margin:5px 0;display:block;width:100%;max-width:200px}
 .pixel-navigation .selectnav{display:inline-block;margin:10px 0 0 10px}
@@ -882,7 +881,7 @@ form input[type='text']:hover,#pixel-footer .contact-form-widget textarea:hover{
 }
 @media only screen and (max-width:520px){
   .pixl .pixel-hero .pixelfeatured-thumb,.pixl .blsm-img,.pixl .pixel-featured .pixel-secondary .pixelfeatured-thumb,.pixl .pixel-featured .pixel-secondary .pixel-thumb{height: 300px;}
- .postmarg h3{font-size: 24px;line-height:28px;}
+ .postmarg .entry-title{font-size: 24px;line-height:28px;}
   .postmarg {padding: 20px 0px !important;}
   .pixel-left-tags,.pixel-right-share{float: none;width: 100%;margin: 8px 0px;}
   .pixel-post-author .post-author .author-img{padding-right: 0;text-align: center;}
@@ -911,7 +910,6 @@ h1.post-title{font-size:22px;margin-bottom:10px}
 .Header .description p,.showpageOf{display:none}
 }
 @media only screen and (max-width: 300px) {
-#sidebar-wrapper{display:none}
 .related-thumb{width:100%;float:none}
 .archive .post h2,.index .post h2{line-height:29px!important;font-size:15px!important}
 #blog-pager{padding:0;margin:0}
@@ -922,7 +920,7 @@ h1.post-title{font-size:22px;margin-bottom:10px}
 .title-404{font-size:120px!important}
 h1.post-title{font-size:17px}
 .pixel-social #social a{width:24px;height:24px;line-height:24px}
-.pixel-pixel-top-menu,.pixel-search-btn{display:none}
+.pixel-pixel-top-menu{display:none}
 .blsm-post-share li{width:100%}
 .comments .comments-content .comment-header{width:100%;float:none;clear:both;margin:0;padding:0;width:100%;float:none;clear:both;margin:0 0 0 -35px;padding:0}
 }
@@ -930,7 +928,8 @@ h1.post-title{font-size:17px}
 #Header1 h1, #Header1 h1 a{font-weight: 800;font-size:40px;color: #222;}
 .pixel-center-header{ border-bottom: 1px solid $(lightcolor) ;}
 .pixel-navigation{border-bottom: 1px solid $(lightcolor) ;}
-.search-transition-wrap{display:none;background:rgba(20, 22, 24, 0.95);bottom:0;height:100%;left:0;position:fixed;right:0;top:0;width:100% !important;transition:0.1s;z-index:99999;}
+.search-transition-wrap{display:none;border:0;margin:0;padding:0;max-width:none;max-height:none;background:rgba(20, 22, 24, 0.95);bottom:0;height:100%;left:0;position:fixed;right:0;top:0;width:100% !important;transition:0.1s;z-index:99999;}
+.search-transition-wrap[open]{display:block}
 .search-transition-wrap .search-transition-inner{padding:0 25%;position:absolute;text-align:center;top:50%;width:100%;border:none !important;box-sizing:border-box;}
 .search-transition-wrap .searchform .input-group{border-bottom:1px solid #fff;padding:0 !important;}
 .search-transition-wrap .searchform .form-control{background:none;border:none;font-size:20px;color:#FFF;height:50px;padding:0;}
@@ -940,6 +939,9 @@ h1.post-title{font-size:17px}
 .search-transition-wrap form > .input-group{position:relative;}
 .search-transition-wrap .btn-mini-close{background:rgba(0, 0, 0, 0) none repeat scroll 0 0;border:medium none;color:#fff !important;font-size:35px;position:fixed;top:50px;right:50px;margin-right:0px;opacity:1;transition:0.4s;}
 .search-transition-wrap .btn-mini-close:hover{cursor:pointer;}
+.search-transition-wrap .search-transition-inner{left:50%;max-width:720px;padding:0 20px;transform:translate(-50%,-50%)}
+.search-transition-wrap .searchform .form-control{font-size:clamp(18px,5vw,30px)}
+.search-transition-wrap .btn-mini-close{top:20px;right:20px;min-width:44px;min-height:44px}
 .midalizer{
 margin: 0 auto;
 padding: 20px 0px;
@@ -970,6 +972,19 @@ padding: 20px 0px;
 .post-body blockquote p:last-child{margin-bottom:0}
 .post-body img{margin:.6em auto}
 .post-body hr{margin:2.2em 0}
+.post-body{min-width:0;overflow-wrap:anywhere}
+.post-body img{height:auto;padding:0}
+.post-body iframe,.post-body video,.post-body embed,.post-body object{max-width:100%}
+.post-body iframe[src*="youtube.com/embed/"],.post-body iframe[src*="youtube-nocookie.com/embed/"]{width:100%;height:auto;aspect-ratio:16/9}
+.post-body pre{max-width:100%;overflow:auto;white-space:pre;overflow-wrap:normal}
+.post-body table{display:block;max-width:100%;overflow-x:auto;overflow-wrap:normal}
+.pixel-wide .title,.pixel-wide .title a,.postmarg .entry-title{overflow-wrap:anywhere}
+@media only screen and (max-width:620px){
+  .selectnav{min-height:44px}
+  .pixel-navigation .selectnav{margin-top:8px;max-width:calc(100% - 70px)}
+  .pixel-sidebar-tab li a{height:44px;line-height:44px}
+  #Header1 h1,#Header1 h1 a,#Header1 p.title,#Header1 p.title a{font-size:clamp(24px,7vw,40px);overflow-wrap:anywhere}
+}
 
 
 /* Mega menu pager loader */
@@ -1090,7 +1105,7 @@ window.addEventListener("load", pixelIconFallback);
 <body expr:class='data:blog.pageType'>
 <a class='skip-link' href='#main-wrapper'>Skip to content</a>
 
-<div class='searchform-wrap search-transition-wrap'><div class='search-transition-inner'><form action='/search' class='searchform' method='get'><div class='input-group'> <input class='form-control' name='q' placeholder='Search ... ' type='text' value=''/> <button aria-label='Search' class='btn btn-primary' type='submit'></button> </div></form>                                <button aria-label='Close search' class='btn-mini-close float-end'><i aria-hidden='true' class='fa-solid fa-xmark'/></button></div></div>
+<dialog aria-label='Search this blog' class='searchform-wrap search-transition-wrap' id='pixel-search-dialog'><div class='search-transition-inner'><form action='/search' class='searchform' method='get'><div class='input-group'> <input aria-label='Search query' class='form-control' name='q' placeholder='Search ... ' type='text' value=''/> <button aria-label='Search' class='btn btn-primary' type='submit'></button> </div></form>                                <button aria-label='Close search' class='btn-mini-close float-end' type='button'><i aria-hidden='true' class='fa-solid fa-xmark'></i></button></div></dialog>
 <div class='adminbar' style='display:none'>
 <div class='theme-opt'>
     <b:section class='option' id='option' maxwidgets='1' name='Layout Setup' preferred='no' showaddelement='no'>
@@ -1391,7 +1406,7 @@ window.addEventListener("load", pixelIconFallback);
           </b:includable>
           </b:widget>
         </b:section>
-  <div class='pixel-search-btn'><span><a aria-label='Open search' class='pixel-serch' href='#' role='button'/></span></div>
+  <div class='pixel-search-btn'><span><button aria-controls='pixel-search-dialog' aria-expanded='false' aria-label='Open search' class='pixel-serch' type='button'></button></span></div>
   </div>
       </div>
 <div style='clear: both;'/> 
@@ -1480,7 +1495,7 @@ window.addEventListener("load", pixelIconFallback);
 <div class='pixel-wrapper padders'>
   <div class='body-row midalizer'>
     <p>It looks like nothing was found at this location. Maybe try a search?</p>
-<form action='/search' class='searchform' method='get'><div class='input-group'> <input class='form-control' name='q' placeholder='Search ... ' type='text' value=''/> <button aria-label='Search' class='btn btn-primary' type='submit'></button> </div><div/></form>
+<form action='/search' class='searchform' method='get'><div class='input-group'> <input aria-label='Search query' class='form-control' name='q' placeholder='Search ... ' type='text' value=''/> <button aria-label='Search' class='btn btn-primary' type='submit'></button> </div><div/></form>
 </div>
 </div>
 <!--ERROR PAGE-->
@@ -1999,34 +2014,7 @@ window.addEventListener("load", pixelIconFallback);
 </b:if>
                     </b:if>
 
-          <b:if cond='data:blog.pageType == &quot;item&quot;'>
-          <script type='application/ld+json'>
-          {
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            "mainEntityOfPage": { "@type": "WebPage", "@id": "<data:post.url/>" },
-            "headline": "<data:post.title/>",
-            <b:if cond='data:post.firstImageUrl'>"image": "<data:post.firstImageUrl/>",</b:if>
-            "datePublished": "<data:post.timestampISO8601/>",
-            "dateModified": "<data:post.lastUpdatedISO8601/>",
-            "author": { "@type": "Person", "name": "<data:post.author/>" },
-            "publisher": { "@type": "Organization", "name": "<data:blog.title/>" },
-            "url": "<data:post.url/>"
-          }
-          </script>
-          <script type='application/ld+json'>
-          {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-              { "@type": "ListItem", "position": 1, "name": "<data:blog.title/>", "item": "<data:blog.homepageUrl/>" }<b:if cond='data:post.labels'><b:loop values='data:post.labels' var='label'><b:if cond='data:label.isFirst'>,
-              { "@type": "ListItem", "position": 2, "name": "<data:label.name/>", "item": "<data:label.url/>" }</b:if></b:loop>,
-              { "@type": "ListItem", "position": 3, "name": "<data:post.title/>", "item": "<data:post.url/>" }<b:else/>,
-              { "@type": "ListItem", "position": 2, "name": "<data:post.title/>", "item": "<data:post.url/>" }</b:if>
-            ]
-          }
-          </script>
-          </b:if>
+          <b:include data='post' name='pixel-post-schema'/>
 
           <div class='post-header'>
             <div class='post-header-line-1'/>
@@ -2115,7 +2103,39 @@ window.addEventListener("load", pixelIconFallback);
   </div>
   <div class='clear'/>
 </b:includable>
+       <b:includable id='pixel-post-schema' var='post'>
+          <b:if cond='data:blog.pageType == &quot;item&quot;'>
+          <script type='application/ld+json'>
+          {
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "mainEntityOfPage": { "@type": "WebPage", "@id": "<data:post.url.canonical.jsonEscaped/>" },
+            "headline": "<data:post.title.jsonEscaped/>",
+            <b:if cond='data:post.firstImageUrl'>"image": "<data:post.firstImageUrl.jsonEscaped/>",</b:if>
+            "datePublished": "<data:post.timestampISO8601.jsonEscaped/>",
+            <b:if cond='data:post.lastUpdatedISO8601'>"dateModified": "<data:post.lastUpdatedISO8601.jsonEscaped/>",</b:if>
+            "author": { "@type": "Person", "name": "<data:post.author.jsonEscaped/>" },
+            "publisher": { "@type": "Organization", "name": "<data:blog.title.jsonEscaped/>" },
+            "url": "<data:post.url.canonical.jsonEscaped/>"
+          }
+          </script>
+          <script type='application/ld+json'>
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "<data:blog.title.jsonEscaped/>", "item": "<data:blog.homepageUrl.canonical.jsonEscaped/>" }<b:if cond='data:post.labels'><b:loop values='data:post.labels' var='label'><b:if cond='data:label.isFirst'>,
+              { "@type": "ListItem", "position": 2, "name": "<data:label.name.jsonEscaped/>", "item": "<data:label.url.jsonEscaped/>" }</b:if></b:loop>,
+              { "@type": "ListItem", "position": 3, "name": "<data:post.title.jsonEscaped/>", "item": "<data:post.url.canonical.jsonEscaped/>" }<b:else/>,
+              { "@type": "ListItem", "position": 2, "name": "<data:post.title.jsonEscaped/>", "item": "<data:post.url.canonical.jsonEscaped/>" }</b:if>
+            ]
+          }
+          </script>
+          </b:if>
+
+</b:includable>
        <b:includable id='post' var='post'>
+  <b:include data='post' name='pixel-post-schema'/>
  
 <b:if cond='data:blog.pageType in {&quot;index&quot;,&quot;archive&quot;}'>
 
@@ -2247,7 +2267,7 @@ window.addEventListener("load", pixelIconFallback);
 		</b:if>
   <b:else/>
   <style>.hidden{display:none;}</style>
-  <div class='hidden' id='hpick'>
+  <div id='hpick'>
     <b:if cond='data:post.firstImageUrl'>
       &lt;style&gt;.gradient{background:url(<data:post.firstImageUrl/>);}
 .gradient{position: absolute;left: 0px;top:0px;height: 100%;width: 100%;background-size:cover;background-position:center center;}
@@ -2273,7 +2293,7 @@ a.postmarg .article-meta, .postmarg .article-meta a,.postmarg .article-meta i{co
 	<div class='postmarg body-row midalizer'>
 				<span class='post-cat'><b:if cond='data:top.showPostLabels and data:post.labels'><b:loop values='data:post.labels' var='label'><a class='pixel-max-limit' expr:href='data:label.url' expr:title='&quot;View all posts in &quot; + data:label.name'><data:label.name/></a></b:loop></b:if></span>
     		  <div class='entry-header clearfix'>
-                 <h3 class='entry-title'><data:post.title/></h3>
+                 <h1 class='entry-title'><data:post.title/></h1>
 			   </div>
                <div class='article-meta clearfix'>
 					<span class='byline'>
@@ -2296,7 +2316,7 @@ a.postmarg .article-meta, .postmarg .article-meta a,.postmarg .article-meta i{co
 (function () {
   var nav = document.querySelector(".pixel-navigation");
   var pick = document.getElementById("hpick");
-  if (nav && pick) nav.insertAdjacentHTML("afterend", pick.innerHTML);
+  if (nav && pick) nav.insertAdjacentElement("afterend", pick);
 })();
 //]]>
 </script>
@@ -2643,7 +2663,7 @@ var msg = &#39;<data:navMessage/>&#39;;
      </b:widget>
      <b:widget id='HTML990' locked='true' title='Comments System' type='HTML' version='1'>
        <b:widget-settings>
-         <b:widget-setting name='content'>[blogger][disqus][facebook]</b:widget-setting>
+         <b:widget-setting name='content'>[blogger]</b:widget-setting>
        </b:widget-settings>
        <b:includable id='main'>
 
@@ -2806,15 +2826,16 @@ var msg = &#39;<data:navMessage/>&#39;;
      </b:widget>
      <b:widget id='HTML989' locked='true' title='Disqus Shortname' type='HTML' version='1'>
        <b:widget-settings>
-         <b:widget-setting name='content'>theme-daddy</b:widget-setting>
+         <b:widget-setting name='content'/>
        </b:widget-settings>
        <b:includable id='main'>
           <b:if cond='data:blog.pageType in {&quot;item&quot;,&quot;static_page&quot;}'>
             &lt;script type=&#39;text/javascript&#39;&gt;
-            var disqus_shortname = &#39;<data:content/>&#39;;
+            var disqus_shortname = &#39;<data:content.jsEscaped/>&#39;;
              (function() {
+              if (!document.getElementById(&#39;disqus_thread&#39;) || !/^[a-z0-9-]+$/i.test(disqus_shortname)) return;
               var dsq = document.createElement(&#39;script&#39;); dsq.type = &#39;text/javascript&#39;; dsq.async = true;
-              dsq.src = &#39;//&#39; + disqus_shortname + &#39;.disqus.com/embed.js&#39;;
+              dsq.src = &#39;https://&#39; + disqus_shortname + &#39;.disqus.com/embed.js&#39;;
               (document.getElementsByTagName(&#39;head&#39;)[0] || document.getElementsByTagName(&#39;body&#39;)[0]).appendChild(dsq);
               })();
             &lt;/script&gt;
@@ -3337,26 +3358,22 @@ function initSearchOverlay() {
   var overlay = document.querySelector(".searchform-wrap");
   if (!overlay) return;
   var input = overlay.querySelector("input[name='q']");
-  function openOverlay() {
-    overlay.style.opacity = "0";
-    overlay.style.display = "block";
-    requestAnimationFrame(function () { overlay.style.opacity = "1"; });
-    if (input) input.focus();
-  }
-  function closeOverlay() {
-    overlay.style.opacity = "0";
-    setTimeout(function () { overlay.style.display = "none"; }, 150);
-  }
-  document.querySelectorAll(".pixel-serch").forEach(function (btn) {
-    btn.addEventListener("click", function (e) {
-      e.preventDefault();
-      openOverlay();
+  var triggers = document.querySelectorAll(".pixel-serch");
+  var opener = null;
+  triggers.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      opener = btn;
+      // Native modal dialogs contain keyboard focus and make the page inert.
+      if (!overlay.open) overlay.showModal();
+      if (input) input.focus();
+      btn.setAttribute("aria-expanded", "true");
     });
   });
   var closeBtn = overlay.querySelector(".btn-mini-close");
-  if (closeBtn) closeBtn.addEventListener("click", closeOverlay);
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && overlay.style.display === "block") closeOverlay();
+  if (closeBtn) closeBtn.addEventListener("click", function () { overlay.close(); });
+  overlay.addEventListener("close", function () {
+    triggers.forEach(function (btn) { btn.setAttribute("aria-expanded", "false"); });
+    if (opener) opener.focus();
   });
 }
 initSearchOverlay();
@@ -3385,7 +3402,7 @@ document.querySelectorAll("time.format-date").forEach(function (el) {
 //<![CDATA[
 
 // Plugin: SelectNav.js ~ url: https://github.com/lukaszfiszer/selectnav.js
-window.selectnav=function(){"use strict";var e=function(e,t){function c(e){var t;if(!e)e=window.event;if(e.target)t=e.target;else if(e.srcElement)t=e.srcElement;if(t.nodeType===3)t=t.parentNode;if(t.value)window.location.href=t.value}function h(e){var t=e.nodeName.toLowerCase();return t==="ul"||t==="ol"}function p(e){for(var t=1;document.getElementById("selectnav"+t);t++);return e?"selectnav"+t:"selectnav"+(t-1)}function d(e){a++;var t=e.children.length,n="",l="",c=a-1;if(!t){return}if(c){while(c--){l+=o}l+=" "}for(var v=0;v<t;v++){var m=e.children[v].children[0];if(typeof m!=="undefined"){var g=m.innerText||m.textContent;var y="";if(r){y=m.className.search(r)!==-1||m.parentNode.className.search(r)!==-1?f:""}if(i&&!y){y=m.href===document.URL?f:""}n+='<option value="'+m.href+'" '+y+">"+l+g+"</option>";if(s){var b=e.children[v].children[1];if(b&&h(b)){n+=d(b)}}}}if(a===1&&u){n='<option value="">'+u+"</option>"+n}if(a===1){n='<select class="selectnav" id="'+p(true)+'">'+n+"</select>"}a--;return n}e=document.getElementById(e);if(!e){return}if(!h(e)){return}if(!("insertAdjacentHTML"in window.document.documentElement)){return}document.documentElement.className+=" js";var n=t||{},r=n.activeclass||"active",i=typeof n.autoselect==="boolean"?n.autoselect:true,s=typeof n.nested==="boolean"?n.nested:true,o=n.indent||"-",u=n.label||"Menu",a=0,f=" selected ";e.insertAdjacentHTML("afterend",d(e));var l=document.getElementById(p());if(l.addEventListener){l.addEventListener("change",c)}if(l.attachEvent){l.attachEvent("onchange",c)}return l};return function(t,n){e(t,n)}}();
+window.selectnav=function(){"use strict";var e=function(e,t){function c(e){var t;if(!e)e=window.event;if(e.target)t=e.target;else if(e.srcElement)t=e.srcElement;if(t.nodeType===3)t=t.parentNode;if(t.value)window.location.href=t.value}function h(e){var t=e.nodeName.toLowerCase();return t==="ul"||t==="ol"}function p(e){for(var t=1;document.getElementById("selectnav"+t);t++);return e?"selectnav"+t:"selectnav"+(t-1)}function d(e){a++;var t=e.children.length,n="",l="",c=a-1;if(!t){return}if(c){while(c--){l+=o}l+=" "}for(var v=0;v<t;v++){var m=e.children[v].children[0];if(typeof m!=="undefined"){var g=m.innerText||m.textContent;var y="";if(r){y=m.className.search(r)!==-1||m.parentNode.className.search(r)!==-1?f:""}if(i&&!y){y=m.href===document.URL?f:""}n+='<option value="'+pixelAttr(m.href)+'" '+y+">"+l+pixelAttr(g)+"</option>";if(s){var b=e.children[v].children[1];if(b&&h(b)){n+=d(b)}}}}if(a===1&&u){n='<option value="">'+u+"</option>"+n}if(a===1){n='<select class="selectnav" id="'+p(true)+'">'+n+"</select>"}a--;return n}e=document.getElementById(e);if(!e){return}if(!h(e)){return}if(!("insertAdjacentHTML"in window.document.documentElement)){return}document.documentElement.className+=" js";var n=t||{},r=n.activeclass||"active",i=typeof n.autoselect==="boolean"?n.autoselect:true,s=typeof n.nested==="boolean"?n.nested:true,o=n.indent||"-",u=n.label||"Menu",a=0,f=" selected ";e.insertAdjacentHTML("afterend",d(e));var l=document.getElementById(p());if(l.addEventListener){l.addEventListener("change",c)}if(l.attachEvent){l.attachEvent("onchange",c)}return l};return function(t,n){e(t,n)}}();
 
 
 
@@ -3408,7 +3425,15 @@ function pixelEntryUrl(entry) {
 }
 
 function pixelAttr(value) {
-  return String(value).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+  return String(value).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/'/g, "&#39;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+// Read feed HTML as inert text, decoding entities before escaping for output.
+function pixelText(html) {
+  var template = document.createElement("template");
+  template.innerHTML = html;
+  template.content.querySelectorAll("script, style").forEach(function (el) { el.remove(); });
+  return template.content.textContent || "";
 }
 
 // Swap the size segment of a Blogger image URL (s72-c, s1600, w400-h300-...)
@@ -3450,32 +3475,39 @@ function initMainMenu() {
   if (!menu) return;
   var linkList = menu.querySelector(".LinkList");
   if (!linkList) return;
-  var html = "";
-  var level = -1;
+  var root = document.createElement("ul");
+  var lists = [root];
+  var previousItem = null;
   linkList.querySelectorAll("ul li").forEach(function (li) {
     var link = li.querySelector("a");
     if (!link) return;
-    var text = li.textContent;
-    var depth = (text.match(/_/g) || []).length;
-    if (depth > level) html += "<ul>";
-    if (depth < level) {
-      for (var k = 0; k < level - depth; k++) html += "</ul></li>";
+    var text = link.textContent.trim();
+    var prefix = text.match(/^_*/)[0];
+    // A skipped level can only descend beneath the preceding item.
+    var depth = Math.min(prefix.length, previousItem ? lists.length : 0);
+    if (depth === lists.length) {
+      var nested = document.createElement("ul");
+      previousItem.appendChild(nested);
+      lists.push(nested);
     }
-    html += "<li><a href='" + link.getAttribute("href") + "'>" + text.replace(/_/g, "") + "</a>";
-    level = depth;
+    lists.length = depth + 1;
+    var item = document.createElement("li");
+    var anchor = document.createElement("a");
+    anchor.setAttribute("href", link.getAttribute("href") || "#");
+    anchor.textContent = text.substring(prefix.length);
+    item.appendChild(anchor);
+    lists[depth].appendChild(item);
+    previousItem = item;
   });
-  for (var k = 0; k <= level; k++) {
-    html += "</ul>";
-    if (k !== 0) html += "</li>";
-  }
-  linkList.innerHTML = html;
+  linkList.textContent = "";
+  linkList.appendChild(root);
   var topMenu = linkList.querySelector("ul");
   if (topMenu) topMenu.id = "pixel_menu";
   document.querySelectorAll("#pixel_menu a").forEach(function (a) {
     var href = (a.getAttribute("href") || "").toLowerCase();
     if (href.indexOf("[mega menu]") !== -1) {
       a.classList.add("mega-link");
-      a.setAttribute("href", "/search/label/" + a.textContent + "?&max-results=" + perPage);
+      a.setAttribute("href", "/search/label/" + encodeURIComponent(a.textContent) + "?max-results=" + perPage);
     }
   });
   selectnav("pixel_menu");
@@ -3493,7 +3525,7 @@ function initMainMenu() {
 function pixelMegaItemHtml(entry) {
   var thumb = entry.media$thumbnail ? pixelResizeImage(entry.media$thumbnail.url, "s400") : PIXEL_NO_THUMB;
   var url = pixelEntryUrl(entry);
-  return '<div class="pixel-mega-item col-sm-3"><div class="pixel-m-thumb" style="background:url(\'' + thumb + '\')"><a aria-label="' + pixelAttr(entry.title.$t) + '" class="linkcover" href="' + url + '"></a></div><div class="pixel-text"><a href="' + url + '">' + entry.title.$t + "</a></div></div>";
+  return '<div class="pixel-mega-item col-sm-3"><div class="pixel-m-thumb" style="background:url(\'' + thumb + '\')"><a aria-label="' + pixelAttr(entry.title.$t) + '" class="linkcover" href="' + url + '"></a></div><div class="pixel-text"><a href="' + url + '">' + pixelAttr(entry.title.$t) + "</a></div></div>";
 }
 
 function pixelMegaImageUrls(entries) {
@@ -3672,8 +3704,8 @@ function initFeaturedGrid() {
           var author = entry.author[0].name.$t;
           var date = pixelFormatShortDate(entry.published.$t);
           var image = pixelEntryImage(entry, index === 0 ? "s1200" : "s600");
-          var labelHtml = '<div class="pixel-label"><a class="icon ' + category + '" href="/search/label/' + category + '">' + category + "</a></div>";
-          var metaHtml = '<h3 class="pixelfeatured-title"><a href="' + url + '">' + title + '</a></h3><span class="pixel-author">' + author + '</span><span class="pixel-time">' + date + "</span>";
+          var labelHtml = '<div class="pixel-label"><a class="icon ' + pixelAttr(category) + '" href="/search/label/' + encodeURIComponent(category) + '">' + pixelAttr(category) + "</a></div>";
+          var metaHtml = '<h3 class="pixelfeatured-title"><a href="' + url + '">' + pixelAttr(title) + '</a></h3><span class="pixel-author">' + pixelAttr(author) + '</span><span class="pixel-time">' + date + "</span>";
           if (index === 0) {
             // The hero is the homepage LCP element - start fetching it right away
             var hero = new Image();
@@ -3685,7 +3717,7 @@ function initFeaturedGrid() {
           }
         });
       } else {
-        html += '<style>.pixel-empty-panel img{max-width: 600px; width:100%}.pixel-empty-panel{text-align: center;}.pixel-empty-text h3{font-weight: 600;font-size:18px;line-height: 24px;margin-bottom:50px;}</style><div class="pixel-empty-panel"><div class="pixel-empty-thumb"><img alt="" src="https://1.bp.blogspot.com/-FCuCIgXt2v8/WdDfhsYYoZI/AAAAAAAAAhk/X-ke9mcD1KsrOnsxV2z15nup1TkXkw36wCLcBGAs/s1600/trpgrid.png"></div><div class="pixel-empty-text"><h3>No posts found for label : "' + label + '". <br/> <span class="pixel-small">You can disable this widget by removing all the widget content from layout tab.</span></h3></div></div>';
+        html += '<style>.pixel-empty-panel img{max-width: 600px; width:100%}.pixel-empty-panel{text-align: center;}.pixel-empty-text h3{font-weight: 600;font-size:18px;line-height: 24px;margin-bottom:50px;}</style><div class="pixel-empty-panel"><div class="pixel-empty-thumb"><img alt="" src="https://1.bp.blogspot.com/-FCuCIgXt2v8/WdDfhsYYoZI/AAAAAAAAAhk/X-ke9mcD1KsrOnsxV2z15nup1TkXkw36wCLcBGAs/s1600/trpgrid.png"></div><div class="pixel-empty-text"><h3>No posts found for label : "' + pixelAttr(label) + '". <br/> <span class="pixel-small">You can disable this widget by removing all the widget content from layout tab.</span></h3></div></div>';
       }
       html += "</div>";
       content.innerHTML = html;
@@ -3695,17 +3727,25 @@ function initFeaturedGrid() {
         section.classList.add("pixel-implied");
         section.classList.remove("pixel-initiate");
       });
+    }, function () {
+      content.textContent = "Featured posts are unavailable. Please try again later.";
+      content.setAttribute("role", "status");
+      var section = content.closest(".pixel_featured_widget");
+      if (section) {
+        section.classList.add("pixel-implied");
+        section.classList.remove("pixel-initiate");
+      }
     });
   });
 }
 
 // ---- Sidebar feed widgets: recent comments, recent posts, posts by tag ----
-var PIXEL_EMPTY_PANEL = '<style>.pixel-empty-panel img{max-width: 600px; width:100%}.pixel-empty-panel{text-align: center;}.pixel-empty-text h3{font-weight: 600;font-size:18px;line-height: 24px;margin-bottom:50px;}.bgr{background: rgb(236,239,241);}.bgr{box-sizing: border-box;padding:5px 10px;}</style><div class="pixel-empty-panel bgr"><div class="pixel-empty-thumb"><img alt="" src="\' + PIXEL_NO_THUMB + \'"></div><div class="pixel-empty-text"><h3>{message} <br/></h3></div></div>';
+var PIXEL_EMPTY_PANEL = '<style>.pixel-empty-panel img{max-width: 600px; width:100%}.pixel-empty-panel{text-align: center;}.pixel-empty-text h3{font-weight: 600;font-size:18px;line-height: 24px;margin-bottom:50px;}.bgr{background: rgb(236,239,241);}.bgr{box-sizing: border-box;padding:5px 10px;}</style><div class="pixel-empty-panel bgr"><div class="pixel-empty-thumb"><img alt="" src="' + PIXEL_NO_THUMB + '"></div><div class="pixel-empty-text"><h3>{message} <br/></h3></div></div>';
 
 function pixelRecentItemHtml(entry) {
   var url = pixelEntryUrl(entry);
   var image = pixelEntryImage(entry, "s400");
-  return '<div class="pixel-recent-item"><a aria-label="' + pixelAttr(entry.title.$t) + '" class="pixel-recent-thumb" href="' + url + '" style="background:url(' + image + ') no-repeat center center;background-size: cover"><span class="pixel-trap"></span></a><div class="pixel-recent-content"><h3 class="pixel-recent-title"><a href="' + url + '">' + entry.title.$t + '</a></h3><span class="pixel-author">' + entry.author[0].name.$t + '</span><span class="pixel-time">' + pixelFormatShortDate(entry.published.$t) + "</span></div></div>";
+  return '<div class="pixel-recent-item"><a aria-label="' + pixelAttr(entry.title.$t) + '" class="pixel-recent-thumb" href="' + url + '" style="background:url(' + image + ') no-repeat center center;background-size: cover"><span class="pixel-trap"></span></a><div class="pixel-recent-content"><h3 class="pixel-recent-title"><a href="' + url + '">' + pixelAttr(entry.title.$t) + '</a></h3><span class="pixel-author">' + pixelAttr(entry.author[0].name.$t) + '</span><span class="pixel-time">' + pixelFormatShortDate(entry.published.$t) + "</span></div></div>";
 }
 
 function pixelRenderRecentList(span, data, emptyMessage) {
@@ -3733,13 +3773,13 @@ function initSidebarFeedWidgets() {
       if (data.feed.entry) {
         data.feed.entry.forEach(function (entry) {
           var url = pixelEntryUrl(entry);
-          var text = (entry.content ? entry.content.$t : "").replace(/<\S[^>]*>/g, "");
+          var text = pixelText(entry.content ? entry.content.$t : "");
           if (text.length > 70) text = text.substring(0, 50) + "...";
           var author = entry.author[0].name.$t;
           var avatar = entry.author[0].gd$image.src;
           if (avatar.indexOf("img1.blogblog.com/img/blank.gif") > -1 || avatar.indexOf("img2.blogblog.com/img/b16-rounded.gif") > -1) avatar = "https://img1.blogblog.com/img/anon36.png";
           if (avatar.indexOf("//") === 0) avatar = "https:" + avatar;
-          html += '<div class="pixel-comment"><div class="pixel-comment-profile"><img alt="" class="pixel-comment-thumb" loading="lazy" src="' + avatar + '"/></div><a href="' + url + '">' + author + '</a><span>"' + text + '"</span></div>';
+          html += '<div class="pixel-comment"><div class="pixel-comment-profile"><img alt="" class="pixel-comment-thumb" loading="lazy" src="' + pixelAttr(avatar) + '"/></div><a href="' + url + '">' + pixelAttr(author) + '</a><span>"' + pixelAttr(text) + '"</span></div>';
         });
       } else {
         html += PIXEL_EMPTY_PANEL.replace("{message}", "No comments!");
@@ -3776,48 +3816,75 @@ initCommentScroll();
 </script>
 <script type='text/javascript'>
 //<![CDATA[
-// Sidebar tabs (Tab [1] / Tab [2] / Tab [3]) - vanilla replacement for the tabslet plugin
-function initSidebarTabs() {
-  var container = document.getElementById("pixel-sidebar-tabs");
-  if (!container) return;
-  if (!container.querySelector(".widget")) { container.remove(); return; }
-  // Tab labels come from each tab section's widget heading
-  [1, 2, 3].forEach(function (n) {
-    var heading = container.querySelector("#tabside" + n + " .widget h2, #tabside" + n + " .widget .widget-title");
-    var link = container.querySelector(".pixel-sidebar-tab .item-" + n + " a");
-    if (heading && link) link.textContent = heading.textContent;
-    container.querySelectorAll("#tabside" + n + " .widget h2, #tabside" + n + " .widget .widget-title").forEach(function (h) { h.remove(); });
-  });
-  var tabs = Array.prototype.slice.call(container.querySelectorAll(".pixel-sidebar-tab li"));
-  var panels = Array.prototype.filter.call(container.children, function (el) { return el.tagName === "DIV"; });
-  var nav = container.querySelector(".pixel-sidebar-tab");
-  if (nav) nav.setAttribute("role", "tablist");
-  panels.forEach(function (panel) { panel.setAttribute("role", "tabpanel"); });
+// Shared tab behavior: one tab stop, linked panels, and standard keyboard controls.
+var pixelTabGroup = 0;
+function pixelInitTabs(links, panels, onActivate) {
+  var group = ++pixelTabGroup;
   function activate(index, animate) {
-    tabs.forEach(function (li, i) {
-      li.classList.toggle("active", i === index);
-      var link = li.querySelector("a");
-      if (link) link.setAttribute("aria-selected", i === index ? "true" : "false");
-    });
-    panels.forEach(function (panel, i) {
-      panel.style.display = i === index ? "block" : "none";
-      if (i === index && animate) panel.style.animation = "pixelFadeIn .4s ease";
+    links.forEach(function (link, i) {
+      link.setAttribute("aria-selected", i === index ? "true" : "false");
+      link.tabIndex = i === index ? 0 : -1;
+      panels[i].hidden = i !== index;
+      panels[i].style.display = i === index ? "block" : "none";
+      if (i === index && animate) panels[i].style.animation = "pixelFadeIn .4s ease";
+      onActivate(link, i === index);
     });
   }
-  tabs.forEach(function (li, i) {
-    li.classList.add("pixel-hide");
-    li.setAttribute("role", "presentation");
-    var link = li.querySelector("a");
-    if (link) link.setAttribute("role", "tab");
-    (link || li).addEventListener("click", function (e) {
+  links.forEach(function (link, i) {
+    link.id = "pixel-tab-" + group + "-" + i;
+    if (!panels[i].id) panels[i].id = "pixel-panel-" + group + "-" + i;
+    link.setAttribute("role", "tab");
+    link.setAttribute("aria-controls", panels[i].id);
+    panels[i].setAttribute("role", "tabpanel");
+    panels[i].setAttribute("aria-labelledby", link.id);
+    panels[i].tabIndex = 0;
+    link.addEventListener("click", function (e) {
       e.preventDefault();
       activate(i, true);
     });
+    link.addEventListener("keydown", function (e) {
+      var index = i;
+      if (e.key === "ArrowRight") index = (i + 1) % links.length;
+      else if (e.key === "ArrowLeft") index = (i + links.length - 1) % links.length;
+      else if (e.key === "Home") index = 0;
+      else if (e.key === "End") index = links.length - 1;
+      else if (e.key !== " " && e.key !== "Enter") return;
+      e.preventDefault();
+      activate(index, true);
+      links[index].focus();
+    });
   });
-  activate(0, false);
+  if (links.length) activate(0, false);
 }
 
-// Comment system tabs (blogger / disqus / facebook) - vanilla replacement for the simplyTab plugin
+function initSidebarTabs() {
+  var container = document.getElementById("pixel-sidebar-tabs");
+  if (!container) return;
+  var nav = container.querySelector(".pixel-sidebar-tab");
+  if (!nav) return;
+  var links = [];
+  var panels = [];
+  nav.setAttribute("role", "tablist");
+  nav.setAttribute("aria-label", "Sidebar posts and comments");
+  container.querySelectorAll(".pixel-sidebar-tab li").forEach(function (li) {
+    var link = li.querySelector("a");
+    var panel = link && document.getElementById(link.hash.substring(1));
+    if (!panel || !panel.querySelector(".widget")) { li.remove(); return; }
+    var heading = panel.querySelector(".widget h2, .widget .widget-title");
+    link.textContent = heading ? heading.textContent : "Posts";
+    panel.querySelectorAll(".widget h2, .widget .widget-title").forEach(function (h) { h.remove(); });
+    li.classList.add("pixel-hide");
+    li.setAttribute("role", "presentation");
+    links.push(link);
+    panels.push(panel);
+  });
+  if (!links.length) { container.remove(); return; }
+  links.forEach(function (link) { link.parentElement.style.width = (100 / links.length) + "%"; });
+  pixelInitTabs(links, panels, function (link, active) {
+    link.parentElement.classList.toggle("active", active);
+  });
+}
+
 function initCommentTabs() {
   if (typeof cmtal === "undefined" || !cmtal) {
     var placer = document.getElementById("pixel-comment-placer");
@@ -3836,37 +3903,22 @@ function initCommentTabs() {
     var wrapper = document.createElement("ul");
     wrapper.className = "pixel-tab-wrapper";
     wrapper.setAttribute("role", "tablist");
+    wrapper.setAttribute("aria-label", "Comment systems");
     header.appendChild(wrapper);
     tabs.insertBefore(header, tabs.firstChild);
-    var links = [];
-    panes.forEach(function (pane, i) {
+    var links = panes.map(function (pane) {
       pane.classList.add("content-tab");
-      pane.setAttribute("role", "tabpanel");
-      pane.style.display = i === 0 ? "block" : "none";
       var item = document.createElement("li");
       item.setAttribute("role", "presentation");
       var link = document.createElement("a");
       link.href = "#";
       link.textContent = pane.getAttribute("data-tab");
-      link.setAttribute("role", "tab");
-      link.setAttribute("aria-selected", i === 0 ? "true" : "false");
-      if (i === 0) link.className = "activeTab";
-      link.addEventListener("click", function (e) {
-        e.preventDefault();
-        links.forEach(function (el) {
-          el.classList.remove("activeTab");
-          el.setAttribute("aria-selected", "false");
-        });
-        link.classList.add("activeTab");
-        link.setAttribute("aria-selected", "true");
-        panes.forEach(function (p, j) {
-          p.style.display = j === i ? "block" : "none";
-          if (j === i) p.style.animation = "pixelFadeIn .4s ease";
-        });
-      });
-      links.push(link);
       item.appendChild(link);
       wrapper.appendChild(item);
+      return link;
+    });
+    pixelInitTabs(links, panes, function (link, active) {
+      link.classList.toggle("activeTab", active);
     });
   });
 }
@@ -3908,12 +3960,127 @@ article {
 </script>
 <script type='text/javascript'>
  /*<![CDATA[*/
- // Same-origin feed read for the pager. Replaces the JSONP + document.write()
- // pair the pager used to bootstrap itself, which blocked the HTML parser.
- function pixelPagerFeed(url, onSuccess) {
-   fetch(url).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(onSuccess).catch(function () {});
+ // Keep Blogger's native pager unless a valid numbered pager can be rendered.
+ function pixelPagerFeed(url, onSuccess, onError) {
+   pixelFetchFeed(url, onSuccess, onError);
  }
- function looppagecurrentg(e){var a="";pageNumber=parseInt(numPages/2),pageNumber==numPages-pageNumber&&(numPages=2*pageNumber+1),pageStart=currentPageNo-pageNumber,pageStart<1&&(pageStart=1),lastPageNo=parseInt(e/perPage)+1,lastPageNo-1==e/perPage&&(lastPageNo-=1),pageEnd=pageStart+numPages-1,pageEnd>lastPageNo&&(pageEnd=lastPageNo),a+="<span class='showpageOf'>Page "+currentPageNo+" of "+lastPageNo+"</span>";var t=parseInt(currentPageNo)-1;currentPageNo>1&&(a+="page"==currentPage?'<span class="showpage firstpage"><a href="'+home_page+'">'+firstText+"</a></span>":'<span class="displaypageNum firstpage"><a href="/search/label/'+postLabel+"?&max-results="+perPage+'">'+firstText+"</a></span>"),currentPageNo>2&&(a+=3==currentPageNo?"page"==currentPage?'<span class="showpage"><a href="'+home_page+'">'+prevText+"</a></span>":'<span class="displaypageNum"><a href="/search/label/'+postLabel+"?&max-results="+perPage+'">'+prevText+"</a></span>":"page"==currentPage?'<span class="displaypageNum"><a href="#" onclick="redirectpage('+t+');return false">'+prevText+"</a></span>":'<span class="displaypageNum"><a href="#" onclick="redirectlabel('+t+');return false">'+prevText+"</a></span>"),pageStart>1&&(a+="page"==currentPage?'<span class="displaypageNum"><a href="'+home_page+'">1</a></span>':'<span class="displaypageNum"><a href="/search/label/'+postLabel+"?&max-results="+perPage+'">1</a></span>'),pageStart>2&&(a+=" ... ");for(var s=pageStart;s<=pageEnd;s++)a+=currentPageNo==s?'<span class="pagecurrent">'+s+"</span>":1==s?"page"==currentPage?'<span class="displaypageNum"><a href="'+home_page+'">1</a></span>':'<span class="displaypageNum"><a href="/search/label/'+postLabel+"?&max-results="+perPage+'">1</a></span>':"page"==currentPage?'<span class="displaypageNum"><a href="#" onclick="redirectpage('+s+');return false">'+s+"</a></span>":'<span class="displaypageNum"><a href="#" onclick="redirectlabel('+s+');return false">'+s+"</a></span>";pageEnd<lastPageNo-1&&(a+="..."),pageEnd<lastPageNo&&(a+="page"==currentPage?'<span class="displaypageNum"><a href="#" onclick="redirectpage('+lastPageNo+');return false">'+lastPageNo+"</a></span>":'<span class="displaypageNum"><a href="#" onclick="redirectlabel('+lastPageNo+');return false">'+lastPageNo+"</a></span>");var r=parseInt(currentPageNo)+1;currentPageNo<lastPageNo-1&&(a+="page"==currentPage?'<span class="displaypageNum"><a href="#" onclick="redirectpage('+r+');return false">'+nextText+"</a></span>":'<span class="displaypageNum"><a href="#" onclick="redirectlabel('+r+');return false">'+nextText+"</a></span>"),currentPageNo<lastPageNo&&(a+="page"==currentPage?'<span class="displaypageNum lastpage"><a href="#" onclick="redirectpage('+lastPageNo+');return false">'+lastText+"</a></span>":'<span class="displaypageNum lastpage"><a href="#" onclick="redirectlabel('+lastPageNo+');return false">'+lastText+"</a></span>");for(var p=document.getElementsByName("pageArea"),n=document.getElementById("blog-pager"),l=0;l<p.length;l++)p[l].innerHTML=a;p&&p.length>0&&(a=""),n&&(n.innerHTML=a)}function totalcountdata(e){var a=e.feed;looppagecurrentg(parseInt(a.openSearch$totalResults.$t,10))}function pagecurrentg(){var e=urlactivepage;-1!=e.indexOf("/search/label/")&&(postLabel=-1!=e.indexOf("?updated-max")?e.substring(e.indexOf("/search/label/")+14,e.indexOf("?updated-max")):e.substring(e.indexOf("/search/label/")+14,e.indexOf("?&max"))),-1==e.indexOf("?q=")&&-1==e.indexOf(".html")&&(-1==e.indexOf("/search/label/")?(currentPage="page",currentPageNo=-1!=urlactivepage.indexOf("#PageNo=")?urlactivepage.substring(urlactivepage.indexOf("#PageNo=")+8,urlactivepage.length):1,pixelPagerFeed(home_page+"feeds/posts/summary?max-results=1&alt=json",totalcountdata)):(currentPage="label",-1==e.indexOf("&max-results=")&&(perPage=20),currentPageNo=-1!=urlactivepage.indexOf("#PageNo=")?urlactivepage.substring(urlactivepage.indexOf("#PageNo=")+8,urlactivepage.length):1,pixelPagerFeed(home_page+"feeds/posts/summary/-/"+postLabel+"?alt=json&max-results=1",totalcountdata)))}function redirectpage(e){jsonstart=(e-1)*perPage,noPage=e;pixelPagerFeed(home_page+"feeds/posts/summary?start-index="+jsonstart+"&max-results=1&alt=json",finddatepost)}function redirectlabel(e){jsonstart=(e-1)*perPage,noPage=e;pixelPagerFeed(home_page+"feeds/posts/summary/-/"+postLabel+"?start-index="+jsonstart+"&max-results=1&alt=json",finddatepost)}function finddatepost(e){post=e.feed.entry[0];var a=post.published.$t.substring(0,19)+post.published.$t.substring(23,29),t=encodeURIComponent(a);if("page"==currentPage)s="/search?updated-max="+t+"&max-results="+perPage+"#PageNo="+noPage;else var s="/search/label/"+postLabel+"?updated-max="+t+"&max-results="+perPage+"#PageNo="+noPage;location.href=s}"undefined"==typeof firstText&&(firstText="First"),"undefined"==typeof lastText&&(lastText="Last");var noPage,currentPage,currentPageNo,postLabel;pagecurrentg();
+
+ var currentPage, currentPageNo, postLabel, pixelLastPage, pixelPagerRequest = 0;
+ function pixelPagerPath() {
+   return currentPage === "label" ? "/search/label/" + postLabel : "/search";
+ }
+
+ function looppagecurrentg(total) {
+   if (!Number.isSafeInteger(total) || total <= 0) return;
+   var lastPage = Math.ceil(total / perPage);
+   if (currentPageNo > lastPage) return;
+   var posts = document.querySelectorAll("#Blog1 .blog-posts > .grid-item");
+   // Blogger may shorten a page regardless of the configured post count.
+   if (posts.length !== Math.min(perPage, total - (currentPageNo - 1) * perPage)) return;
+   var nativePager = document.getElementById("blog-pager");
+   if (!nativePager || document.getElementById("pixel-numbered-pager")) return;
+   pixelLastPage = lastPage;
+   var count = Math.max(1, parseInt(numPages, 10) || 5);
+   var start = Math.max(1, Math.min(currentPageNo - Math.floor(count / 2), lastPage - count + 1));
+   var end = Math.min(lastPage, start + count - 1);
+   var html = '<span class="sr-only">Page ' + currentPageNo + ' of ' + lastPage + '</span>';
+   function pageLink(page, text, extraClass) {
+     if (page === currentPageNo) return '<span class="pagecurrent" aria-current="page">' + page + '</span>';
+     var firstUrl = currentPage === "label" ? pixelPagerPath() + "?max-results=" + perPage : home_page;
+     var control = page === 1 ? '<a href="' + pixelAttr(firstUrl) + '">' + text + '</a>' : '<button type="button" data-page="' + page + '" aria-label="Page ' + page + '">' + text + '</button>';
+     return '<span class="displaypageNum ' + (extraClass || "") + '">' + control + '</span>';
+   }
+   if (currentPageNo > 1) {
+     html += pageLink(1, firstText, "firstpage");
+   }
+   if (start > 1) html += pageLink(1, "1");
+   if (start > 2) html += '<span aria-hidden="true"> … </span>';
+   for (var page = start; page <= end; page++) html += pageLink(page, page);
+   if (end < lastPage - 1) html += '<span aria-hidden="true"> … </span>';
+   if (end < lastPage) html += pageLink(lastPage, lastPage);
+   if (currentPageNo < lastPage) {
+     html += pageLink(lastPage, lastText, "lastpage");
+   }
+   var area = document.createElement("nav");
+   area.id = "pixel-numbered-pager";
+   area.className = "pixel-numbered-pager";
+   area.innerHTML = html + '<p id="pixel-pager-status" role="status" aria-live="polite"></p>';
+   area.setAttribute("aria-label", "Numbered post pages");
+   nativePager.insertAdjacentElement("beforebegin", area);
+   area.querySelectorAll("button[data-page]").forEach(function (link) {
+       var page = Number(link.getAttribute("data-page"));
+       if (page === 1) return;
+       link.addEventListener("click", function (event) {
+         event.preventDefault();
+         if (currentPage === "label") redirectlabel(page);
+         else redirectpage(page);
+       });
+   });
+ }
+
+ function totalcountdata(data) {
+   looppagecurrentg(Number(data.feed.openSearch$totalResults.$t));
+ }
+
+ function pagecurrentg() {
+   var url = new URL(urlactivepage);
+   var label = url.pathname.match(/^\/search\/label\/(.+)$/);
+   // Search results and date archives retain Blogger's native Older/Newer links.
+   if (url.searchParams.has("q") || (!label && url.pathname !== "/" && url.pathname !== "/search")) return;
+   if (["updated-min", "published-min", "published-max", "start-index", "reverse-paginate"].some(function (key) { return url.searchParams.has(key); })) return;
+   var hash = url.hash.match(/^#PageNo=([1-9]\d*)$/);
+   // A native Older/Newer URL has no known page number.
+   if (url.searchParams.has("updated-max") && !hash) return;
+   if (hash && (!url.searchParams.has("updated-max") || !Number.isSafeInteger(Number(hash[1])) || Number(hash[1]) < 2)) return;
+   currentPage = label ? "label" : "page";
+   // The pathname already contains the escaped label, including encoded slashes.
+   postLabel = label ? label[1] : "";
+   currentPageNo = hash ? Number(hash[1]) : 1;
+   var nativeOlder = document.querySelector("#blog-pager a.blog-pager-older-link");
+   var nativeSize = nativeOlder ? new URL(nativeOlder.href, url).searchParams.get("max-results") : null;
+   perPage = Number(url.searchParams.get("max-results") || nativeSize || perPage || 6);
+   if (!Number.isSafeInteger(perPage) || perPage < 1) return;
+   var path = "/feeds/posts/summary" + (label ? "/-/" + postLabel : "");
+   pixelPagerFeed(path + "?max-results=1&alt=json&orderby=published", totalcountdata);
+ }
+
+ function pixelPagerState(message, busy) {
+   var status = document.getElementById("pixel-pager-status");
+   if (status) status.textContent = message;
+   var area = document.getElementById("pixel-numbered-pager");
+   if (area) {
+     area.setAttribute("aria-busy", busy ? "true" : "false");
+     area.querySelectorAll("button").forEach(function (button) { button.disabled = busy; });
+   }
+ }
+
+ function pixelRedirectPage(page) {
+   if (!Number.isSafeInteger(page) || page < 2 || page > pixelLastPage) return;
+   var path = "/feeds/posts/summary" + (currentPage === "label" ? "/-/" + postLabel : "");
+   // updated-max is exclusive: use the preceding page's last post as the cursor.
+   var start = (page - 1) * perPage;
+   if (!Number.isSafeInteger(start)) return;
+   var request = ++pixelPagerRequest;
+   pixelPagerState("Loading page…", true);
+   var failureMessage = "Unable to open this numbered page. Use Older Posts or Newer Posts below.";
+   pixelPagerFeed(path + "?start-index=" + start + "&max-results=2&alt=json&orderby=published", function (data) {
+     if (request !== pixelPagerRequest) return;
+     var entries = data.feed.entry || [];
+     var previous = entries[0] && entries[0].published && entries[0].published.$t;
+     var next = entries[1] && entries[1].published && entries[1].published.$t;
+     // A timestamp cannot identify a position inside a group of tied posts.
+     if (!previous || !next || !Number.isFinite(Date.parse(previous)) || !Number.isFinite(Date.parse(next)) || Date.parse(previous) <= Date.parse(next)) {
+       pixelPagerState(failureMessage, false);
+       return;
+     }
+     location.href = pixelPagerPath() + "?updated-max=" + encodeURIComponent(previous) + "&max-results=" + perPage + "#PageNo=" + page;
+   }, function () {
+     if (request === pixelPagerRequest) pixelPagerState(failureMessage, false);
+   });
+ }
+ function redirectpage(page) { pixelRedirectPage(page); }
+ function redirectlabel(page) { pixelRedirectPage(page); }
+ pagecurrentg();
       /*]]>*/
 </script>
 </b:if>
@@ -3944,7 +4111,7 @@ function pixelLoadSwiper() {
 }
 
 function pixelExcerpt(html, wordCount) {
-  return html.replace(/<.*?>/gi, "").split(/\s+/).slice(0, wordCount - 1).join(" ");
+  return pixelText(html).trim().split(/\s+/).slice(0, wordCount).join(" ");
 }
 
 var PIXEL_FULL_MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -3954,7 +4121,7 @@ function pixelFormatLongDate(published) {
 }
 
 function pixelNoPostsPanel(label) {
-  return '<div class="pixel-empty"><div class="pixel-no-post"><div class="pixel-entry-no-icon"><img class="pixel-empty" alt="pixel-empty" src="' + PIXEL_NO_THUMB + '"></div><div class="pixel-no-title"><h3 class="pixel-postmatch">No posts matching tag "' + label + '".</h3></div></div></div>';
+  return '<div class="pixel-empty"><div class="pixel-no-post"><div class="pixel-entry-no-icon"><img class="pixel-empty" alt="pixel-empty" src="' + PIXEL_NO_THUMB + '"></div><div class="pixel-no-title"><h3 class="pixel-postmatch">No posts matching tag "' + pixelAttr(label) + '".</h3></div></div></div>';
 }
 
 function pixelShareIconsHtml(url) {
@@ -3974,9 +4141,9 @@ function pixelRenderListWidget(widget, data) {
       var image = pixelEntryImage(entry, index === 0 ? "s800" : "s400");
       var metaTime = '<span class="posted-on"><i class="fa-regular fa-clock"></i><a href="' + url + '" rel="bookmark"><time class="entry-date published updated" datetime="' + published + '">' + date + "</time></a></span>";
       if (index === 0) {
-        html += '<div class="pixel-widget-col-1 pixel-list-col"><article class="pixel-post"><div class="pixel-parentover"><div class="pixel-list-media"><a href="' + url + '"><img alt="' + pixelAttr(title) + '" loading="lazy" src="' + image + '"></a>' + pixelShareIconsHtml(url) + '</div><div class="pixel-box-list"><div class="pixel-box-inside"><div class="pixel-list-content"><div class="entry-header"><h3 class="entry-title"><a href="' + url + '" rel="bookmark">' + title + '</a></h3></div></div><div class="article-meta"><span class="byline"><i class="fa-regular fa-user"></i><span class="author vcard"><a class="url fn n" href="' + authorUrl + '">' + author + '</a></span></span> ' + metaTime + '</div><div class="entry-content"><div>' + pixelExcerpt(entry.content ? entry.content.$t : "", 25) + '...</div><a class="btn-read" href="' + url + '">Read More</a></div></div></div></div></article></div><div class="pixel-widget-col-2 pixel-list-col">';
+        html += '<div class="pixel-widget-col-1 pixel-list-col"><article class="pixel-post"><div class="pixel-parentover"><div class="pixel-list-media"><a href="' + url + '"><img alt="' + pixelAttr(title) + '" loading="lazy" src="' + image + '"></a>' + pixelShareIconsHtml(url) + '</div><div class="pixel-box-list"><div class="pixel-box-inside"><div class="pixel-list-content"><div class="entry-header"><h3 class="entry-title"><a href="' + url + '" rel="bookmark">' + pixelAttr(title) + '</a></h3></div></div><div class="article-meta"><span class="byline"><i class="fa-regular fa-user"></i><span class="author vcard"><a class="url fn n" href="' + pixelAttr(authorUrl) + '">' + pixelAttr(author) + '</a></span></span> ' + metaTime + '</div><div class="entry-content"><div>' + pixelAttr(pixelExcerpt(entry.content ? entry.content.$t : "", 25)) + '...</div><a class="btn-read" href="' + url + '">Read More</a></div></div></div></div></article></div><div class="pixel-widget-col-2 pixel-list-col">';
       } else {
-        html += '<article class="pixel-post"><div class="article-image"><div class="post-image"><a aria-label="' + pixelAttr(title) + '" href="' + url + '" style="background:black url(' + image + ')" rel="bookmark"></a></div></div><div class="article-content side-item-text"><div class="entry-header"><div class="entry-header-title"><h3 class="entry-title"><a href="' + url + '" rel="bookmark">' + title + '</a></h3></div></div><div class="article-meta">' + metaTime + "</div></div></article>";
+        html += '<article class="pixel-post"><div class="article-image"><div class="post-image"><a aria-label="' + pixelAttr(title) + '" href="' + url + '" style="background:black url(' + image + ')" rel="bookmark"></a></div></div><div class="article-content side-item-text"><div class="entry-header"><div class="entry-header-title"><h3 class="entry-title"><a href="' + url + '" rel="bookmark">' + pixelAttr(title) + '</a></h3></div></div><div class="article-meta">' + metaTime + "</div></div></article>";
       }
     });
     html += '</div><div class="clearfix"></div></div>';
@@ -4012,9 +4179,9 @@ function pixelRenderGalleryWidget(widget, data) {
     var date = pixelFormatLongDate(published);
     var media = pixelGalleryImage(entry);
     if (index === 0) {
-      featureHtml = '<div class="pixel-gallery-feature"><div class="pixel-iframe-hidden"></div><div class="feature-image  ' + media.id + '" data-vidid="' + media.id + '" style="background:url(' + media.img + ')"></div><div class="pixel-absolutize"><div class="pixel-dyn-t"><h3><a href="' + url + '">' + title + '</a></h3></div><div class="article-meta"><span class="byline"><i class="fa-regular fa-user"></i><span class="author vcard"><a class="url fn n" href="' + authorUrl + '">' + author + '</a></span></span> <span class="posted-on"><i class="fa-regular fa-clock"></i><a href="' + url + '" rel="bookmark"><time class="entry-date published updated" datetime="' + published + '">' + date + "</time></a></span></div></div></div>";
+      featureHtml = '<div class="pixel-gallery-feature"><div class="pixel-iframe-hidden"></div><div class="feature-image  ' + media.id + '" data-vidid="' + media.id + '" style="background:url(' + media.img + ')"></div><div class="pixel-absolutize"><div class="pixel-dyn-t"><h3><a href="' + url + '">' + pixelAttr(title) + '</a></h3></div><div class="article-meta"><span class="byline"><i class="fa-regular fa-user"></i><span class="author vcard"><a class="url fn n" href="' + pixelAttr(authorUrl) + '">' + pixelAttr(author) + '</a></span></span> <span class="posted-on"><i class="fa-regular fa-clock"></i><a href="' + url + '" rel="bookmark"><time class="entry-date published updated" datetime="' + published + '">' + date + "</time></a></span></div></div></div>";
     }
-    slidesHtml += '<div class="swiper-slide pixel-gallery-post slide item dy-dn"><div class="' + state + " " + media.id + ' img_dyn getinfo" data-vidid="' + media.id + '" data-img="' + media.img + '" style="background:url(' + media.img + ')" data-auth="' + author + '" data-auth-uri="' + authorUrl + '" data-time="' + date + '"></div><div class="pixel-slide-title"><h3><a href="' + url + '">' + title + "</a></h3></div></div>";
+    slidesHtml += '<div class="swiper-slide pixel-gallery-post slide item dy-dn"><div class="' + state + " " + media.id + ' img_dyn getinfo" data-vidid="' + media.id + '" data-img="' + media.img + '" style="background:url(' + media.img + ')" data-auth="' + pixelAttr(author) + '" data-auth-uri="' + pixelAttr(authorUrl) + '" data-published="' + pixelAttr(published) + '" data-time="' + date + '"></div><div class="pixel-slide-title"><h3><a href="' + url + '">' + pixelAttr(title) + "</a></h3></div></div>";
     if (index === 0) state = "playing";
   });
   widget.insertAdjacentHTML("beforeend",
@@ -4024,8 +4191,21 @@ function pixelRenderGalleryWidget(widget, data) {
   var feature = widget.querySelector(".pixel-gallery-feature");
   var featureImage = feature.querySelector(".feature-image");
   var iframeHolder = feature.querySelector(".pixel-iframe-hidden");
+  function updatePreviewControl() {
+    var isVideo = featureImage.getAttribute("data-vidid") !== "regular";
+    if (isVideo) {
+      featureImage.setAttribute("role", "button");
+      featureImage.setAttribute("aria-label", "Play video");
+      featureImage.tabIndex = 0;
+    } else {
+      featureImage.removeAttribute("role");
+      featureImage.removeAttribute("aria-label");
+      featureImage.removeAttribute("tabindex");
+    }
+  }
+  updatePreviewControl();
   function playVideo(videoId) {
-    iframeHolder.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId + '?autoplay=1" allowfullscreen="" width="100%" height="400" frameborder="0"></iframe>';
+    iframeHolder.innerHTML = '<iframe title="YouTube video player" allow="autoplay; fullscreen" src="https://www.youtube.com/embed/' + videoId + '?autoplay=1" allowfullscreen="" width="100%" height="400" frameborder="0"></iframe>';
     iframeHolder.style.display = "block";
     featureImage.style.display = "none";
   }
@@ -4033,7 +4213,23 @@ function pixelRenderGalleryWidget(widget, data) {
     var videoId = featureImage.getAttribute("data-vidid");
     if (videoId !== "regular") playVideo(videoId);
   });
+  featureImage.addEventListener("keydown", function (event) {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      featureImage.click();
+    }
+  });
   widget.querySelectorAll(".dy-dn.slide.pixel-gallery-post").forEach(function (slide) {
+    var control = slide.querySelector(".img_dyn.getinfo");
+    control.setAttribute("role", "button");
+    control.setAttribute("aria-label", "Show " + slide.querySelector(".pixel-slide-title").textContent);
+    control.tabIndex = 0;
+    control.addEventListener("keydown", function (event) {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        control.click();
+      }
+    });
     slide.addEventListener("click", function () {
       var info = slide.querySelector(".img_dyn.getinfo");
       widget.querySelectorAll(".ntpl").forEach(function (el) {
@@ -4050,8 +4246,14 @@ function pixelRenderGalleryWidget(widget, data) {
       var dynTitle = feature.querySelector(".pixel-dyn-t");
       if (dynTitle) dynTitle.innerHTML = slide.querySelector(".pixel-slide-title").innerHTML;
       var timeEl = feature.querySelector("time");
-      if (timeEl) timeEl.textContent = info.getAttribute("data-time");
+      if (timeEl) {
+        timeEl.textContent = info.getAttribute("data-time");
+        timeEl.setAttribute("datetime", info.getAttribute("data-published"));
+        timeEl.parentElement.setAttribute("href", slide.querySelector(".pixel-slide-title a").href);
+      }
       var videoId = info.getAttribute("data-vidid");
+      featureImage.setAttribute("data-vidid", videoId);
+      updatePreviewControl();
       if (videoId !== "regular") {
         playVideo(videoId);
       } else {
@@ -4110,10 +4312,20 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 // Label links honor the configured posts-per-page
-document.querySelectorAll(".Label a, .pixel-max-limit").forEach(function (a) {
-  var href = a.getAttribute("href");
-  if (href && href.indexOf("max-results=") === -1) a.setAttribute("href", href + "?&max-results=" + perPage);
-});
+function pixelLimitLabelLinks() {
+  document.querySelectorAll(".Label a, .pixel-max-limit").forEach(function (a) {
+    var href = a.getAttribute("href");
+    if (!href) return;
+    try {
+      var url = new URL(href, location.href);
+      if (!url.searchParams.has("max-results")) {
+        url.searchParams.set("max-results", perPage);
+        a.setAttribute("href", url.href);
+      }
+    } catch (error) { /* Keep malformed custom links unchanged. */ }
+  });
+}
+pixelLimitLabelLinks();
 //]]>
 </script>
 <script>

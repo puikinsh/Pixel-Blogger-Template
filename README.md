@@ -1,6 +1,6 @@
 # Pixel — Free News & Magazine Blogger Template
 
-[![Version](https://img.shields.io/badge/Version-2.3.0-2942ee.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/Version-2.4.0-2942ee.svg)](CHANGELOG.md)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Vanilla JS](https://img.shields.io/badge/Vanilla_JS-zero_frameworks-F7DF1E?logo=javascript&logoColor=black)](http://vanilla-js.com/)
 [![Font Awesome](https://img.shields.io/badge/Font%20Awesome-7-528DD7?logo=fontawesome&logoColor=white)](https://fontawesome.com/)
@@ -11,7 +11,7 @@ Created and maintained by [Colorlib](https://colorlib.com), Pixel is a fast, AdS
 
 [![Pixel — free news & magazine Blogger template (Blogspot theme) by Colorlib](https://colorlib.com/wp/wp-content/uploads/sites/2/pixel-free-news-adsense-blogger-template.jpg)](https://pixel-template.blogspot.com)
 
-**[Live Demo](https://pixel-template.blogspot.com)** | **[Download ZIP](https://github.com/puikinsh/Pixel-Blogger-Template/archive/refs/heads/master.zip)** | **[Documentation](https://pixel-template.blogspot.com/p/documentation.html)** | **[Changelog](CHANGELOG.md)**
+**[Live Demo](https://pixel-template.blogspot.com)** | **[Download ZIP](https://github.com/puikinsh/Pixel-Blogger-Template/releases/latest/download/pixel-blogger-template.zip)** | **[Setup & Troubleshooting](docs/SETUP.md)** | **[Changelog](CHANGELOG.md)**
 
 ## Features
 
@@ -21,16 +21,22 @@ Created and maintained by [Colorlib](https://colorlib.com), Pixel is a fast, AdS
 - **Tabbed sidebar** - Recent, Popular, and Comments tabs with accessible keyboard-friendly switching
 - **Custom list and gallery widgets** - magazine-style homepage sections fed by post labels, including a touch-friendly Swiper gallery with YouTube video support
 - **Mobile-first responsive design** - 7 CSS breakpoints from 1200px down to 300px
-- **SEO-optimized markup** — exactly one `h1` per page, JSON-LD structured data (`WebSite`, `SearchAction`, `BlogPosting`, `BreadcrumbList`), Open Graph and Twitter card meta tags, semantic landmarks
+- **SEO-optimized markup** — primary `h1` post titles, JSON-LD structured data (`WebSite`, `SearchAction`, `BlogPosting`, `BreadcrumbList`), Open Graph and Twitter card meta tags, semantic landmarks
 - **Fast page load** — zero jQuery, zero CSS frameworks, no render-blocking external assets, no `document.write()`, preconnect hints, native lazy loading, and right-sized images served by Blogger's CDN
 - **Accessible** — skip-to-content link, labeled controls, ARIA tab roles, keyboard-operable dropdown and mega menus, visible focus rings, `prefers-reduced-motion` support, and no user-zoom blocking
 - **Easy color customization** — change the color scheme from Blogger's theme editor, no code required
 - **Font Awesome 7 icons, embedded** — the icons the theme uses ship inside the template as a subsetted font, so a stock install downloads no icon files at all; Google Fonts still load without blocking the first paint
 - **Self-updating copyright year** in the footer
 
+## What’s new in 2.4.0
+
+Safer pagination, complete article structured data in the responsive renderer, improved mobile layouts, keyboard navigation, and a focus-managed search dialog. See the [release notes](docs/releases/2.4.0.md) and [upgrade guide](docs/UPGRADING.md). The live demo is deployed separately; deployment status is recorded in the release notes.
+
 ## How to Install a Blogger Template
 
-1. **Download** the [ZIP](https://github.com/puikinsh/Pixel-Blogger-Template/archive/refs/heads/master.zip) or clone this repository
+Before upgrading, download a backup of your current theme from **Theme → Customize dropdown → Backup** and save your widget settings. Try changes on a test blog first; see the [setup guide](docs/SETUP.md) for exact menu and widget examples.
+
+1. **Download** the [ZIP](https://github.com/puikinsh/Pixel-Blogger-Template/releases/latest/download/pixel-blogger-template.zip) or clone this repository
 2. **Sign in to Blogger** at [blogger.com](https://www.blogger.com) and pick your blog
 3. **Open the theme editor** — *Theme* → *Customize* dropdown → **Edit HTML**
 4. **Replace the code** — select everything, delete it, and paste the full contents of `Pixel-Blogger-Template.xml`
@@ -47,9 +53,11 @@ To preview the template with sample posts before publishing your own:
 ## Customization
 
 - **Colors** — *Theme* → *Customize* → *Advanced* exposes the template's color variables (accent color, backgrounds, text) with live preview
-- **Menus** — edit the navigation LinkList widgets in *Layout*; prefix an item with `_` for a dropdown level, or set a link to `[Mega Menu]`-style label syntax where supported
+- **Menus** — edit *Layout → Main Navigation Menu*; prefix link names with `_` or `__` for nested dropdowns. For a mega menu, use the exact post label as the link name and `[Mega Menu]` as its URL
 - **Homepage sections** — the label-driven widgets are configured from *Layout* by editing each widget's content (the label name and post count)
 - **Ads** — paste your AdSense (or any) ad code into the advertisement widgets in *Layout*
+
+Feed widgets work best with **Settings → Site feed → Allow blog feed → Full**. Match **Layout → Posts Per Page** to Blogger's main-page post count. The [setup guide](docs/SETUP.md) covers feed settings, sidebar snippets, page-size configuration, and common problems.
 
 ## Tech Stack
 
@@ -61,13 +69,17 @@ To preview the template with sample posts before publishing your own:
 
 Everything else is hand-written CSS and vanilla JavaScript inside the single template file — no jQuery, no Bootstrap, no build step. Feeds load over same-origin `fetch()` with `alt=json`.
 
+## Contributing
+
+Run `python3 scripts/check_template.py` and `node --test tests/*.test.cjs` to check XML, JavaScript syntax, and behavior. The browser regression test uses Chrome/Chromium when installed. See [CONTRIBUTING.md](CONTRIBUTING.md) for prerequisites, limitations, and the Blogger release checklist.
+
 ## FAQ
 
 **Is Pixel really free?** Yes — free for personal and commercial use under GPL v3. Attribution to [Colorlib](https://colorlib.com) is appreciated but not required.
 
 **Does it work with AdSense?** Yes. The layout includes dedicated ad widgets, and you can add more ad units through Blogger's Layout editor.
 
-**Will it slow down my blog?** No — the template loads zero render-blocking external assets and removed all legacy frameworks (jQuery, Bootstrap, Owl Carousel) in version 2.0. Version 2.3 went further and embedded the icon font, so a stock install downloads no icon files at all. See the [changelog](CHANGELOG.md) for the full performance work.
+**How fast is it?** The template avoids render-blocking external assets and legacy frameworks, embeds its stock icons, and loads the gallery library on demand. Actual performance depends on your images, ads, tracking, embeds, and added gadgets. See the [changelog](CHANGELOG.md) for the performance work.
 
 **Can I use it on multiple blogs?** Yes, on as many blogs as you like.
 

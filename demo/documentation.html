@@ -1,0 +1,79 @@
+<!-- Blogger page body: keep the existing /p/documentation.html permalink. -->
+<style>
+.static_page .posttitle{height:auto;min-height:0;background:#f7f7f7}
+.static_page .gradient,.static_page .postmarg .article-meta,.static_page .postmarg .post-cat{display:none}
+.static_page .postmarg{position:relative;bottom:auto;padding:32px 20px!important}
+.static_page .postmarg .entry-title{color:#2e2e2e}
+</style>
+<p><strong>Pixel 2.4.0</strong> is Colorlib's free news and magazine Blogger theme. This guide covers installation, navigation, feed widgets, ads, comments, and upgrades.</p>
+<p><a href="https://github.com/puikinsh/Pixel-Blogger-Template/releases/latest/download/pixel-blogger-template.zip">Download the Blogger theme ZIP</a> · <a href="https://github.com/puikinsh/Pixel-Blogger-Template/blob/v2.4.0/CHANGELOG.md">Release history</a> · <a href="https://github.com/puikinsh/Pixel-Blogger-Template/blob/v2.4.0/docs/UPGRADING.md">Upgrade guide</a></p>
+
+<h2 id="install">1. Install or upgrade</h2>
+<ol>
+  <li>Back up your existing theme using <strong>Theme → Customize dropdown → Backup → Download</strong>. Keep copies of your Layout gadget settings, menus, and ad code.</li>
+  <li>Extract the downloaded ZIP and open <code>Pixel-Blogger-Template.xml</code>. Test the theme on a separate Blogger blog first.</li>
+  <li>In Blogger, open <strong>Theme → Edit HTML</strong>, replace the entire theme with the XML, and save.</li>
+  <li>In the theme's mobile settings, select <strong>Desktop</strong> to use the responsive theme on phones.</li>
+  <li>Restore your own widget settings and replace the sample labels, links, author details, and advertisements.</li>
+</ol>
+<p><code>Pixel Demo Content.xml</code> is optional sample content, imported through <strong>Settings → Manage blog → Import content</strong>. It does not install the theme and is not needed when upgrading an established blog.</p>
+
+<h2 id="settings">2. Feed and page-size settings</h2>
+<p>Use <strong>Settings → Site feed → Allow blog feed → Full</strong> for complete widget images and excerpts. Leave <strong>Post feed redirect URL</strong> empty. A disabled or shortened feed can prevent widgets from showing the expected content.</p>
+<p>Set <strong>Layout → Posts Per Page</strong> to a positive whole number, such as <code>6</code>, and match it to Blogger's <strong>Max posts shown on main page</strong> setting.</p>
+<p>Older/Newer links remain available. Numbered controls are optional: Blogger can shorten a page, and posts can share a publication timestamp. When a numbered jump cannot be made reliably, use Older/Newer. Search results and date archives keep Blogger's native navigation.</p>
+
+<h2 id="identity">3. Logo, colors, and author information</h2>
+<p>Edit the Header gadget in <strong>Layout</strong> to upload a logo or show your blog title. Change theme colors through <strong>Theme → Customize → Advanced</strong>. Set <strong>Boxed Layout</strong> to <code>true</code> for a constrained desktop wrapper or <code>false</code> for the normal layout.</p>
+<p>Replace the sample text in <strong>Author Description</strong> and update <strong>Author Social Links</strong>. Keep a readable blog title in Blogger's settings even if you use a logo.</p>
+
+<h2 id="navigation">4. Navigation and mega menus</h2>
+<p>Edit <strong>Layout → Main Navigation Menu</strong>. Disable automatic sorting and arrange links in their intended order. Home is supplied automatically.</p>
+<ul>
+  <li><code>Destinations</code> is a top-level link.</li>
+  <li><code>_Europe</code> nests beneath the preceding top-level item.</li>
+  <li><code>__Italy</code> nests beneath Europe.</li>
+  <li><code>_Asia</code> is another child of Destinations.</li>
+</ul>
+<p>Only leading underscores create nesting. For a mega menu, use the exact post label as the link name, for example <code>travel</code>, and use <code>[Mega Menu]</code> as the URL. Label matching is case-sensitive. Phones use the generated navigation select.</p>
+
+<h2 id="social">5. Social profiles</h2>
+<p>In <strong>Top Social Widget</strong>, use supported names such as <code>instagram</code>, <code>pinterest</code>, <code>youtube</code>, <code>tiktok</code>, <code>x-twitter</code>, <code>facebook</code>, <code>threads</code>, <code>telegram</code>, <code>whatsapp</code>, <code>linkedin</code>, or <code>rss</code>. Set each URL to your profile and remove unused placeholder links.</p>
+
+<h2 id="featured">6. Featured grid</h2>
+<p>In <strong>Featured Grid Widget</strong>, enter this HTML and replace <code>travel</code> with a label used by published posts:</p>
+<pre><code>&lt;span data-type="pixelfeatured" data-label="travel"&gt;&lt;/span&gt;</code></pre>
+<p>The homepage grid displays up to three matching posts. Clear the gadget content to disable it.</p>
+
+<h2 id="custom">7. Homepage lists and galleries</h2>
+<p>Add separate HTML/JavaScript gadgets inside <strong>Customized Widgets</strong>. These examples display five posts from a label:</p>
+<pre><code>&lt;object class="pixel-widget" data-label="travel" data-type="list"&gt;&lt;/object&gt;
+&lt;object class="pixel-widget" data-label="mountain" data-type="gallery"&gt;&lt;/object&gt;</code></pre>
+<p>Use one example per gadget. The gallery supports images and YouTube thumbnails supplied by Blogger's feed. Replace label names exactly; write an ampersand inside an HTML attribute as <code>&amp;amp;</code>.</p>
+
+<h2 id="sidebar">8. Sidebar and tabs</h2>
+<p>Add HTML/JavaScript gadgets in the sidebar or <strong>Tab [1]</strong>, <strong>Tab [2]</strong>, and <strong>Tab [3]</strong>. The gadget title becomes the tab label. Empty tab sections are omitted.</p>
+<pre><code>&lt;!-- Recent posts --&gt;
+&lt;span class="pixel-recent" data-no="5"&gt;&lt;/span&gt;
+&lt;!-- Recent comments --&gt;
+&lt;span class="pixel-cmnt" data-no="5"&gt;&lt;/span&gt;
+&lt;!-- Posts matching a label --&gt;
+&lt;span class="pixel-tagswid" data-label="travel" data-no="5"&gt;&lt;/span&gt;</code></pre>
+<p>Tabs support Left/Right arrows, Home/End, Enter, and Space. Use Tab to move into the selected panel.</p>
+
+<h2 id="ads">9. Advertisement slots</h2>
+<p>Replace the sample image links in <strong>Home Advertisement [Full Width]</strong>, <strong>Post Page Advertisement [Top]</strong>, and <strong>Post Page Advertisement [Bottom]</strong> with your own ad code. Clear unused slots. Sidebar ads are separate gadgets. The theme provides placements; approval and actual page performance depend on your content and ad service.</p>
+
+<h2 id="comments">10. Comment providers</h2>
+<p>Set <strong>Comments System</strong> to <code>[blogger]</code> for native comments. Supported combinations include <code>[blogger][disqus]</code> and <code>[blogger][disqus][facebook]</code>. Use the exact bracket tokens without spaces; their order determines the tabs.</p>
+<p>For Disqus, enter your own <strong>Disqus Shortname</strong>. Optional providers need working service configuration. Native Blogger comments are the simplest starting point.</p>
+
+<h2 id="troubleshooting">11. Troubleshooting and support</h2>
+<ul>
+  <li><strong>No featured posts:</strong> check that matching posts are published, label spelling is exact, and Full feeds are enabled.</li>
+  <li><strong>No recent comments:</strong> use <code>pixel-cmnt</code> and confirm the public comment feed contains comments.</li>
+  <li><strong>Page numbers are absent:</strong> use Older/Newer; Blogger may have shortened the page or the URL may not identify a known numbered page.</li>
+  <li><strong>The XML will not save:</strong> paste the entire file and preserve Blogger tags, widget IDs, CDATA, and escaped ampersands.</li>
+  <li><strong>Pages slow down after customization:</strong> check added images, ad scripts, embeds, and tracking gadgets individually.</li>
+</ul>
+<p>For detailed instructions and current fixes, see the <a href="https://github.com/puikinsh/Pixel-Blogger-Template/blob/v2.4.0/docs/SETUP.md">repository setup guide</a>. Report reproducible theme bugs in <a href="https://github.com/puikinsh/Pixel-Blogger-Template/issues">GitHub Issues</a>, including the affected URL, browser, expected behavior, and steps to reproduce.</p>
