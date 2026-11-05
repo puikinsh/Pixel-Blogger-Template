@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Documentation
+
+- Added a portfolio maintenance report covering the eight sibling templates' 2.3.0 releases, demo validation and outstanding Colorlib download/documentation link corrections.
+
 ## [2.4.1] - 2026-11-05
 
 ### Fixed
