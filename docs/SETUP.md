@@ -9,9 +9,13 @@
 
 `Pixel Demo Content.xml` is optional sample content. Import it through **Settings → Manage blog → Import content** on your test blog. It does not install the theme. Turn off automatic publishing during import if you want to review posts first. [Blogger supports legacy XML imports](https://support.google.com/blogger/answer/41387?hl=en).
 
+Download the named package from [GitHub Releases](https://github.com/puikinsh/Pixel-Blogger-Template/releases/latest), extract it, and open `Pixel-Blogger-Template.xml`. If using GitHub's file view, choose **Raw** before copying the XML; saving the GitHub webpage downloads HTML, not the theme. A parser error mentioning `data-pjax-transient`, GitHub page metadata, or an HTML `meta` tag is a sign to check the downloaded file. The XML theme declares the `slider` skin setting; do not replace its variable-definition block with a partial CSS excerpt.
+
 ## Configure feeds and page size
 
 Under **Settings → Site feed**, use **Allow blog feed → Full** for the richest widget images and excerpts. Disabled feeds prevent feed-driven widgets from loading; shortened feeds may omit post images or text. Leave **Post feed redirect URL** empty when using the theme's JSON feeds. Blogger documents these options in its [settings reference](https://support.google.com/blogger/answer/9691230?hl=en).
+
+Recent posts use `/feeds/posts/default?alt=json` and include posts without labels. Label widgets use `/feeds/posts/default/-/<encoded-label>?alt=json`; the `/-/` segment selects a label and must stay in the URL. Use an exact published label, including case, rather than changing the feed route. The theme encodes spaces, slashes and non-ASCII characters itself.
 
 Set **Layout → Posts Per Page** to a positive whole number, such as `6`. Match it to **Settings → Posts → Max posts shown on main page**. Numbered pagination assumes a consistent page size. Search results and date archives use Blogger's native Older/Newer navigation.
 
@@ -91,3 +95,5 @@ Set **Comments System** to `[blogger]` for native comments. Supported combinatio
 | Slow pages after customization | Test added ads, embeds, tracking, and gadgets individually; they can add blocking resources and layout shifts. |
 
 Before replacing a live theme, follow the [release checklist](../CONTRIBUTING.md#blogger-release-checklist).
+
+The [legacy issue review](ISSUE-REVIEW-2026.md) records the current upload/feed/widget checks and the outstanding measured desktop performance audit.

@@ -23,12 +23,16 @@ test('search, menus, tabs, feed text, and gallery work in Chrome', { skip: !chro
   const scratch = mkdtempSync(join(tmpdir(), 'pixel-browser-'));
   try {
     const production = [
+      source.match(/^var month_format = .+$/m)[0],
       section('function initSearchOverlay()', 'initSearchOverlay();'),
       section('function pixelFetchFeed(', '// ---- Main navigation:'),
+      section('function initFeaturedGrid()', '// ---- Sidebar feed widgets:'),
+      section('var PIXEL_EMPTY_PANEL =', '// ---- Smooth scroll'),
       section('window.selectnav=', '//main'),
       section('function initMainMenu(', '// ---- Mega menus:'),
       section('var pixelTabGroup =', 'document.addEventListener("DOMContentLoaded", function () {\n  initSidebarTabs();'),
       section('function pixelExcerpt(', 'function initCustomWidgets('),
+      section('function initCustomWidgets()', 'initCustomWidgets();'),
     ].join('\n');
     const checks = String.raw`
       function check(value, message) { if (!value) throw new Error(message); }
@@ -129,6 +133,40 @@ test('search, menus, tabs, feed text, and gallery work in Chrome', { skip: !chro
         check(pixelExcerpt('<p>one two three four</p>', 3) === 'one two three', 'excerpt word limit');
         check(pixelText('<style>bad</style><script>bad<\/script><p>Good &amp; safe</p>') === 'Good & safe', 'exclude script and style text');
         check(list.querySelector('.entry-title').textContent === entries[0].title.$t, 'literal post title');
+
+        // Issues #2/#4: label feeds keep /-/ and Recent must retain posts without category.
+        check(entries.every(function (item) { return !('category' in item); }), 'fixture posts must be unlabeled');
+        var feedRequests = [];
+        pixelFetchFeed = function (path, success) {
+          feedRequests.push(path);
+          success({ feed: { entry: entries } });
+        };
+        var recentFixture = document.createElement('div');
+        recentFixture.className = 'pixel-widetize';
+        recentFixture.innerHTML = '<div class="HTML"><div class="widget-content"><span class="pixel-recent" data-no="5"></span></div></div>';
+        document.body.appendChild(recentFixture);
+        initSidebarFeedWidgets();
+        check(feedRequests[0] === '/feeds/posts/default?alt=json&max-results=5', 'Recent uses the unfiltered posts feed');
+        check(recentFixture.querySelectorAll('.pixel-recent-item').length === entries.length, 'Recent must not drop unlabeled posts');
+        check(recentFixture.querySelector('.pixel-recent-title').textContent === entries[0].title.$t, 'Recent preserves literal titles');
+
+        var featuredFixture = document.createElement('div');
+        featuredFixture.className = 'pixel_featured_widget';
+        featuredFixture.innerHTML = '<div class="HTML"><div class="widget-content"><span data-type="pixelfeatured" data-label="Travel &amp; Food/Trips"></span></div></div>';
+        document.body.appendChild(featuredFixture);
+        initFeaturedGrid();
+        check(feedRequests.includes('/feeds/posts/default/-/Travel%20%26%20Food%2FTrips?alt=json&max-results=3'), 'featured label path keeps /-/ and encodes the complete label');
+        check(featuredFixture.querySelectorAll('.pixelfeatured-title').length === entries.length, 'featured entries tolerate missing categories');
+
+        var customFixture = document.createElement('div');
+        customFixture.className = 'custwid';
+        customFixture.innerHTML = '<div class="widget"><h2 class="title">List</h2><object class="pixel-widget" data-type="list" data-label="Travel &amp; Food/Trips"></object></div><div class="widget"><h2 class="title">Gallery</h2><object class="pixel-widget" data-type="gallery" data-label="Café / Rīga"></object></div>';
+        document.body.appendChild(customFixture);
+        initCustomWidgets();
+        check(feedRequests.includes('/feeds/posts/default/-/Travel%20%26%20Food%2FTrips?alt=json&max-results=5'), 'custom list uses an encoded label feed');
+        check(feedRequests.includes('/feeds/posts/default/-/Caf%C3%A9%20%2F%20R%C4%ABga?alt=json&max-results=5'), 'custom gallery supports non-ASCII labels');
+        check(customFixture.querySelector('[data-type="list"]').textContent.includes('Photo'), 'custom list renders feed entries');
+        check(customFixture.querySelectorAll('.img_dyn.getinfo').length === entries.length, 'custom gallery renders all choices');
         document.body.dataset.result = 'passed';
       } catch (error) {
         document.body.dataset.result = 'failed';
