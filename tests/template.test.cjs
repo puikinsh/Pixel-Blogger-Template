@@ -14,6 +14,15 @@ function section(start, end) {
 const helpers = section('function pixelFetchFeed(', '// ---- Main navigation:');
 const pager = section(' // Keep Blogger\'s native pager', '      /*]]>*/');
 
+test('skin variables are declared, including the legacy slider setting from issue #1', () => {
+  const skin = section('<b:skin><![CDATA[', ']]></b:skin>');
+  const declared = new Set([...skin.matchAll(/<Variable\b[^>]*\bname=["']([^"']+)["']/g)].map(match => match[1]));
+  assert.ok(declared.has('slider'), 'Blogger must receive the slider variable declaration');
+  const css = skin.replace(/\/\*[\s\S]*?\*\//g, '');
+  const references = [...css.matchAll(/\$\(([\w.]+)\)|\$([a-zA-Z_]\w*)/g)].map(match => match[1] || match[2]);
+  for (const name of references) assert.ok(declared.has(name), `Undeclared Blogger skin variable: ${name}`);
+});
+
 function makePager(url, total = 60, options = {}) {
   const requests = [];
   const elements = {};

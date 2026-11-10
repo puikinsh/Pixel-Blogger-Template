@@ -8,8 +8,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Documentation
 
+- Reviewed the four legacy GitHub issues against 2.4.1 and the live demo. Clarified raw XML downloads, the `slider` setting, label-feed URLs and unlabeled Recent posts; recorded the remaining desktop performance measurement gap.
 - Added a portfolio maintenance report covering the eight sibling templates' 2.3.0 releases, demo validation and outstanding Colorlib download/documentation link corrections.
 - Recorded completion of the Colorlib link corrections for all nine templates, including FutureMag's new Documentation button and independent public-page/HTTP verification.
+
+### Tests
+
+- Added skin-variable coverage and expanded the Chrome fixture for unlabeled Recent entries, encoded label-feed paths and custom list/gallery initialization. All 43 regressions pass.
 
 ## [2.4.1] - 2026-11-05
 
